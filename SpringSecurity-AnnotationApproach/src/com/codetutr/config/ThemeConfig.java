@@ -1,0 +1,51 @@
+package com.codetutr.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.ui.context.ThemeSource;
+import org.springframework.ui.context.support.ResourceBundleThemeSource;
+import org.springframework.web.servlet.ThemeResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.theme.CookieThemeResolver;
+import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
+
+@Configuration
+public class ThemeConfig extends WebMvcConfigurerAdapter
+{
+	  @Bean
+	    public ThemeSource themeSource() 
+	    {
+	    	ResourceBundleThemeSource source = new ResourceBundleThemeSource();
+	    	source.setBasenamePrefix("messages.theme-");
+	    	return source;
+	    }
+	  
+	    @Bean 
+	    public ThemeResolver themeResolver()
+	    {
+	    	CookieThemeResolver resolver = new CookieThemeResolver();
+	    	resolver.setCookieMaxAge(2400);
+	    	resolver.setCookieName("mythemecookie");
+	    	resolver.setDefaultThemeName("default");
+	    	return resolver;
+	    }
+	    
+
+		@Bean
+		public ThemeChangeInterceptor  themeChangeInterceptor()
+		{
+			ThemeChangeInterceptor interceptor = new ThemeChangeInterceptor();
+			interceptor.setParamName("theme");
+			return interceptor;
+		}
+		
+		
+		@Override
+		public void addInterceptors(InterceptorRegistry registry)
+		{
+			registry.addInterceptor(themeChangeInterceptor());
+		}
+
+
+}
