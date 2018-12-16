@@ -36,11 +36,9 @@
                         
 
 # What happen when you Run the application ? </br>   
-=> 
-   &nbsp;&nbsp;&nbsp;&nbsp;  - (Need to pass "envTarget", "persistenceTarget" i.e.let's say you pass [envTarget=dev]   and [persistenceTarget=h2] )
+=> Need to pass "envTarget", "persistenceTarget" i.e.let's say you pass [envTarget=dev]   and [persistenceTarget=h2] 
 
-BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP
-=====================================================
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
 
 1) ContextEvent.java
 =====================
