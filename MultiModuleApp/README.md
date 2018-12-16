@@ -46,20 +46,17 @@ BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
 
 BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
 
-1) ServletConfig.java
-======================
-- This class loads the Dispatcher servlet
-- Because of this servletConfig.java, two classes i.e. ContextConfig.java and WebConfig.java are executed now
-
-			1.1) ContextConfig.java 
-			========================
-			- The purpose of this class is to load all key and values to application context
-			- it looks for "env-${envTarget:local}.properties" i.e. env-local.properties (By the way, if envTarget is not set, then it takes default as local) and load that properties file to container
-			- it also looks for ContextConfig.xml and loads into the container
-			- At last, because of this, it following will load into spring container:
-			                    - spring.profiles.active=local
-			                    - <context:annotation-config />  (which is helful for AOP)
-			                    - @EnableAspectJAutoProxy (which is helpful for AOP)
+1) ServletConfig.java : </br>
+- This class loads the Dispatcher servlet </br>
+- Because of this servletConfig.java, two classes i.e. ContextConfig.java and WebConfig.java are executed now </br>
+1.1) ContextConfig.java : </br>
+- The purpose of this class is to load all key and values to application context </br>
+- it looks for "env-${envTarget:local}.properties" i.e. env-local.properties (By the way, if envTarget is not set, then it takes default as local) and load that properties file to container </br>
+- it also looks for ContextConfig.xml and loads into the container </br>
+- At last, because of this, it following will load into spring container: </br>
+- spring.profiles.active=local
+- <context:annotation-config />  (which is helful for AOP)
+- @EnableAspectJAutoProxy (which is helpful for AOP)
 			                    
 			1.2) WebConfig.java 
 			=====================
