@@ -46,7 +46,7 @@ BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file at  resources folder. By the way if it don't find the value of "envTarget" at system property, then by default it takes</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"local". and hence in that case it looks for "env-local.properties" file at Resources folder. There, it search for the key</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"spring.profiles.active" and get the value of that and set that into a Active profile of spring environment. i.e. In our</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case it sets the profile "local" as active profile in an spring environment.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case it sets the profile "local" as active profile in an spring environment.</br> </br>
 
 BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
 
