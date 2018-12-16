@@ -38,7 +38,7 @@
 # What happen when you Run the application ? </br>   
 => Need to pass "envTarget", "persistenceTarget" i.e.let's say you pass [envTarget=dev]   and [persistenceTarget=h2] 
 
-BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
+<b>BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP</b> : </br>
 
 &nbsp;1) ContextEvent.java : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> The purpose of this class is to set the current active profile into Spring "Environment" </br>
@@ -48,7 +48,7 @@ BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"spring.profiles.active" and get the value of that and set that into a Active profile of spring environment. i.e. In our</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case it sets the profile "local" as active profile in an spring environment.</br> </br>
 
-BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
+<b>BELOW WILL BE LOADED DURING THE SERVER STARTUP</b> : </br>
 
 &nbsp;1) ServletConfig.java : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> This class loads the Dispatcher servlet </br>
@@ -99,7 +99,7 @@ BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> It annotate the "com.yoogesh.persistence.dao.Hibernate.ProfileRepositoryOldWay.java" using @Repository  (This is</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;traditional hibernate)  </br>  </br>                                                     
                                                                                                                                           
-AFTER ABOVE STEPS COMPLETED, FOLLOWING THING WILL HAPPEN: </br>
+<b>AFTER ABOVE STEPS COMPLETED, FOLLOWING THING WILL HAPPEN</b> : </br>
 
 &nbsp;1) as soon as the Application context is initialized, context refershed event is called.Since "SecuritySetup.java" has implemented ContextRefreshedEvent,now its onApplicationEvent() method is called [IF THE PROFILE IS DEPLOYED] and because of this following things will happen: </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> "BeforeSetupEvent" is called. This event is created by us actually. </br>
