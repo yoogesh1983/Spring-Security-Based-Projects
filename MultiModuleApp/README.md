@@ -8,7 +8,7 @@
          &nbsp;&nbsp;&nbsp;&nbsp; 6) How to use JPA and traditional Hibernate                                                                           </br>
          &nbsp;&nbsp;&nbsp;&nbsp; 7) How to use Filter and Interceptor                                                                                  </br>
          &nbsp;&nbsp;&nbsp;&nbsp; 8) How to create H2 database that looks like Physical database                                                        </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;9) This project is inspired from <a href="https://github.com/naturalprogrammer/spring-lemon.git">Spring-Lemon</a> and may help to understand Spring-Lemon on its Study path </br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9) This project is inspired from <a href="https://github.com/naturalprogrammer/spring-lemon.git">Spring-Lemon</a> and may help to understand Spring-Lemon on its Study path </br>
                                                                                                                                 
           
 # How to Start and Run an Application ?                                                                                          </br>
@@ -16,9 +16,8 @@
           &nbsp;&nbsp;&nbsp;&nbsp;1) Right Click to "MultiModuleApp-parent" => Maven => Update-project                                                  </br>
           &nbsp;&nbsp;&nbsp;&nbsp;2) Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run                         </br>
           &nbsp;&nbsp;&nbsp;&nbsp;3) Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application                    </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;4) You can now see the Running app at below URL:       
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://localhost:8888/VehicleTrackingSystem/dispatcher                                                    </br>
-                                                                                                                                </br>
+          &nbsp;&nbsp;&nbsp;&nbsp;4) You can now see the Running app at below URL:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://localhost:8888/VehicleTrackingSystem/dispatcher 
           &nbsp;&nbsp;&nbsp;&nbsp;5) Use below Login Credentials to login:                                                               
                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dba@gmail.com                                                                                            </br>
                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cou******1                                                                                               </br>
