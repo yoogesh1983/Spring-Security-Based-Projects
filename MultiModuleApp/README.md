@@ -1,8 +1,5 @@
 # What Does the application do ?                                                                                                </br> 
-################################                                                                                                </br>
-                                                                                                                                </br>
 => This is a Maven Multi-Module Application which Basically teaches Us:                                                         </br>
-                                                                                                                                </br>
           1) How to create Maven MultiModule Application                                                                        </br>
           2) How to create transactionId in every Request (Using Thread-Local) and passes that in a different modules           </br>
           3) How to save transactionId in a Spring-Security RequestContextHolder                                                </br>
