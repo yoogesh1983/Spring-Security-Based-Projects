@@ -79,12 +79,12 @@ BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- com.yoogesh.common.web.LemonProperties ... and more </br>
 			                    
                        
-&nbsp;2) SecurityConfig.java : </br>
+&nbsp;2) SecurityConfig.java :
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- This is for Spring security. This scans "com.yoogesh.security" and enable security rules </br>
 
                                                         
-&nbsp;3) ServiceConfig.java :  </br>
+&nbsp;3) ServiceConfig.java : 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- The purpose of this class is to use @ComponentScan annotation into all services packages </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Here we have also configured our own Message converter and customize the rest accept parameter </br>
