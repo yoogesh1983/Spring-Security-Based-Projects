@@ -4,3 +4,4 @@ It contains following Projects:
 
 => Spring-Security using XML-Based Approach </br>
 => Spring-security using Annotation-Based Approach </br>
+=> MultiModule Application </br>
