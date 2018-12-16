@@ -50,11 +50,11 @@ BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
 
 BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
 
-1) ServletConfig.java : </br>
-- This class loads the Dispatcher servlet </br>
-- Because of this servletConfig.java, two classes i.e. ContextConfig.java and WebConfig.java are executed now </br>
-1.1) ContextConfig.java : </br>
-- The purpose of this class is to load all key and values to application context </br>
+(1) ServletConfig.java : </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> This class loads the Dispatcher servlet </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> Because of this servletConfig.java, two classes i.e. ContextConfig.java and WebConfig.java are executed now </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1.1) ContextConfig.java : </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- The purpose of this class is to load all key and values to application context </br>
 - it looks for "env-${envTarget:local}.properties" i.e. env-local.properties (By the way, if envTarget is not set, then it takes default as local) and load that properties file to container </br>
 - it also looks for ContextConfig.xml and loads into the container </br>
 - At last, because of this, it following will load into spring container: </br>
