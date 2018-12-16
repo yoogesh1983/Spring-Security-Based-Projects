@@ -18,7 +18,7 @@
           &nbsp;&nbsp;&nbsp;&nbsp;3) Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application                    </br>
           &nbsp;&nbsp;&nbsp;&nbsp;4) You can now see the Running app at below URL: </br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> 
-          &nbsp;&nbsp;&nbsp;&nbsp;5) Use below Login Credentials to login: </br>                                                              
+          &nbsp;&nbsp;&nbsp;&nbsp;5) Use below Login Credentials to login:                                                             
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dba@gmail.com                    
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cou*********1 </br>
                                                                                       </br>
