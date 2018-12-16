@@ -35,12 +35,9 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password ===> (leave it Blank)                                                                          </br>
                         
 
-#What happen when you Run the application ?                                                                                        </br>
-##########################################                                                                                         </br>
-                        
--------------------------------------------------------------------------------------------------------------------
-( Need to pass "envTarget", "persistenceTarget" i.e.let's say you pass [envTarget=dev]   and [persistenceTarget=h2] )
---------------------------------------------------------------------------------------------------------------------
+# What happen when you Run the application ? </br>   
+=> 
+   &nbsp;&nbsp;&nbsp;&nbsp;  - (Need to pass "envTarget", "persistenceTarget" i.e.let's say you pass [envTarget=dev]   and [persistenceTarget=h2] )
 
 BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP
 =====================================================
