@@ -1,29 +1,54 @@
-Url: 
-===
-http://localhost:8888/VehicleTrackingSystem/dispatcher
+# What Does the application do ?                                                                                                </br> 
+################################                                                                                                </br>
+                                                                                                                                </br>
+=> This is a Maven Multi-Module Application which Basically teaches Us:                                                         </br>
+                                                                                                                                </br>
+          1) How to create Maven MultiModule Application                                                                        </br>
+          2) How to create transactionId in every Request (Using Thread-Local) and passes that in a different modules           </br>
+          3) How to save transactionId in a Spring-Security RequestContextHolder                                                </br>
+          4) How to create Spring WebServices using Spring Rest-Template                                                        </br>
+          5) How to create a Log-file override Logger                                                                           </br>
+          6) How to use JPA and traditional Hibernate                                                                           </br>
+          7) How to use Filter and Interceptor                                                                                  </br>
+          8) How to create H2 database that looks like Physical database                                                        </br>
+          9) This project is inspired from <a href="https://github.com/naturalprogrammer/spring-lemon.git">Spring-Lemon</a> and may help to understand Spring-Lemon on its Study path </br>
+                                                                                                                                
+          
+#How to Start and Run an Application ?                                                                                          </br>
+######################################                                                                                          </br>
+                                                                                                                                </br>
+=> Following steps need to do to run the application:                                                                           </br>
+                                                                                                                                </br>
+          1) Right Click to "MultiModuleApp-parent" => Maven => Update-project                                                  </br>
+          2) Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run                         </br>
+          3) Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application                    </br>
+          4) You can now see the Running app at below URL:                                                                      </br>
+                                                                                                                                </br>
+                      http://localhost:8888/VehicleTrackingSystem/dispatcher                                                    </br>
+                                                                                                                                </br>
+          5) Use below Login Credentials to login:                                                                              </br>
+                                                                                                                                </br>
+                       dba@gmail.com                                                                                            </br>
+                       Cou******1                                                                                               </br>
+                                                                                                                                </br>
+                       admin@gmail.com                                                                                          </br>
+                       Cou**********1                                                                                           </br>
+                                                                                                                                </br>
+                       syoogesh@gmail.com                                                                                       </br>
+                       Cou*********1                                                                                            </br>
+                       																											</br>
+          6) Use below credentials to go to Database :                                                                          </br>
+                                                                                                                                </br>
+                        Database URL ===> http://localhost:8888/VehicleTrackingSystem/dispatcher/h2-console                     </br>
+                        Driver Class =====>  org.h2.Driver                                                                      </br>
+                        JDBC URL =====> jdbc:h2:file:./Database                                                                 </br>
+                        Username ====> sa                                                                                       </br>
+                        password ===> (leave it Blank)                                                                          </br>
+                        
 
-Database URL:
-=============
-http://localhost:8888/VehicleTrackingSystem/dispatcher/h2-console
-
-Driver Class =====>  org.h2.Driver
-JDBC URL =====> jdbc:h2:file:./Database
-Username ====> sa
-password ===> (leave it Blank)
-
-
-Username and passwords:
-=======================
-
-dba@gmail.com
-Cou******1
-
-admin@gmail.com
-Cou**********1
-
-syoogesh@gmail.com
-Cou*********1
-
+#What happen when you Run the application ?                                                                                        </br>
+##########################################                                                                                         </br>
+                        
 -------------------------------------------------------------------------------------------------------------------
 ( Need to pass "envTarget", "persistenceTarget" i.e.let's say you pass [envTarget=dev]   and [persistenceTarget=h2] )
 --------------------------------------------------------------------------------------------------------------------
@@ -129,11 +154,10 @@ AFTER ABOVE STEPS COMPLETED, FOLLOWING THING WILL HAPPEN:
    called, the transactionId format will be [randomNumber] but not [Guid :: randomNumber]
  - Now before rendering the response of this request to the view, an interceptor 'AuthenticationStateBeanHandlerInterceptor' is called and name, role, profile-id and isAuthencated paramater are
    reset into a session at 'getAuthenticationStateBean' i.e. request.getSession.setAttribute('authentication-state-Bean', authenticationStateBean)
-  
 
-
- 
- 
- 
- 
- 
+          
+          
+          
+          
+          
+          
