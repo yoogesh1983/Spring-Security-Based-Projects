@@ -114,10 +114,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> it calls createPrincipals() method to create login users </br>
                
                
-               
-               
- WHAT WILL HAPPEN WHEN REQUEST COMES?
- ====================================
+ # What will happen when Request comes ? </br>                
  - RequestEvent.java is called which creates a transactionId in a TrackingLogger ThreadLocal in a [Guid :: randomNumber] format
  - Request now goes to RequestInfoFilter.java which creates 'AuthenticationRequestBean' object  and sets into a request attribute using request wrapper. This 'AuthenticationRequestBean' contains
    transactionId(just created on a TrackingLogger ThreadLocal by RequestEvent.java), clientIpAddress and BrowserAgent.Hence you have now the TransactionId,
