@@ -1,0 +1,3 @@
+2018-03-30 20:11:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DESC[*] USR "; expected "DELETE, DROP, DECLARE, DEALLOCATE, {"; SQL statement:
+desc usr [42001-193]

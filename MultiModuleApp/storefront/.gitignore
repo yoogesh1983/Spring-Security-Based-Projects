@@ -1,0 +1,11 @@
+/target/
+/.settings/
+/.classpath
+/_classpath
+/._classpath
+/.project
+/_project
+/._project
+/.factorypath
+/.springBeans
+/Database.trace

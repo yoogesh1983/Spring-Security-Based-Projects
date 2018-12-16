@@ -1,0 +1,25 @@
+# log4j.local
+# WAS_ENVIRONMENT is the System property of the Application server that need to be set
+# to local (local in lowercase) otherwise this file will not be read on your local environment.
+
+#Other option is "all, stdout"
+log4j.rootLogger=info, stdout
+log4j.appender.stdout=org.apache.log4j.RollingFileAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+
+# Pattern to output the caller's file name and line number is very expensive.
+log4j.appender.stdout.layout.ConversionPattern=%d %-5p %c - %m%n
+
+# Modify the [appName] with your WAS application name and un-comment the line below.
+log4j.appender.stdout.File=C:\\logs\\twmutil_local.log
+
+# (log4j.appender.stdout.MaxFileSize X log4j.appender.stdout.MaxBackupIndex)
+# should not exceed 50MB in dev/uat/prod environment.
+log4j.appender.stdout.MaxFileSize=5MB
+log4j.appender.stdout.MaxBackupIndex=3
+
+
+#Debug for SpringSecurity
+logging.level.org.springframework.security= DEBUG
+
+
