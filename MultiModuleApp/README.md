@@ -89,8 +89,8 @@ BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
                                                                                                                                                                                    
                                                           
 &nbsp;4) PersistenceConfig.java : </br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> The purpose of this class is to load persistence related properties from required</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;properties file and also scan repository package for annotation </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> The purpose of this class is to load persistence related properties from required properties file and</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;also scan repository package for annotation </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> it looks for "persistence-${persistenceTarget:h2}.properties" i.e. persistence-h2-properties (By the way, if persistenceTarget is not set then by default it takes h2 value as persistence </br>
   target and loads into container or environment </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> It scans the "com.yoogesh.persistence" using @Component scan  </br>
