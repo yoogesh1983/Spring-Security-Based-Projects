@@ -1,14 +1,14 @@
-# What Does the application do ?                                                                                                </br> 
-=> This is a Maven Multi-Module Application which Basically teaches Us:                                                         </br>
-         &nbsp;&nbsp;&nbsp;&nbsp; 1) How to create Maven MultiModule Application                                                                        </br>
-         &nbsp;&nbsp;&nbsp;&nbsp; 2) How to create transactionId in every Request (Using Thread-Local) and passes that in a different modules           </br>
-         &nbsp; &nbsp;&nbsp;&nbsp;3) How to save transactionId in a Spring-Security RequestContextHolder                                                </br>
-         &nbsp;&nbsp;&nbsp;&nbsp; 4) How to create Spring WebServices using Spring Rest-Template                                                        </br>
-         &nbsp;&nbsp;&nbsp;&nbsp; 5) How to create a Log-file override Logger                                                                           </br>
-         &nbsp;&nbsp;&nbsp;&nbsp; 6) How to use JPA and traditional Hibernate                                                                           </br>
-         &nbsp;&nbsp;&nbsp;&nbsp; 7) How to use Filter and Interceptor                                                                                  </br>
-         &nbsp;&nbsp;&nbsp;&nbsp; 8) How to create H2 database that looks like Physical database                                                        </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9) This project is inspired from <a href="https://github.com/naturalprogrammer/spring-lemon.git">Spring-Lemon</a> and may help to understand Spring-Lemon on its Study path </br>
+# What Does the application do ? </br> 
+=> This is a Maven Multi-Module Application which Basically teaches Us: </br>
+         &nbsp;&nbsp;&nbsp;&nbsp; 1) How to create Maven MultiModule Application</br>
+         &nbsp;&nbsp;&nbsp;&nbsp; 2) How to create transactionId in every Request (Using Thread-Local) and passes that in a different modules </br>
+         &nbsp; &nbsp;&nbsp;&nbsp;3) How to save transactionId in a Spring-Security RequestContextHolder </br>
+         &nbsp;&nbsp;&nbsp;&nbsp; 4) How to create Spring WebServices using Spring Rest-Template </br>
+         &nbsp;&nbsp;&nbsp;&nbsp; 5) How to create a Log-file override Logger</br>
+         &nbsp;&nbsp;&nbsp;&nbsp; 6) How to use JPA and traditional Hibernate </br>
+         &nbsp;&nbsp;&nbsp;&nbsp; 7) How to use Filter and Interceptor </br>
+         &nbsp;&nbsp;&nbsp;&nbsp; 8) How to create H2 database that looks like Physical database</br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9) This project is inspired from <a href="https://github.com/naturalprogrammer/spring-lemon.git">Spring-Lemon</a> and may help to understand Spring-Lemon on its Study path </br>
                                                                                                                                 
           
 # How to Start and Run an Application ?                                                                                          </br>
