@@ -43,8 +43,8 @@ BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
 (1) ContextEvent.java : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> The purpose of this class is to set the current active profile into Spring "Environment" </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> For this, it look for the value of "envTarget" in System property. if found, then it look for "env-{envTarget}.properties </br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file at  resources folder. By the way if it don't find the value of "envTarget" at system property, then by default it </br>
-takes "local". and hence in that case it looks for "env-local.properties" file at Resources folder. </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file at  resources folder. By the way if it don't find the value of "envTarget" at system property, then by default it takes</br>
+"local". and hence in that case it looks for "env-local.properties" file at Resources folder. </br>
 There, it search for the key  "spring.profiles.active" and get the value of that and set that into a Active</br>
 profile of spring environment. i.e. In our case it sets </br> the profile "local" as active profile in an </br>
 spring environment. </br>
