@@ -38,18 +38,13 @@
 # What happen when you Run the application ? </br>   
 => Need to pass "envTarget", "persistenceTarget" i.e.let's say you pass [envTarget=dev]   and [persistenceTarget=h2] 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
+BELOW WILL BE LOADED BEFORE THE SERVER FULLY STARTUP : </br>
 
-1) ContextEvent.java: </br>
+1) ContextEvent.java : </br>
 - The purpose of this class is to set the current active profile into Spring "Environment" </br>
-- For this, it look for the value of "envTarget" in System property. if found, then it look for "env-{envTarget}.properties file at resources folder. By the way if it don't find the value of "envTarget" at system property, then by default it takes "local". and hence in that case it looks for "env-local.properties" file at Resources folder. There, it search for the key "spring.profiles.active" and get the value of that and set that into a Active profile of spring environment. i.e. In our case it sets the profile "local" as active profile in an spring environment
+- For this, it look for the value of "envTarget" in System property. if found, then it look for "env-{envTarget}.properties file at resources folder. By the way if it don't find the value of "envTarget" at system property, then by default it takes "local". and hence in that case it looks for "env-local.properties" file at Resources folder. There, it search for the key "spring.profiles.active" and get the value of that and set that into a Active profile of spring environment. i.e. In our case it sets the profile "local" as active profile in an spring environment. </br>
 
-
-
-
-
-BELOW WILL BE LOADED DURING THE SERVER STARTUP
-===============================================
+BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
 
 1) ServletConfig.java
 ======================
