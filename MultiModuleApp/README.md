@@ -101,12 +101,9 @@ BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
                                                                                                                                           
 AFTER ABOVE STEPS COMPLETED, FOLLOWING THING WILL HAPPEN: </br>
 
-&nbsp;1) as soon as the Application context is initialized, context refershed event is called.Since "SecuritySetup.java" has implemented ContextRefreshedEvent,
-   now its onApplicationEvent() method is called [IF THE PROFILE IS DEPLOYED] and because of this following things will happen:
-   
-               => "BeforeSetupEvent" is called. This event is created by us actually.
-               => Since "SpringVerificationsBeforeSetupListener.java" has implemented "BeforeSetupEvent", eventually onApplicationEvent() is called that
-                  will make sure the following beans are created on spring container:
+&nbsp;1) as soon as the Application context is initialized, context refershed event is called.Since "SecuritySetup.java" has implemented ContextRefreshedEvent,now its onApplicationEvent() method is called [IF THE PROFILE IS DEPLOYED] and because of this following things will happen: </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> "BeforeSetupEvent" is called. This event is created by us actually. </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> Since "SpringVerificationsBeforeSetupListener.java" has implemented "BeforeSetupEvent", eventually onApplicationEvent() is called that will make sure the following beans are created on spring container:
                                               => PrivilegeController.class
                                               => RoleController.class
                                               => UserController.class
