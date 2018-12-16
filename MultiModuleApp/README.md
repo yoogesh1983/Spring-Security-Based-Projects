@@ -97,14 +97,11 @@ BELOW WILL BE LOADED DURING THE SERVER STARTUP : </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> It scans the "com.yoogesh.persistence" using @Component scan  </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> It scans the "com.yoogesh.persistence.dao.SpringData" using @EnableJpaRepositories (This is spring data)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> It annotate the "com.yoogesh.persistence.dao.Hibernate.ProfileRepositoryOldWay.java" using @Repository  (This is</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;traditional hibernate)  </br>                                                       
-                                                           
-                                                               
-                                                                                                                                                                                                                                                               
-AFTER ABOVE STEPS COMPLETED, FOLLOWING THING WILL HAPPEN:
-========================================================
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;traditional hibernate)  </br>  </br>                                                     
+                                                                                                                                          
+AFTER ABOVE STEPS COMPLETED, FOLLOWING THING WILL HAPPEN: </br>
 
-1) as soon as the Application context is initialized, context refershed event is called.Since "SecuritySetup.java" has implemented ContextRefreshedEvent,
+&nbsp;1) as soon as the Application context is initialized, context refershed event is called.Since "SecuritySetup.java" has implemented ContextRefreshedEvent,
    now its onApplicationEvent() method is called [IF THE PROFILE IS DEPLOYED] and because of this following things will happen:
    
                => "BeforeSetupEvent" is called. This event is created by us actually.
