@@ -1,3 +1,6 @@
+# What is the Application about ? </br>
+&nbsp;=> This is a Spring-Security application using the legacy web.xml apporach
+
 URL:
 ====
 localhost:8080/{jarfilename}
