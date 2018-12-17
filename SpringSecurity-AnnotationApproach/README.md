@@ -2,7 +2,7 @@
 &nbsp;=> This is a Spring-Security application replacing legacy web.xml by Java configuration approach </br>
 
 # How to run the application ? </br>
-&nbsp;=> This application needs to be run in tomcat and may get 403 when run into wild-fly server </br>
+&nbsp;=> This application needs to be run at tomcat and may get 403 when run into wild-fly server </br>
 &nbsp;=> Right click on a project => Maven => update-project
 &nbsp;=> Right click on a project => run as => Run on server => run </br>
 &nbsp;=> You can now browse the application at http://localhost:8080/SpringSecurity-AnnotationApproach/ </br>
