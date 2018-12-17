@@ -6,11 +6,4 @@
 &nbsp;=> Right click on a project => Maven => update-project
 &nbsp;=> Right click on a project => run as => Run on server => run </br>
 &nbsp;=> You can now browse the application at http://localhost:8080/SpringSecurity-XMLApproach/ </br>
-&nbsp;=>In case of 404, make sure to change the JarfileName in a web-project setting which sometime may not update
-
-URL:
-====
-localhost:8080/{jarfilename}
-
-Do not forget to change the JarfileName in a web-project setting since it is not generating a jar as expected currenlty.
-will update soon.
+&nbsp;=> In case of 404, make sure to change the JarfileName in a web-project setting which sometime may not update
