@@ -33,6 +33,8 @@ hs_err_pid*
 /._project
 /.factorypath
 /.springBeans
+/_springBeans
+/._springBeans
 
 #For MultiModule project (in StoreFront) module
 /Database.trace.db
