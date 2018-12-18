@@ -19,7 +19,7 @@
 
 The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> </br>
 Use below Login Credentials to login:  </br>                                                           
-> dba@gmail.com  /  Cou****** 1    </br>               
+> dba@gmail.com  /  Cou****** 1  
 > admin@gmail.com / Cou****** 1  
 > syoogesh@gmail.com / Cou****** 1 </br>
 
