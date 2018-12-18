@@ -12,13 +12,14 @@
                                                                                                                                 
           
 # How to Start and Run an Application ?                                                                                          </br>
-=> Following steps need to do to run the application:                                                                           </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;1) Right Click to "MultiModuleApp-parent" => Maven => Update-project                                                  </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;2) Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run                         </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;3) Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application                    </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;4) You can now see the Running app at below URL: </br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> 
-          &nbsp;&nbsp;&nbsp;&nbsp;5) Use below Login Credentials to login:                                                             
+=> Following steps need to do to run the application: </br>
+> Right Click to "MultiModuleApp-parent" => Maven => Update-project </br>
+> Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run </br>
+> Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application  </br> </br>
+
+The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> </br>
+
+Use below Login Credentials to login:                                                             
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dba@gmail.com                    
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cou****** 1 </br>
                                                                                       </br>
