@@ -17,17 +17,13 @@
 > Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run </br>
 > Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application  </br>
 
-The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> </br>
-> Use below Login Credentials to login:  </br>                                                           
-> dba@gmail.com  /  Cou****** 1                   
-           > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </br>
-                                                                                      </br>
-                        > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;admin@gmail.com  </br>
-                        > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cou****** 1   </br>
-                                                                                     </br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;syoogesh@gmail.com  </br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cou****** 1 </br>										
-&nbsp;&nbsp;&nbsp;&nbsp;6) Use below credentials to go to Database :                                                                          </br>
+The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> 
+Use below Login Credentials to login:  </br>                                                           
+> dba@gmail.com  /  Cou****** 1    </br>               
+> admin@gmail.com / Cou****** 1   </br>
+> syoogesh@gmail.com / Cou****** 1 </br>
+
+Use below credentials to go to Database :     </br>                                                                     </br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Database URL ===> http://localhost:8888/VehicleTrackingSystem/dispatcher/h2-console                     </br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Driver Class =====>  org.h2.Driver                                                                      </br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JDBC URL =====> jdbc:h2:file:./Database                                                                 </br>
