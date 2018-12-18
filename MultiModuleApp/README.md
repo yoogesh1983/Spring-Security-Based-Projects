@@ -23,12 +23,12 @@ Use below Login Credentials to login:  </br>
 > admin@gmail.com / Cou****** 1  
 > syoogesh@gmail.com / Cou****** 1 </br>
 
-Use below credentials to go to Database :     </br>                                                                     </br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Database URL ===> http://localhost:8888/VehicleTrackingSystem/dispatcher/h2-console                     </br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Driver Class =====>  org.h2.Driver                                                                      </br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JDBC URL =====> jdbc:h2:file:./Database                                                                 </br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username ====> sa                                                                                       </br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password ===> (leave it Blank)                                                                          </br>
+Use below credentials to go to Database :  </br>
+> Database URL ===> http://localhost:8888/VehicleTrackingSystem/dispatcher/h2-console </br>
+> Driver Class =====>  org.h2.Driver </br>
+> JDBC URL =====> jdbc:h2:file:./Database </br>
+> Username ====> sa  </br>
+> password ===> (leave it Blank) </br>
                         
 
 # What happen when you Run the application ? </br>   
