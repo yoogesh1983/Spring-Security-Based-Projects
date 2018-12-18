@@ -11,13 +11,13 @@
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9) This project is inspired from <a href="https://github.com/naturalprogrammer/spring-lemon.git">Spring-Lemon</a> and may help to understand Spring-Lemon on its Study path </br>
                                                                                                                                 
           
-# How to Start and Run an Application ?                                                                                          </br>
+# How to Start and Run an Application ? </br>
 => Following steps need to do to run the application: </br>
 > Right Click to "MultiModuleApp-parent" => Maven => Update-project </br>
 > Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run </br>
 > Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application  </br>
 
-The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> </br>
+The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br>
 Use below Login Credentials to login:  </br>                                                           
 > dba@gmail.com  /  Cou****** 1  
 > admin@gmail.com / Cou****** 1  
