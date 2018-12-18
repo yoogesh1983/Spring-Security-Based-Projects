@@ -15,7 +15,7 @@
 => Following steps need to do to run the application: </br>
 > Right Click to "MultiModuleApp-parent" => Maven => Update-project </br>
 > Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run </br>
-> Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application  </br> </br>
+> Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application  </br>
 
 The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> </br>
 
