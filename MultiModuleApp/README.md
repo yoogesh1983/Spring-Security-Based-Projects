@@ -17,10 +17,10 @@
 > Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run </br>
 > Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application  </br>
 
-The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> 
+The application can now be browsed at: http://localhost:8888/VehicleTrackingSystem/dispatcher  </br> </br>
 Use below Login Credentials to login:  </br>                                                           
 > dba@gmail.com  /  Cou****** 1    </br>               
-> admin@gmail.com / Cou****** 1   </br>
+> admin@gmail.com / Cou****** 1  
 > syoogesh@gmail.com / Cou****** 1 </br>
 
 Use below credentials to go to Database :     </br>                                                                     </br>
