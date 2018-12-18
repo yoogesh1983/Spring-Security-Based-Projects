@@ -12,7 +12,7 @@
                                                                                                                                 
           
 # How to Start and Run an Application ? </br>
-=> Following steps need to do to run the application: </br>
+Following steps need to do to run the application: </br>
 > Right Click to "MultiModuleApp-parent" => Maven => Update-project </br>
 > Right Click to "MultiModuleApp-parent" => Run As => Maven build... => clean install => Run </br>
 > Right CLick to "SpringBootInitialSetup.java" at storefront module => Run as => Java Application  </br>
