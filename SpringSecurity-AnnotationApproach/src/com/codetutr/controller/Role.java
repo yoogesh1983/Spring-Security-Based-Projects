@@ -1,4 +1,4 @@
-package com.codetutr.controller.securitry;
+package com.codetutr.controller;
 
 import java.util.ArrayList;
 import java.util.List;

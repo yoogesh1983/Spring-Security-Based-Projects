@@ -1,4 +1,4 @@
-package com.codetutr.config;
+package com.codetutr.config.springMvc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
