@@ -3,39 +3,20 @@ package com.codetutr.services;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.Map.Entry;
-
 import com.codetutr.dao.ProfileDao;
-import com.codetutr.model.DatabaseConnection;
 import com.codetutr.model.Profile;
 
 public class ProfileService 
 {
-	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	
-	Map<Long, Profile> TableProfile = DatabaseConnection.getProfileTable();
-	ProfileDao profiledao = new ProfileDao ();
+	ProfileDao profiledao;
 
-	
 	public ProfileService()
-	
 	{
-		
-//		TableProfile.put(1L, new Profile(1L, "syoogesh@gmail.com","Countrr1", "Yoogesh", "Sharma", "ROLE_ADMIN"));
-//		TableProfile.put(2L, new Profile(2L, "yoogesh2002@yahoo.com","Countrr1", "Sushila", "Sapkota", "ROLE_USER"));
-		
-		TableProfile.put(1L, new Profile(1L, "syoogesh@gmail.com",passwordEncoder.encode("Countrr1"), "Yoogesh", "Sharma", "ROLE_USER"));
-		TableProfile.put(2L, new Profile(2L, "kristy@gmail.com",passwordEncoder.encode("Countrr1"), "Kristy", "Sharma", "ROLE_ADMIN"));
-		TableProfile.put(3L, new Profile(3L, "sushila@gmail.com",passwordEncoder.encode("Countrr1"), "Sushila", "Sapkota", "ROLE_DBA"));
+		profiledao = new ProfileDao ();
     }
-	
-	
-	
 
 	//CREAT
 	public Profile createProfile(Profile profile)
@@ -57,7 +38,7 @@ public class ProfileService
 			return new Profile(null,null,null,null,null,null);
 		}
 		
-		Set<Entry<Long, Profile>> set = TableProfile.entrySet();
+		Set<Entry<Long, Profile>> set = profiledao.getEntrySet();
 		Iterator<Entry<Long, Profile>> i = set.iterator();
 		while(i.hasNext())
 		{
@@ -94,7 +75,7 @@ public class ProfileService
 				}
 				
 
-				Set<Entry<Long, Profile>> set = TableProfile.entrySet();
+				Set<Entry<Long, Profile>> set = profiledao.getEntrySet();
 				Iterator<Entry<Long, Profile>> i = set.iterator();
 				while(i.hasNext())
 				{
@@ -140,7 +121,7 @@ public class ProfileService
 		}
 		
 
-		Set<Entry<Long, Profile>> set = TableProfile.entrySet();
+		Set<Entry<Long, Profile>> set = profiledao.getEntrySet();
 		Iterator<Entry<Long, Profile>> i = set.iterator();
 		while(i.hasNext())
 		{

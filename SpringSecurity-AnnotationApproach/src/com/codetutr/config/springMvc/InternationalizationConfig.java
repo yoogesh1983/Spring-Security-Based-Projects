@@ -3,18 +3,16 @@ package com.codetutr.config.springMvc;
 import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-@Configuration
-public class InternationalizationConfig extends WebMvcConfigurerAdapter
+public class InternationalizationConfig implements WebMvcConfigurer
 {
-
-	@Bean LocaleResolver localeResolver()
+	@Bean 
+	public LocaleResolver localeResolver()
 	{
 		//SessionLocaleResolver resolver = new SessionLocaleResolver();
 		CookieLocaleResolver resolver = new CookieLocaleResolver();
@@ -24,6 +22,16 @@ public class InternationalizationConfig extends WebMvcConfigurerAdapter
 		return resolver;
 	}
 	
+	/*
+	@Bean(name="sessionLocaleResolver")
+	public SessionLocaleResolver sessionLocaleResolver()
+	{
+		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+		Locale defaultLocale = Locale.forLanguageTag("en_US");
+		sessionLocaleResolver.setDefaultLocale(defaultLocale);
+		return sessionLocaleResolver;
+	}
+	 */
 	
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor()
@@ -32,8 +40,6 @@ public class InternationalizationConfig extends WebMvcConfigurerAdapter
 		interceptor.setParamName("mylocale");
 		return interceptor;
 	}
-	
-	
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry)

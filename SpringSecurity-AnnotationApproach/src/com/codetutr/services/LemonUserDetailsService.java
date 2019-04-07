@@ -1,24 +1,18 @@
-package com.codetutr.controller;
+package com.codetutr.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.codetutr.model.DatabaseConnection;
 import com.codetutr.model.Profile;
-import com.codetutr.services.ProfileService;
 
-@Configuration
-public class Role implements UserDetailsService 
+public class LemonUserDetailsService implements UserDetailsService 
 {
-	Map<Long, Profile> TableProfile = DatabaseConnection.getProfileTable();
 	ProfileService profileservice = new ProfileService ();
 
 	@Override
