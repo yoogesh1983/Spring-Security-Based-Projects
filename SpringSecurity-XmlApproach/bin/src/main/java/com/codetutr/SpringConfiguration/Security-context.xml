@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:security="http://www.springframework.org/schema/security"
+   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+   
+<!-- ==================================================================================================================================== -->	
+
+                         <!-- Getting role from database -->
+                         
+<bean id="customUserDetailService" class="com.codetutr.controller.Security.CustomUserDetailService"/>
+<bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="customUserDetailService"></property>
+</bean>
+
+
+<bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+  <constructor-arg name="providers">
+  <list>
+       <ref bean="authenticationProvider"/>
+  </list>
+  </constructor-arg>
+</bean>
+
+
+<security:authentication-manager>
+     <security:authentication-provider user-service-ref="customUserDetailService">
+<!-- 			<security:password-encoder hash="plaintext"></security:password-encoder> -->
+			<security:password-encoder ref="passwordEncoder"/>
+     </security:authentication-provider>
+</security:authentication-manager>
+
+
+<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+								
+			
+<!-- ==================================================================================================================================== -->		
+		
+              <!-- Based upon the role, user is redirected to particular page -->
+              
+<bean id="customSuccessHandler" class="com.codetutr.controller.Security.CustomSuccessHandler" />		
+		
+		
+<!-- ==================================================================================================================================== -->
+  
+                             <!-- Role hierarchy --> 
+<bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+   <constructor-arg>
+        <bean class="org.springframework.security.web.access.expression.WebExpressionVoter">
+            <property name="expressionHandler" ref="webExpressionHandler" />
+        </bean>
+   </constructor-arg>
+</bean>
+
+<bean id="webExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler">
+    <property name="roleHierarchy" ref="roleHierarchy"/>
+</bean>
+
+<bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+    <property name="hierarchy">
+        <value>
+            ROLE_DBA > ROLE_ADMIN
+            ROLE_ADMIN > ROLE_USER
+        </value>
+    </property>
+</bean>  
+
+<!-- ==================================================================================================================================== --> 
+  
+                          <!-- Method level access control -->
+<security:global-method-security secured-annotations="enabled"></security:global-method-security>
+
+<!-- ==================================================================================================================================== -->  
+    
+    		               <!-- Access Control list -->
+    		               
+<security:http use-expressions="true" access-decision-manager-ref="accessDecisionManager">
+        <security:intercept-url pattern="/" access="permitAll" /> 
+        <security:intercept-url pattern="/static/**" access="permitAll" />
+        
+		<security:intercept-url pattern="/do-sign-in" access="permitAll" />  <!-- That's not our controller!! That's spring's controller!! -->
+		<security:intercept-url pattern="/sign-in" access="permitAll" />
+		<security:intercept-url pattern="/sign-out" access="permitAll" />
+		<security:intercept-url pattern="/sign-in?error=true" access="permitAll" />
+		<security:intercept-url pattern="/denied-access" access="permitAll" />
+		<security:intercept-url pattern="/sign-up" access="permitAll" />
+		
+		<security:intercept-url pattern="/my-account-user" access="hasRole('ROLE_USER')" /> 
+		<security:intercept-url pattern="/my-account-admin" access="hasRole('ROLE_ADMIN')" /> 
+		<security:intercept-url pattern="/my-account-dba" access="hasRole('ROLE_ADMIN') and hasRole('ROLE_DBA')" /> 
+		<security:intercept-url pattern="/**" access="denyAll" /> 
+ 
+		
+	    <security:form-login login-page="/sign-in" login-processing-url="/do-sign-in" authentication-success-handler-ref="customSuccessHandler" authentication-failure-url="/sign-in?error=true" username-parameter="username" password-parameter="password"/>
+		<security:csrf disabled="true"/>
+		<security:logout logout-url="/sign-out" logout-success-url="/sign-in" />
+		<security:access-denied-handler error-page="/Access_Denied" />
+		
+		<security:remember-me key="iloveu" user-service-ref="customUserDetailService" />	
+</security:http>
+
+  <!-- ==================================================================================================================================== -->
+   
+  
+</beans>
+
+
+
+
