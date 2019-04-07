@@ -7,3 +7,5 @@
 &nbsp;=> Right click on a project => run as => Run on server => run </br>
 &nbsp;=> You can now browse the application at http://localhost:8080/SpringSecurity-AnnotationApproach/ </br>
 &nbsp;=> In case of 404, make sure to change the JarfileName in a web-project setting which sometime may not update</br>
+
+![./docs/ServicePipeline.svg](./docs/ServicePipeline.svg)
