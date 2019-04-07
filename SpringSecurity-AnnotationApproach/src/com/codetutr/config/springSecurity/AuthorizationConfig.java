@@ -15,13 +15,6 @@ import org.springframework.security.web.access.expression.WebExpressionVoter;
 public class AuthorizationConfig {
 
 	@Bean
-	public RoleHierarchy getRoleHierarchy() {
-		RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-		roleHierarchy.setHierarchy("ROLE_DBA > ROLE_ADMIN \n ROLE_DBA > ROLE_USER \n ROLE_ADMIN > ROLE_USER");
-		return roleHierarchy;
-	}
-	
-	@Bean
     public AccessDecisionManager getAccessDecisionManager()
     {
     	DefaultWebSecurityExpressionHandler expressionHandler = new DefaultWebSecurityExpressionHandler();
@@ -35,5 +28,13 @@ public class AuthorizationConfig {
     	voters.add(webExpressionVoter);
     	return new AffirmativeBased(voters);
     }
+	
+	
+	@Bean
+	public RoleHierarchy getRoleHierarchy() {
+		RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+		roleHierarchy.setHierarchy("ROLE_DBA > ROLE_ADMIN \n ROLE_DBA > ROLE_USER \n ROLE_ADMIN > ROLE_USER");
+		return roleHierarchy;
+	}
 
 }

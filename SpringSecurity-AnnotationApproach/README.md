@@ -3,6 +3,7 @@
 
 # How to run the application ? </br>
 &nbsp;=> This application needs to be run at tomcat and may get 403 when run into wild-fly server </br>
+&nbsp;=> Open project in eclipse => Right click into a <strong>resources</strong> folder => build path => use as a Source Folder </br>
 &nbsp;=> Right click on a project => Maven => update-project</br>
 &nbsp;=> Right click on a project => run as => Run on server => run </br>
 &nbsp;=> You can now browse the application at http://localhost:8080/SpringSecurity-AnnotationApproach/ </br>

@@ -25,17 +25,48 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	  
-	  http.authorizeRequests()
-	    .accessDecisionManager(accessDecisionManager)
-	  	.antMatchers("/", "/home", "/static/**").permitAll()
-	  	.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
-	  	.antMatchers("/my-account-user").access("hasRole('USER')")
-	  	.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
-	  	.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')")
-	  	.and().formLogin().loginPage("/sign-in").loginProcessingUrl("/do-sign-in").successHandler(customSuccessHandler).failureUrl("/sign-in?error=true")
-	  	.usernameParameter("username").passwordParameter("password")
-	  	.and().csrf()
-	  	.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+		authorizeRequests(http);  // authorize requests
+		login(http);              // login configuration
+		csrf(http);               // csrf configuration
+		exceptionHandling(http);  //exception handling
+	}
+
+
+	private void authorizeRequests(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+			.accessDecisionManager(accessDecisionManager)
+		  	.antMatchers("/", "/home", "/static/**").permitAll()
+		  	.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
+		  	.antMatchers("/my-account-user").access("hasRole('USER')")
+		  	.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
+		  	.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')");
+		  	//.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')").accessDecisionManager(accessDecisionManager);
+	}
+	
+	private void login(HttpSecurity http) throws Exception {
+		http
+			.formLogin()
+			.loginPage("/sign-in")
+			.loginProcessingUrl("/do-sign-in")
+			.successHandler(customSuccessHandler)
+			.failureUrl("/sign-in?error=true")
+			.usernameParameter("username")
+			.passwordParameter("password");
+	}
+	
+	private void csrf(HttpSecurity http) throws Exception{
+		http.csrf();
+	}
+	
+	private void exceptionHandling(HttpSecurity http) throws Exception {
+		http
+			.exceptionHandling()
+			
+			/***********************************************
+			 * To prevent redirection to the login page
+			 * when someone tries to access a restricted page
+			 **********************************************/
+			//.authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+			.accessDeniedPage("/Access_Denied");
 	}
 }
