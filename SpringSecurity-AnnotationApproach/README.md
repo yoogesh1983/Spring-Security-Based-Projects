@@ -13,7 +13,6 @@
               
 &nbsp;=> Normally when you clone a fresh copy from Git, the structure might be like above where the resources folder is not in a class path. So that in this condition, do the following: </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Open project in eclipse => Right click into a resources folder => build path => use as a Source Folder</strong> </br>
-you need to create a new <strong>source folder</strong> inside <strong>java Resources</strong> parallel to src like below which automatically brings
-the files inside it the classpath:</br></br>
+&nbsp;=> The file structure will be like below now and it should solve the problem:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               ![./docs/Project_View_After_Change.PNG](./docs/Project_View_After_Change.PNG) <br/>
