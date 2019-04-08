@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class SignIn 
+public class SigninController 
 {
 	@RequestMapping(value = "/sign-in", method = RequestMethod.GET)
 	public ModelAndView SpringLogin() 

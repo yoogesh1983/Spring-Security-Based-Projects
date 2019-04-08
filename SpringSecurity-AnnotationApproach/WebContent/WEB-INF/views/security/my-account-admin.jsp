@@ -24,6 +24,12 @@
 <a href="${pageContext.request.contextPath}/my-account-admin"> Go back to Home!!! </a> </br>
 <a href="${pageContext.request.contextPath}/sign-out"> Click here for to signout!!!</a> </br>
 
+<h3>Method label Access Check</h3>
+<a href="${pageContext.request.contextPath}/secure/dba"><span style="color:white">DBA</span></a> | 
+<a href="${pageContext.request.contextPath}/secure/admin"><span style="color:white">ADMIN</span></a> |
+<a href="${pageContext.request.contextPath}/secure/user"><span style="color:white">USER</span></a> |
+<a href="${pageContext.request.contextPath}/secure/authenticated"><span style="color:white">AUTHENTICATED</span></a>
+
 </body>
 </html>
 

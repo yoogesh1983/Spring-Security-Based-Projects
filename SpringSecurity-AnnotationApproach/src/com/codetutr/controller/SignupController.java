@@ -21,7 +21,7 @@ import com.codetutr.services.ProfileService;
 import com.codetutr.validation.ProfileBeanValidator;
 
 @Controller
-public class SignUp 
+public class SignupController 
 {
 	
 	ProfileService profileservice = new ProfileService();
