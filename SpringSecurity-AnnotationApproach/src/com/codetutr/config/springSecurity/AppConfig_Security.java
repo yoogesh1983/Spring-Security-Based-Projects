@@ -3,6 +3,7 @@ package com.codetutr.config.springSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,10 +17,13 @@ import com.codetutr.handler.CustomSuccessHandler;
 public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	public CustomSuccessHandler customSuccessHandler;
+	public ProviderManager providerManager;
 	
 	@Autowired
 	public AccessDecisionManager accessDecisionManager;
+	
+	@Autowired
+	public CustomSuccessHandler customSuccessHandler;
 	
     public AppConfig_Security(){
     	super();
@@ -27,32 +31,16 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		authorizeRequests(http);     // authorize requests
-		handleUnknownRequests(http); // authorize requests
-		login(http);                 // login configuration
-		csrf(http);                  // csrf configuration
-		exceptionHandling(http);     //exception handling
+		authentication(http);
+		authorization(http);
+		csrf(http);
+		exceptionHandling(http);
 	}
 
-	private void authorizeRequests(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.accessDecisionManager(accessDecisionManager)
-		  			.antMatchers("/", "/home", "/static/**").permitAll()
-		  			.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
-		  			.antMatchers("/my-account-user").access("hasRole('USER')")
-		  			.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
-		  			.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')");
-	}
-	
-	private void handleUnknownRequests(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.anyRequest()
-					.authenticated()
-						.accessDecisionManager(accessDecisionManager);
-	}
-	
-	private void login(HttpSecurity http) throws Exception {
+
+	private void authentication(HttpSecurity http) throws Exception {
 		http
+			.authenticationProvider(providerManager.getProviders().get(0))
 			.formLogin()
 				.loginPage("/sign-in")
 				.loginProcessingUrl("/do-sign-in")
@@ -60,6 +48,27 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 				.failureUrl("/sign-in?error=true")
 				.usernameParameter("username")
 				.passwordParameter("password");
+	}
+
+
+	private void authorization(HttpSecurity http) throws Exception {
+		http
+			.authorizeRequests()
+				.accessDecisionManager(accessDecisionManager)
+		  			.antMatchers("/", "/home", "/static/**").permitAll()
+		  			.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
+		  			.antMatchers("/my-account-user").access("hasRole('USER')")
+		  			.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
+		  			.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')");
+		
+		handleUnknownRequests(http);
+	}
+	
+	private void handleUnknownRequests(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.anyRequest()
+					.authenticated()
+						.accessDecisionManager(accessDecisionManager);
 	}
 	
 	
