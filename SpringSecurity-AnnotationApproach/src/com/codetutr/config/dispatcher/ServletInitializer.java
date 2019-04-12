@@ -1,5 +1,9 @@
 package com.codetutr.config.dispatcher;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.codetutr.config.springMvc.AppConfig_Mvc;
@@ -33,4 +37,13 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 		return new String[] { "/" };
 	}
 
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
+		
+		/**
+		 *  This Listner needs to be registered to Listen for Max-session Users configured on AppConfig_Security.java
+		 */
+		servletContext.addListener(HttpSessionEventPublisher.class);
+	}
 }

@@ -35,50 +35,50 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		authorization(http);
 		csrf(http);
 		exceptionHandling(http);
+		sessionManagement(http);
 	}
-
-
+	
 	private void authentication(HttpSecurity http) throws Exception {
 		http
-			.authenticationProvider(providerManager.getProviders().get(0))
-			.formLogin()
-				.loginPage("/sign-in")
-				.loginProcessingUrl("/do-sign-in")
-				.successHandler(customSuccessHandler)
-				.failureUrl("/sign-in?error=true")
-				.usernameParameter("username")
-				.passwordParameter("password");
+		.authenticationProvider(providerManager.getProviders().get(0))
+		.formLogin()
+			.loginPage("/sign-in")
+			.loginProcessingUrl("/do-sign-in")
+			.successHandler(customSuccessHandler)
+			.failureUrl("/sign-in?error=true")
+			.usernameParameter("username")
+			.passwordParameter("password");
 	}
-
 
 	private void authorization(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests()
-				.accessDecisionManager(accessDecisionManager)
-		  			.antMatchers("/", "/home", "/static/**").permitAll()
-		  			.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
-		  			.antMatchers("/my-account-user").access("hasRole('USER')")
-		  			.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
-		  			.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')");
+		.authorizeRequests()
+			.accessDecisionManager(accessDecisionManager)
+		  		.antMatchers("/", "/home", "/static/**").permitAll()
+		  		.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
+		  		.antMatchers("/my-account-user").access("hasRole('USER')")
+		  		.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
+		  		.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')");
 		
 		handleUnknownRequests(http);
 	}
 	
 	private void handleUnknownRequests(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.anyRequest()
-					.authenticated()
-						.accessDecisionManager(accessDecisionManager);
+		http
+		.authorizeRequests()
+			.anyRequest()
+				.authenticated()
+					.accessDecisionManager(accessDecisionManager);
 	}
 	
-	
 	private void csrf(HttpSecurity http) throws Exception{
-		http.csrf();
+		http
+		.csrf();
 	}
 	
 	private void exceptionHandling(HttpSecurity http) throws Exception {
 		http
-			.exceptionHandling()
+		.exceptionHandling()
 			
 			/***********************************************
 			 * To prevent redirection to the login page
@@ -86,5 +86,15 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 			 **********************************************/
 			//.authenticationEntryPoint(new Http403ForbiddenEntryPoint());
 			.accessDeniedPage("/Access_Denied");
+	}
+	
+	private void sessionManagement(HttpSecurity http) throws Exception {
+		http
+		.sessionManagement()
+		.sessionAuthenticationErrorUrl("/user-already-loggedIn-somewhere")
+			.maximumSessions(1)
+				.maxSessionsPreventsLogin(true)
+				.expiredUrl("/user-session-time-out");
+			
 	}
 }
