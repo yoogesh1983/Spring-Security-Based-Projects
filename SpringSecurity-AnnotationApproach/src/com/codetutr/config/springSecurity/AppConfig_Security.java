@@ -6,6 +6,7 @@ import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -29,6 +30,11 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
     	super();
     }
 
+    
+	public void configure(WebSecurity web) throws Exception {
+		web.debug(true);
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		authentication(http);
