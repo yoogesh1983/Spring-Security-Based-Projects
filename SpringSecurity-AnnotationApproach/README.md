@@ -17,5 +17,4 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               ![./docs/Project_View_After_Change.PNG](./docs/Project_View_After_Change.PNG) <br/>
               
-&nbsp;=> Also you may get 405 error on <strong>do-sign-in</strong> method saying method not allowed. It this happens, turn off CSRF like below: </br>
-> http.csrf().disable();        
+&nbsp;=> Also you may get 405 error on <strong>do-sign-in</strong> method saying method not allowed. You need to clear browser cache if this happens
