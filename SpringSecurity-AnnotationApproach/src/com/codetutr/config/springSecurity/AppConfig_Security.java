@@ -31,10 +31,20 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
     }
 
     
+    /**
+     * WebSecurity Configuration
+     */
+    @Override
 	public void configure(WebSecurity web) throws Exception {
-		web.debug(true);
+       disableFiltersOnStaticResources(web);
+       enableDebugMode(web);
 	}
 	
+    /**
+     * HttpSecurity Configuration</br>
+     * Difference between WebSecurity and HttpSecurity
+     * {@link https://stackoverflow.com/questions/31995221/correct-use-of-websecurity-in-websecurityconfigureradapter/32056323}
+     */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		authentication(http);
@@ -60,7 +70,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 			.accessDecisionManager(accessDecisionManager)
-		  		.antMatchers("/", "/home", "/static/**").permitAll()
+		  		.antMatchers("/", "/home").permitAll()
 		  		.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
 		  		.antMatchers("/my-account-user").access("hasRole('USER')")
 		  		.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
@@ -102,5 +112,14 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 				.maxSessionsPreventsLogin(true)
 				.expiredUrl("/user-session-time-out");
 			
+	}
+	
+	private void enableDebugMode(WebSecurity web) {
+		web.debug(true);
+	}
+
+	private void disableFiltersOnStaticResources(WebSecurity web) {
+		// XML Configuration => <http pattern="/static/**" security="none"/>
+		web.ignoring().antMatchers("/static/**");
 	}
 }
