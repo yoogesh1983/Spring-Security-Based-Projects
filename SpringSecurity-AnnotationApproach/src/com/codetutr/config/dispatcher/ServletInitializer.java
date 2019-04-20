@@ -9,6 +9,15 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import com.codetutr.config.springMvc.AppConfig_Mvc;
 import com.codetutr.config.springSecurity.AppConfig_Security;
 
+/**
+ * 
+ * The DispatcherServlet class creates {@link org.springframework.context.ApplicationContext}, which is a child of the root ApplicationContext interface. 
+ * Typically, Spring MVC-specific components are initialized in the ApplicationContext interface of DispatcherServlet, while the 
+ * rest are loaded by {@link org.springframework.web.context.ContextLoaderListener}. It is important to know that beans in a child ApplicationContext (such as those created
+ * by DispatcherServlet) can reference beans of the parent ApplicationContext (such as those created by ContextLoaderListener). However, 
+ * the parent ApplicationContext interface cannot refer to beans of the child ApplicationContext.<p>
+ *
+ */
 public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
@@ -16,20 +25,29 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 		return new Class[] 
 		{ 
 			/**
-			 * Initializes SpringMVC
+			 *  Initializes SpringSecurity (by parent ApplicationContext via ContextLoaderListener) 
 			 */
-			AppConfig_Mvc.class,
+			AppConfig_Security.class,
+
 			
 			/**
-			 *  Initializes SpringSecurity
+			 * Initializes SpringMVC (by parent ApplicationContext via ContextLoaderListener)
 			 */
-			AppConfig_Security.class
+			AppConfig_Mvc.class
 		};
 	}
  
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return null;
+		return new Class[] 
+		{ 
+			/**
+			 * Initializes SpringMVC (by Child ApplicationContext via DispatcherServlet) 
+			 * Some how it is not working here, so currently is is being used at contextLoaderListener level
+			 * 
+			 * AppConfig_Mvc.class
+			 */
+		};
 	}
  
 	@Override

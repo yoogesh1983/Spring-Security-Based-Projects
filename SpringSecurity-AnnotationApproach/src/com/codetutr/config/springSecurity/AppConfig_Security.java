@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 
 import com.codetutr.handler.CustomSuccessHandler;
 
@@ -25,6 +27,9 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public CustomSuccessHandler customSuccessHandler;
+	
+	@Autowired
+	public UserDetailsService userDetailsService;
 	
     public AppConfig_Security(){
     	super();
@@ -49,11 +54,13 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		authentication(http);
 		authorization(http);
+		logout(http);
 		csrf(http);
 		exceptionHandling(http);
 		sessionManagement(http);
+		rememberMe(http);
 	}
-	
+
 	private void authentication(HttpSecurity http) throws Exception {
 		http
 		.authenticationProvider(providerManager.getProviders().get(0))
@@ -71,7 +78,8 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 			.accessDecisionManager(accessDecisionManager)
 		  		.antMatchers("/", "/home").permitAll()
-		  		.antMatchers("/sign-in", "/sign-out" , "/sign-up").permitAll()
+		  		.antMatchers("/sign-in", "/sign-up").permitAll()
+		  		.antMatchers("/logout").authenticated()
 		  		.antMatchers("/my-account-user").access("hasRole('USER')")
 		  		.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
 		  		.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')");
@@ -97,10 +105,14 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		.exceptionHandling()
 			
 			/***********************************************
+			 * What happen when an unannonomous user hit the myaccount page URL? for this we set authenticationEntryPoint
+			 * 
 			 * To prevent redirection to the login page
 			 * when someone tries to access a restricted page
+			 * 
+			 * if you uncomment this, it will go to login page
 			 **********************************************/
-			//.authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+			.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
 			.accessDeniedPage("/Access_Denied");
 	}
 	
@@ -108,7 +120,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		http
 		.sessionManagement()
 		.sessionAuthenticationErrorUrl("/user-already-loggedIn-somewhere")
-			.maximumSessions(1)
+			.maximumSessions(10)
 				.maxSessionsPreventsLogin(true)
 				.expiredUrl("/user-session-time-out");
 			
@@ -121,5 +133,13 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	private void disableFiltersOnStaticResources(WebSecurity web) {
 		// XML Configuration => <http pattern="/static/**" security="none"/>
 		web.ignoring().antMatchers("/static/**");
+	}
+	
+	private void rememberMe(HttpSecurity http) throws Exception {
+		http.rememberMe().key("ILoveNepal").userDetailsService(userDetailsService);
+	}
+	
+	private void logout(HttpSecurity http) throws Exception {
+		http.logout().logoutUrl("/logout").deleteCookies("JSESSIONID", "remember-me");
 	}
 }

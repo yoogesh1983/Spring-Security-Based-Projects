@@ -22,13 +22,17 @@
  <a href="${pageContext.request.contextPath}/my-account-user"> Click here to go for User account page!!!</a> </br>
 <a href="${pageContext.request.contextPath}/my-account-dba"> Click here to go for DBA account page!!! </a> </br>
 <a href="${pageContext.request.contextPath}/my-account-admin"> Go back to Home!!! </a> </br>
-<a href="${pageContext.request.contextPath}/sign-out"> Click here for to signout!!!</a> </br>
 
 <h3>Method label Access Check</h3>
 <a href="${pageContext.request.contextPath}/secure/dba"><span style="color:white">DBA</span></a> | 
 <a href="${pageContext.request.contextPath}/secure/admin"><span style="color:white">ADMIN</span></a> |
 <a href="${pageContext.request.contextPath}/secure/user"><span style="color:white">USER</span></a> |
 <a href="${pageContext.request.contextPath}/secure/authenticated"><span style="color:white">AUTHENTICATED</span></a>
+
+<form action='${pageContext.request.contextPath}/logout' method='POST'>
+	<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+    <input name="LOGOUT" type="submit" value="Logout"/>
+</form>
 
 </body>
 </html>
