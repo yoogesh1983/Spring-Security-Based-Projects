@@ -15,4 +15,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Open project in eclipse => Right click into a resources folder => build path => use as a Source Folder</strong> </br>
 &nbsp;=> The file structure will be like below now and it should solve the problem:</br></br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              ![./docs/Project_View_After_Change.PNG](./docs/Project_View_After_Change.PNG) <br/>
+              ![./docs/Project_View_After_Change.PNG](./docs/Project_View_After_Change.PNG)
+              
+&nbsp;=> You may need to clear browser cache if you get 405 Error
