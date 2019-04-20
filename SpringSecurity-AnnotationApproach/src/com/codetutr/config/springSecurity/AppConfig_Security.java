@@ -58,7 +58,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		csrf(http);
 		exceptionHandling(http);
 		sessionManagement(http);
-		rememberMe(http);
+		enableRememberMeServices(http);
 	}
 
 	private void authentication(HttpSecurity http) throws Exception {
@@ -82,7 +82,10 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		  		.antMatchers("/logout").authenticated()
 		  		.antMatchers("/my-account-user").access("hasRole('USER')")
 		  		.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
-		  		.antMatchers("/my-account-dba").access("hasRole('ADMIN') and hasRole('DBA')");
+		  		/**
+		  		 * RememberMe token cannot access the DBA
+		  		 */
+		  		.antMatchers("/my-account-dba").access("fullyAuthenticated and hasRole('DBA')");
 		
 		handleUnknownRequests(http);
 	}
@@ -112,7 +115,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 			 * 
 			 * if you uncomment this, it will go to login page
 			 **********************************************/
-			.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
+			//.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
 			.accessDeniedPage("/Access_Denied");
 	}
 	
@@ -132,14 +135,22 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 
 	private void disableFiltersOnStaticResources(WebSecurity web) {
 		// XML Configuration => <http pattern="/static/**" security="none"/>
-		web.ignoring().antMatchers("/static/**");
+		web
+		.ignoring()
+			.antMatchers("/static/**");
 	}
 	
-	private void rememberMe(HttpSecurity http) throws Exception {
-		http.rememberMe().key("ILoveNepal").userDetailsService(userDetailsService);
+	private void enableRememberMeServices(HttpSecurity http) throws Exception {
+		http
+		.rememberMe()
+			.key("ILoveNepal")
+			.userDetailsService(userDetailsService);
 	}
 	
 	private void logout(HttpSecurity http) throws Exception {
-		http.logout().logoutUrl("/logout").deleteCookies("JSESSIONID", "remember-me");
+		http
+		.logout()
+			.logoutUrl("/logout")
+			.deleteCookies("JSESSIONID", "remember-me");
 	}
 }
