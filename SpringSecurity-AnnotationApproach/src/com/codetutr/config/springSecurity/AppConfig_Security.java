@@ -10,7 +10,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 
 import com.codetutr.handler.CustomSuccessHandler;
 
@@ -31,6 +32,9 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public UserDetailsService userDetailsService;
 	
+	@Autowired
+	public SwitchUserFilter switchUserFilter;
+		
     public AppConfig_Security(){
     	super();
     }
@@ -85,8 +89,9 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		  		/**
 		  		 * RememberMe token cannot access the DBA
 		  		 */
-		  		.antMatchers("/my-account-dba").access("fullyAuthenticated and hasRole('DBA')");
+		  		.antMatchers("/my-account-dba").access("isFullyAuthenticated() and hasRole('DBA')");
 		
+		configureSwitchUserFunctionality(http);
 		handleUnknownRequests(http);
 	}
 	
@@ -152,5 +157,13 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		.logout()
 			.logoutUrl("/logout")
 			.deleteCookies("JSESSIONID", "remember-me");
+	}
+	
+	private void configureSwitchUserFunctionality(HttpSecurity http) throws Exception {
+		http
+		.addFilterBefore(switchUserFilter, FilterSecurityInterceptor.class)
+		.authorizeRequests()
+			.accessDecisionManager(accessDecisionManager)
+				.antMatchers("/switch_back_To_DBA").access("hasRole('DBA', 'ROLE_PREVIOUS_ADMINISTRATOR')");
 	}
 }

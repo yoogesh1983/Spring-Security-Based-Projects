@@ -9,8 +9,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.RememberMeServices;
-import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 
 import com.codetutr.services.LemonUserDetailsService;
 
@@ -46,18 +45,19 @@ public class AuthenticationConfig {
 	}
 	
 	
-	/*
-    @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder manager) throws Exception 
-    {
-    	manager.authenticationProvider(authenticationProvider());
-    	manager.userDetailsService(getUserDetailsService());
-    }
-	
-	@Autowired
-	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("bill").password("abc123").roles("USER");
-		auth.inMemoryAuthentication().withUser("admin").password("root123").roles("ADMIN");
-		auth.inMemoryAuthentication().withUser("dba").password("root123").roles("ADMIN","DBA");
-	}*/
+	/**
+	 * Some times the the customer support person needs to login using the users email but without a password to know the users path behaviour.
+	 * In such case, CS person cannot ask users password but can only ask username of the user. This switchUser functionality will
+	 * help to CS person to login using customers username but without entering the password. In our case Only DBA has a right to do this.</p>
+	 * 
+	 */
+	@Bean
+	public SwitchUserFilter switchUserFilter() {
+	    SwitchUserFilter filter = new SwitchUserFilter();
+	    filter.setUserDetailsService(getUserDetailsService());
+	    filter.setSwitchUserUrl("/impersonate_As_USER");
+	    filter.setExitUserUrl("/switch_back_To_DBA");
+	    filter.setTargetUrl("/my-account-user");
+	    return filter;
+	}
 }

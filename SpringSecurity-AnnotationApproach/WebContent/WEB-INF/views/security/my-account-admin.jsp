@@ -29,6 +29,12 @@
 <a href="${pageContext.request.contextPath}/secure/user"><span style="color:white">USER</span></a> |
 <a href="${pageContext.request.contextPath}/secure/authenticated"><span style="color:white">AUTHENTICATED</span></a>
 
+<c:if test = "${switchUserMode eq true}">
+	<form action='${pageContext.request.contextPath}/switch_back_To_DBA' method='GET'>
+    	<input type="submit" value="Switch Back to DBA" />
+	</form>
+</c:if>
+
 <form action='${pageContext.request.contextPath}/logout' method='POST'>
 	<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
     <input name="LOGOUT" type="submit" value="Logout"/>
