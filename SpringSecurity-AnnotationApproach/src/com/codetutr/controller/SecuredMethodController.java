@@ -33,4 +33,9 @@ public class SecuredMethodController {
 	private String authenticatedUser() {
 		return securedService.authenticatedOnly();
 	}
+	
+	@RequestMapping(value = "/editPermission", method = RequestMethod.GET)
+	private String userWithEditPermission() {
+		return securedService.userWithEditPermission();
+	}
 }

@@ -27,7 +27,8 @@
 <a href="${pageContext.request.contextPath}/secure/dba"><span style="color:white">DBA</span></a> | 
 <a href="${pageContext.request.contextPath}/secure/admin"><span style="color:white">ADMIN</span></a> |
 <a href="${pageContext.request.contextPath}/secure/user"><span style="color:white">USER</span></a> |
-<a href="${pageContext.request.contextPath}/secure/authenticated"><span style="color:white">AUTHENTICATED</span></a>
+<a href="${pageContext.request.contextPath}/secure/authenticated"><span style="color:white">AUTHENTICATED</span></a> |
+<a href="${pageContext.request.contextPath}/secure/editPermission"><span style="color:white">EDIT_PERMISSION</span></a>
 
 <form action='${pageContext.request.contextPath}/impersonate_As_USER' method='GET'>
     <input type="text" name="username" value="user@gmail.com"/>
