@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasPermission(#user, 'edit')")
+@PreAuthorize("hasPermission(#profile, 'edit')")
 public @interface UserWithEditPermission {
 
 }

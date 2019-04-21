@@ -2,6 +2,7 @@ package com.codetutr.services;
 
 import org.springframework.stereotype.Service;
 
+import com.codetutr.model.Profile;
 import com.codetutr.model.annotation.AdminUser;
 import com.codetutr.model.annotation.AuthenticatedUser;
 import com.codetutr.model.annotation.DbaUser;
@@ -32,7 +33,7 @@ public class SecuredService {
 	}
 	
 	@UserWithEditPermission
-	public String userWithEditPermission() {
-		return "You have an Edit permission";
+	public String userWithEditPermission(Profile profile) {
+		return "Congratulation Dear " + profile.getUsername() + "!! You have an Edit permission!";
 	}
 }
