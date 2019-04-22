@@ -5,6 +5,10 @@ import java.lang.annotation.RetentionPolicy;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
+/**
+ * 
+ * This will call the hasPermission() method of PermissionEvaluator class
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @PreAuthorize("hasPermission(#profile, 'edit')")
 public @interface UserWithEditPermission {

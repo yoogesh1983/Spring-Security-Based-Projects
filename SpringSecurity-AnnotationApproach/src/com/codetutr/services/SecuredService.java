@@ -1,12 +1,17 @@
 package com.codetutr.services;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.codetutr.dao.Event;
 import com.codetutr.model.Profile;
 import com.codetutr.model.annotation.AdminUser;
 import com.codetutr.model.annotation.AuthenticatedUser;
 import com.codetutr.model.annotation.DbaUser;
 import com.codetutr.model.annotation.NormalUser;
+import com.codetutr.model.annotation.PostFilterEvents;
 import com.codetutr.model.annotation.UserWithEditPermission;
 
 @Service
@@ -35,5 +40,15 @@ public class SecuredService {
 	@UserWithEditPermission
 	public String userWithEditPermission(Profile profile) {
 		return "Congratulation Dear " + profile.getUsername() + "!! You have an Edit permission!";
+	}
+
+	@PostFilterEvents
+	public List<Event> getEvents() {
+		List<Event> events = new LinkedList<>();
+		events.add(new Event("dba@gmail.com", ""));
+		events.add(new Event("admin@gmail.com", "dba@gmail.com"));
+		events.add(new Event("user@gmail.com", "dba@gmail.com"));
+		events.add(new Event("unknown@gmail.com", "admin@gmail.com"));
+		return events;
 	}
 }
