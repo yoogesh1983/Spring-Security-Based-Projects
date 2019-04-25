@@ -12,10 +12,11 @@ import com.codetutr.model.annotation.AuthenticatedUser;
 import com.codetutr.model.annotation.DbaUser;
 import com.codetutr.model.annotation.NormalUser;
 import com.codetutr.model.annotation.PostFilterEvents;
+import com.codetutr.model.annotation.PreFilterEvents;
 import com.codetutr.model.annotation.UserWithEditPermission;
 
 @Service
-public class SecuredService {
+public class SecuredMethodService {
 	
 	@DbaUser
 	public String dbaOnly() {
@@ -49,6 +50,11 @@ public class SecuredService {
 		events.add(new Event("admin@gmail.com", "dba@gmail.com"));
 		events.add(new Event("user@gmail.com", "dba@gmail.com"));
 		events.add(new Event("unknown@gmail.com", "admin@gmail.com"));
+		return events;
+	}
+	
+	@PreFilterEvents
+	public List<Event> saveEvents(List<Event> events) {
 		return events;
 	}
 }

@@ -1,5 +1,6 @@
 package com.codetutr.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,19 +9,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codetutr.dao.Event;
 import com.codetutr.model.Profile;
-import com.codetutr.services.SecuredService;
+import com.codetutr.services.SecuredMethodService;
 
 @RestController
 @RequestMapping(value = "/secure")
 public class SecuredMethodController {
 
 	@Autowired
-	SecuredService securedService;
+	SecuredMethodService securedService;
 
 	@RequestMapping(value = "/dba", method = RequestMethod.GET)
 	public String secureDba() {
@@ -70,10 +70,20 @@ public class SecuredMethodController {
 		return securedService.userWithEditPermission(profile);
 	}
 	
-	@RequestMapping(value = "/events", method = RequestMethod.GET)
-	public List<Event> getEvents() {
-		List<Event> lists = securedService.getEvents();
-		System.out.println("Lists are" + lists);
+	@RequestMapping(value = "/events-preFilter", method = RequestMethod.GET)
+	public List<Event> saveEvents() {
+		List<Event> events = new LinkedList<>();
+		events.add(new Event("dba@gmail.com", ""));
+		events.add(new Event("admin@gmail.com", "dba@gmail.com"));
+		events.add(new Event("user@gmail.com", "dba@gmail.com"));
+		events.add(new Event("unknown@gmail.com", "admin@gmail.com"));
+		List<Event> lists = securedService.saveEvents(events);
 		return lists;
 	}
+	
+	@RequestMapping(value = "/events-postFilter", method = RequestMethod.GET)
+	public List<Event> getEvents() {
+		 return securedService.getEvents();
+	}
+	
 }

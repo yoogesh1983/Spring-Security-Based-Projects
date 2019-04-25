@@ -2,7 +2,11 @@ package com.codetutr.config.springMvc;
 
 import java.util.Locale;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,6 +24,14 @@ public class InternationalizationConfig implements WebMvcConfigurer
 		resolver.setCookieName("myLocaleCookie");
 		resolver.setCookieMaxAge(4800);
 		return resolver;
+	}
+	
+	@Autowired
+	DataSource dataSource;
+	
+	@Bean
+	public JdbcTemplate jdbcTemplate() {
+	    return new JdbcTemplate(dataSource);
 	}
 	
 	/*

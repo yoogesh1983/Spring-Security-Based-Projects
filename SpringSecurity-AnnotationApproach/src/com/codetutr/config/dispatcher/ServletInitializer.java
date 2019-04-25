@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.codetutr.config.database.AppConfig_Persistance;
 import com.codetutr.config.springMvc.AppConfig_Mvc;
 import com.codetutr.config.springSecurity.AppConfig_Security;
 
@@ -33,7 +34,13 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 			/**
 			 * Initializes SpringMVC (by parent ApplicationContext via ContextLoaderListener)
 			 */
-			AppConfig_Mvc.class
+			AppConfig_Mvc.class,
+			
+			
+			/**
+			 * Initializes the DataSource Configuration
+			 */
+			AppConfig_Persistance.class
 		};
 	}
  
