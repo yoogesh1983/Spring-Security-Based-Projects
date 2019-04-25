@@ -3,18 +3,20 @@ package com.codetutr.config.springSecurity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 
-import com.codetutr.services.LemonUserDetailsService;
-
 public class AuthenticationConfig {
 
+	@Autowired
+	private UserDetailsService lemonUserDetailsService;
 	/**
 	 * This class is used to add {@link AuthenticationProvider} and you can add as many as providers you want since this is a List
 	 */
@@ -28,15 +30,9 @@ public class AuthenticationConfig {
 	@Bean
 	public DaoAuthenticationProvider getDaoauthenticationProvider() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-		authenticationProvider.setUserDetailsService(getUserDetailsService());
+		authenticationProvider.setUserDetailsService(lemonUserDetailsService);
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
 		return authenticationProvider;
-	}
-		
-	@Bean
-	public LemonUserDetailsService getUserDetailsService() {
-		LemonUserDetailsService userDetailsService = new LemonUserDetailsService();
-		return userDetailsService;
 	}
 
 	@Bean
@@ -54,7 +50,7 @@ public class AuthenticationConfig {
 	@Bean
 	public SwitchUserFilter switchUserFilter() {
 	    SwitchUserFilter filter = new SwitchUserFilter();
-	    filter.setUserDetailsService(getUserDetailsService());
+	    filter.setUserDetailsService(lemonUserDetailsService);
 	    filter.setSwitchUserUrl("/impersonate_As_USER");
 	    filter.setExitUserUrl("/switch_back_To_DBA");
 	    filter.setTargetUrl("/my-account-user");

@@ -14,7 +14,7 @@
 	</properties>
 
 	<dependencies>
-		<!-- Needed For Spring-Framework-->
+		<!-- Needed For Spring-Framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -42,6 +42,12 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-acl</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+
 
 		<!-- Needed For Servlet -->
 		<dependency>
@@ -89,6 +95,13 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.0</version>
+		</dependency>
+		
+		<!-- for H2 Database -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.199</version>
 		</dependency>
 	</dependencies>
 

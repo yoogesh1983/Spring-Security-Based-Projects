@@ -3,17 +3,21 @@ package com.codetutr.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.codetutr.model.Profile;
 
+@Service
 public class LemonUserDetailsService implements UserDetailsService 
 {
-	ProfileService profileservice = new ProfileService ();
+	@Autowired
+	ProfileService profileservice;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException

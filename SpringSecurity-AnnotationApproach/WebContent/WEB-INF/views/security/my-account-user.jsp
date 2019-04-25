@@ -29,7 +29,8 @@
 <a href="${pageContext.request.contextPath}/secure/user"><span style="color:white">USER</span></a> |
 <a href="${pageContext.request.contextPath}/secure/authenticated"><span style="color:white">AUTHENTICATED</span></a> |
 <a href="${pageContext.request.contextPath}/secure/editPermission"><span style="color:white">EDIT_PERMISSION</span></a> |
-<a href="${pageContext.request.contextPath}/secure/events"><span style="color:white">EVENTS</span></a>
+<a href="${pageContext.request.contextPath}/secure/events-preFilter"><span style="color:white">PRE_FILTER_EVENTS</span></a> |
+<a href="${pageContext.request.contextPath}/secure/events-postFilter"><span style="color:white">POST_FILTER_EVENTS</span></a>
 
 <c:if test = "${switchUserMode eq true}">
 	<form action='${pageContext.request.contextPath}/switch_back_To_DBA' method='GET'>

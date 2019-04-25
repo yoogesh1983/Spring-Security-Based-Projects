@@ -1,4 +1,4 @@
-package com.codetutr.dao;
+package com.codetutr.model;
 
 public class Event {
 	private String owner;

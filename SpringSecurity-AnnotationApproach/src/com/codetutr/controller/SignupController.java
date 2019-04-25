@@ -23,8 +23,8 @@ import com.codetutr.validation.ProfileBeanValidator;
 @Controller
 public class SignupController 
 {
-	
-	ProfileService profileservice = new ProfileService();
+	@Autowired
+	ProfileService profileservice;
 	
 	@InitBinder
 	public void initBinder (WebDataBinder binder)
