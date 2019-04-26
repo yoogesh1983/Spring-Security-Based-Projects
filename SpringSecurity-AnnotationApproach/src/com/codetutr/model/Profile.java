@@ -7,7 +7,8 @@ public class Profile
 	private String password;
 	private String firstName;
 	private String lastName;
-	private String Role;
+	private String authority;
+	private boolean enabled;
 	
 	
 	public Profile() 
@@ -16,97 +17,86 @@ public class Profile
 	}
 
 
-	public Profile(Long uid, String username, String password, String firstName, String lastName, String role) 
-	{
+	public Profile(Long uid, String username, String password, String firstName, String lastName, String authority,
+			boolean enabled) {
 		super();
 		this.uid = uid;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		Role = role;
+		this.authority = authority;
+		this.enabled = enabled;
 	}
 
 
-
-
-
-	public Long getUid() 
-	{
+	public Long getUid() {
 		return uid;
 	}
 
 
-	public void setUid(Long uid) 
-	{
+	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 
 
-	public String getUsername()
-	{
+	public String getUsername() {
 		return username;
 	}
 
 
-	public void setUsername(String username)
-	{
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
 
-	public String getPassword() 
-	{
+	public String getPassword() {
 		return password;
 	}
 
 
-	public void setPassword(String password) 
-	{
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
 
-	public String getFirstName() 
-	{
+	public String getFirstName() {
 		return firstName;
 	}
 
 
-	public void setFirstName(String firstName) 
-	{
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 
-	public String getLastName() 
-	{
+	public String getLastName() {
 		return lastName;
 	}
 
 
-	public void setLastName(String lastName)
-	{
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	public String getRole() 
-	{
-		return Role;
+
+
+	public String getAuthority() {
+		return authority;
 	}
 
 
-	public void setRole(String role) 
-	{
-		Role = role;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 
-	@Override
-	public String toString() 
-	{
-		return "Profile [uid=" + uid + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", Role=" + Role + "]";
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 
@@ -114,7 +104,8 @@ public class Profile
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Role == null) ? 0 : Role.hashCode());
+		result = prime * result + ((authority == null) ? 0 : authority.hashCode());
+		result = prime * result + (enabled ? 1231 : 1237);
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -133,10 +124,12 @@ public class Profile
 		if (getClass() != obj.getClass())
 			return false;
 		Profile other = (Profile) obj;
-		if (Role == null) {
-			if (other.Role != null)
+		if (authority == null) {
+			if (other.authority != null)
 				return false;
-		} else if (!Role.equals(other.Role))
+		} else if (!authority.equals(other.authority))
+			return false;
+		if (enabled != other.enabled)
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -165,7 +158,12 @@ public class Profile
 			return false;
 		return true;
 	}
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Profile [uid=" + uid + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", authority=" + authority + ", enabled=" + enabled + "]";
+	}
 
 }

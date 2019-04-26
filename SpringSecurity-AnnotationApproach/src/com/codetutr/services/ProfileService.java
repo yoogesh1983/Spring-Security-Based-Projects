@@ -3,7 +3,6 @@ package com.codetutr.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.codetutr.dao.IProfileDao;
@@ -13,9 +12,12 @@ import com.codetutr.model.Profile;
 public class ProfileService {
 
 	@Autowired
-	//@Qualifier("mockProfileDaoImpl")
-	@Qualifier("jdbcProfileDaoImpl")
 	IProfileDao profiledao;
+	
+	// Initialization of database
+	public void initiateDatabase() {
+		profiledao.initiateDatabase();		
+	}
 
 	// CREATE
 	public Profile createProfile(Profile profile) {

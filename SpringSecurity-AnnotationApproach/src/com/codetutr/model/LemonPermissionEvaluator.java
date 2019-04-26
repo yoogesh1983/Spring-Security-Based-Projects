@@ -14,7 +14,7 @@ public class LemonPermissionEvaluator implements PermissionEvaluator {
 			result = false;
 		} else {
 			Profile profile = (Profile) targetDomainObject;
-			if (profile.getRole() != null && profile.getRole().equals("ROLE_DBA")) {
+			if (profile.getAuthority() != null && profile.getAuthority().equals("ROLE_DBA")) {
 				result = true;
 			}
 		}

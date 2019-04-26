@@ -14,18 +14,20 @@ import org.springframework.stereotype.Repository;
 import com.codetutr.model.Profile;
 
 @Repository
+@org.springframework.context.annotation.Profile("local")
 public class MockProfileDaoImpl implements IProfileDao {
 
 	private static Map<Long, Profile> profileTable = new HashMap<Long, Profile>();
-	
-	static {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		profileTable.put(1L, new Profile(1L, "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", "ROLE_USER"));
-		profileTable.put(2L, new Profile(2L, "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", "ROLE_ADMIN"));
-		profileTable.put(3L, new Profile(3L, "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", "ROLE_DBA"));
-	}
 
 	public MockProfileDaoImpl() {
+	}
+	
+	@Override
+	public void initiateDatabase() {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		profileTable.put(1L, new Profile(1L, "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", "ROLE_USER", true));
+		profileTable.put(2L, new Profile(2L, "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", "ROLE_ADMIN", true));
+		profileTable.put(3L, new Profile(3L, "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", "ROLE_DBA", true));
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public class MockProfileDaoImpl implements IProfileDao {
 
 		if (guid <= 0) {
 			System.out.println("*****PLEASE ENTER CORRECT PROFILE ID*******");
-			return new Profile(null, null, null, null, null, null);
+			return new Profile(null, null, null, null, null, null, false);
 		}
 
 		Set<Entry<Long, Profile>> set = getEntrySet();
@@ -56,10 +58,10 @@ public class MockProfileDaoImpl implements IProfileDao {
 
 		if (!find) {
 			System.out.println("*****COULD NOT FIND GUID IN A DATABASE*******");
-			return new Profile(null, null, null, null, null, null);
+			return new Profile(null, null, null, null, null, null, false);
 		} else {
 			return UPDATE(new Profile(guid, profile.getUsername(), profile.getPassword(), profile.getFirstName(),
-					profile.getLastName(), profile.getRole()));
+					profile.getLastName(), profile.getAuthority(), false));
 		}
 	}
 
@@ -110,7 +112,7 @@ public class MockProfileDaoImpl implements IProfileDao {
 
 		if (guid <= 0) {
 			System.out.println("*****PLEASE ENTER CORRECT STUDENT ID*******");
-			return new Profile(null, null, null, null, null, null);
+			return new Profile(null, null, null, null, null, null, false);
 		}
 
 		Set<Entry<Long, Profile>> set = getEntrySet();
@@ -124,7 +126,7 @@ public class MockProfileDaoImpl implements IProfileDao {
 		}
 		if (!find) {
 			System.out.println("*****COULD NOT FIND ID IN A DATABASE*******");
-			return new Profile(null, null, null, null, null, null);
+			return new Profile(null, null, null, null, null, null, false);
 		} else {
 			return GET_BY_ID(guid);
 		}
@@ -135,8 +137,8 @@ public class MockProfileDaoImpl implements IProfileDao {
 	}
 
 	@Override
-	public Profile getProfileByUsername(String name) {
-		ArrayList<Profile> al = GET_BY_USERNAME(name);
+	public Profile getProfileByUsername(String username) {
+		ArrayList<Profile> al = GET_BY_USERNAME(username);
 		if (al != null && al.size() == 1) {
 			return al.get(0);
 		} else {
@@ -169,13 +171,13 @@ public class MockProfileDaoImpl implements IProfileDao {
 	}
 
 	@Override
-	public ArrayList<Profile> getProfileByName(Object obj) {
+	public List<Profile> getProfileByName(String name) {
 		ArrayList<Profile> al = new ArrayList<Profile>();
 		Set<Entry<Long, Profile>> set = profileTable.entrySet();
 		Iterator<Entry<Long, Profile>> i = set.iterator();
 		while (i.hasNext()) {
 			Entry<Long, Profile> me = i.next();
-			if (me.getValue().getFirstName().equals(obj)) {
+			if (me.getValue().getFirstName().equals(name)) {
 
 				al.add(profileTable.get(me.getKey()));
 			}

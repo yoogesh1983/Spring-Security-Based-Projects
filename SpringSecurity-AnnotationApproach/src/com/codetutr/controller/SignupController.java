@@ -68,10 +68,10 @@ public class SignupController
 		else
 		{
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			profile.setRole("ROLE_USER");
+			profile.setAuthority("ROLE_USER");
 			profile.setPassword(passwordEncoder.encode(profile.getPassword()));
 			
-			profile.setRole("ROLE_USER");
+			profile.setAuthority("ROLE_USER");
 		    Profile profile1 = profileservice.createProfile(profile);
 		    request.setAttribute("profile1",  profile1);
 		    model.addAttribute("profile",new Profile());   // to reset table
