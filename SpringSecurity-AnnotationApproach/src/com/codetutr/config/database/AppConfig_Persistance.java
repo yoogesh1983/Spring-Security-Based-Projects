@@ -11,10 +11,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.codetutr.dao.MockProfileDaoImpl;
-import com.codetutr.dao.IProfileDao;
-import com.codetutr.dao.JdbcProfileDaoImpl;
-
 @EnableTransactionManagement
 public class AppConfig_Persistance {
 
