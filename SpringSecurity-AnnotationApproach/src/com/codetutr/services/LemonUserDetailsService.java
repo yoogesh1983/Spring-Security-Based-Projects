@@ -35,7 +35,7 @@ public class LemonUserDetailsService implements UserDetailsService
 		}
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority(profile.getRole()));
+		authorities.add(new SimpleGrantedAuthority(profile.getAuthority()));
 		UserDetails userDetails = new org.springframework.security.core.userdetails.User(profile.getUsername(), profile.getPassword(), true, true, true, true, authorities);
 		
 		return userDetails;

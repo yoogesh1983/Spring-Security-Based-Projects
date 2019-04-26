@@ -63,7 +63,7 @@ public class SecuredMethodController {
 		
 		for(GrantedAuthority next: authentication.getAuthorities()) {
 			if(next.getAuthority().equals("ROLE_DBA")) {
-				profile.setRole(next.getAuthority());
+				profile.setAuthority(next.getAuthority());
 				break;
 			}
 		}

@@ -1,6 +1,5 @@
 package com.codetutr.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.codetutr.model.Profile;
@@ -22,11 +21,13 @@ public interface IProfileDao {
 	Profile getProfile(Long guid);
 
 	// Read single using other parameter (not primary key)
-	Profile getProfileByUsername(String name);
+	Profile getProfileByUsername(String username);
 
 	// Read single using other parameter (not primary key)
 	boolean ismoreUsernameExists(String username);
 
-	ArrayList<Profile> getProfileByName(Object obj);
+	List<Profile> getProfileByName(String name);
+
+	void initiateDatabase();
 
 }
