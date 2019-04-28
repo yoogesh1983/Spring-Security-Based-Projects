@@ -3,6 +3,9 @@ package com.codetutr.controller;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,25 +52,15 @@ public class SecuredMethodController {
 	 * Authentication object to the HttpServletRequest.getPrincipal() method
 	 */
 	@RequestMapping(value = "/editPermission", method = RequestMethod.GET)
-	public String userWithEditPermission(Authentication authentication) {
+	public String userWithEditPermission(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		Profile profile = new Profile();
-		
-		Object principal = authentication.getPrincipal();
-		String username = "";
-		if (principal instanceof UserDetails) {
-			username = ((UserDetails) principal).getUsername();
-		} else {
-			username = principal.toString();
-		}
-		profile.setUsername(username);
-		
+		profile.setUsername(request.getRemoteUser());
 		for(GrantedAuthority next: authentication.getAuthorities()) {
 			if(next.getAuthority().equals("ROLE_DBA")) {
 				profile.setAuthority(next.getAuthority());
 				break;
 			}
 		}
-		
 		return securedService.userWithEditPermission(profile);
 	}
 	

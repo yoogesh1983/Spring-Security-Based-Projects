@@ -23,14 +23,14 @@ public class DefaultPageController
 	
 	@PostConstruct
 	public void init() {
-		Log.logInfo(CLASS_NAME, "findUserByUsername(String)" ,"Unable to find the username : " );
+		Log.logInfo(CLASS_NAME, "init()" ,"Initializitation of database started" );
 		profileservice.initiateDatabase();
+		Log.logInfo(CLASS_NAME, "init()" ,"Initializitation of database Finished" );
 	}
 	
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model, HttpServletRequest request, HttpServletResponse response) 
 	{
-		Log.logInfo(CLASS_NAME, "findUserByUsername(String)" ,"Unable to find the username : " );
 		return "security/sign-in";
 	}
 
