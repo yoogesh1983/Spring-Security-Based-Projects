@@ -30,7 +30,8 @@
 <a href="${pageContext.request.contextPath}/secure/authenticated"><span style="color:white">AUTHENTICATED</span></a> |
 <a href="${pageContext.request.contextPath}/secure/editPermission"><span style="color:white">EDIT_PERMISSION</span></a> |
 <a href="${pageContext.request.contextPath}/secure/events-preFilter"><span style="color:white">PRE_FILTER_EVENTS</span></a> |
-<a href="${pageContext.request.contextPath}/secure/events-postFilter"><span style="color:white">POST_FILTER_EVENTS</span></a>
+<a href="${pageContext.request.contextPath}/secure/events-postFilter"><span style="color:white">POST_FILTER_EVENTS</span></a> |
+<a href="${pageContext.request.contextPath}/sessions"><span style="color:white">ACTIVE_SESSIONS</span></a>
 
 <form action='${pageContext.request.contextPath}/impersonate_As_USER' method='GET'>
     <input type="text" name="username" value="user@gmail.com"/>

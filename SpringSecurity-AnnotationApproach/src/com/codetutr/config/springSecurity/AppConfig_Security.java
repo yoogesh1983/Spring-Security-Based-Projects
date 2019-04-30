@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
@@ -17,7 +18,7 @@ import com.codetutr.handler.CustomSuccessHandler;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Import(value={AuthenticationConfig.class, AuthorizationConfig.class})
+@Import(value={AuthenticationConfig.class, AuthorizationConfig.class, SessionStrategyConfig.class})
 public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -34,6 +35,9 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public SwitchUserFilter switchUserFilter;
+	
+	@Autowired
+	public SessionRegistry sessionRegistry;
 		
     public AppConfig_Security(){
     	super();
@@ -125,12 +129,25 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	}
 	
 	private void sessionManagement(HttpSecurity http) throws Exception {
+		
+		//Session fixation
 		http
-		.sessionManagement()
-		.sessionAuthenticationErrorUrl("/user-already-loggedIn-somewhere")
-			.maximumSessions(10)
-				.maxSessionsPreventsLogin(true)
-				.expiredUrl("/user-session-time-out");
+			.sessionManagement()
+				.sessionFixation()
+					.migrateSession();
+		
+		//Per user per session
+		http
+			.sessionManagement()
+				.maximumSessions(-1)
+					.sessionRegistry(sessionRegistry)
+						.maxSessionsPreventsLogin(true)
+							.expiredUrl("/user-session-time-out");
+		
+		//Session authentication error
+		http
+			.sessionManagement()
+				.sessionAuthenticationErrorUrl("/user-already-loggedIn-somewhere");
 			
 	}
 	
