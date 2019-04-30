@@ -85,6 +85,7 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 		
 		/**
 		 * This Listner needs to be registered to Listen for Max-session Users configured on AppConfig_Security.java
+		 * The Servletcontainer will notify Spring Security (through this HttpSessionEventPublisher class)of session life cycle events
 		 */
 		servletContext.addListener(HttpSessionEventPublisher.class);
 	}

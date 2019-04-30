@@ -23,14 +23,12 @@ public class DefaultPageController
 	
 	@PostConstruct
 	public void init() {
-		Log.logInfo(CLASS_NAME, "init()" ,"Initializitation of database started" );
 		profileservice.initiateDatabase();
-		Log.logInfo(CLASS_NAME, "init()" ,"Initializitation of database Finished" );
 	}
 	
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model, HttpServletRequest request, HttpServletResponse response) 
-	{
+	{Log.logInfo(CLASS_NAME, "init()" ,"Initlamoarted" );
 		return "security/sign-in";
 	}
 
