@@ -3,6 +3,7 @@ package com.codetutr.config.springSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -33,11 +34,13 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	private SessionRegistry sessionRegistry;
 	private ClientRegistrationRepository clientRegistrationRepository;
 	private OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
+	private Environment env;
 	
 	@Autowired
 	public AppConfig_Security(ProviderManager providerManager, AccessDecisionManager accessDecisionManager, CustomSuccessHandler customSuccessHandler, 
 			UserDetailsService userDetailsService, SwitchUserFilter switchUserFilter,SessionRegistry sessionRegistry, 
-			ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientService oAuth2AuthorizedClientService) {
+			ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientService oAuth2AuthorizedClientService,
+			Environment env) {
 		this.providerManager = providerManager;
 		this.accessDecisionManager = accessDecisionManager;
 		this.customSuccessHandler= customSuccessHandler;
@@ -46,6 +49,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		this.sessionRegistry = sessionRegistry;
 		this.clientRegistrationRepository = clientRegistrationRepository;
 		this.oAuth2AuthorizedClientService = oAuth2AuthorizedClientService;
+		this.env = env;
 	}
 		
     public AppConfig_Security(){
@@ -209,10 +213,26 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 
 	
 	private void oauth2Login(HttpSecurity http) throws Exception {
+		clientSideConfiguration(http);
+		authorizationEndPointConfiguration(http);
+		
+	}
+	
+	private void clientSideConfiguration(HttpSecurity http) throws Exception {
 		http
 			.oauth2Login()
 	      		.clientRegistrationRepository(clientRegistrationRepository)
 	      		.authorizedClientService(oAuth2AuthorizedClientService)
-	      		.loginPage("/oauth_login");
+	      		.loginPage("/oauth_login")
+	      		.defaultSuccessUrl("/oauth_login_success", true)
+	      		.failureUrl("/oauth_login_Failure");
+	}
+	
+	private void authorizationEndPointConfiguration(HttpSecurity http) throws Exception {
+		http.oauth2Login() 
+		  .authorizationEndpoint()
+		  .baseUri("/oauth2/authorize-client");
+		  //.authorizationRequestRepository(authorizationRequestRepository());
+		
 	}
 }
