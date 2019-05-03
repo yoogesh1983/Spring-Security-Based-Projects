@@ -2,6 +2,7 @@ package com.codetutr.config.springSecurity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -11,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 
@@ -18,26 +22,31 @@ import com.codetutr.handler.CustomSuccessHandler;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Import(value={AuthenticationConfig.class, AuthorizationConfig.class, SessionStrategyConfig.class})
+@Import(value={AuthenticationConfig.class, AuthorizationConfig.class, SessionStrategyConfig.class, Oauth2Config.class})
 public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	public ProviderManager providerManager;
+	private ProviderManager providerManager;
+	private AccessDecisionManager accessDecisionManager;
+	private CustomSuccessHandler customSuccessHandler;
+	private UserDetailsService userDetailsService;
+	private SwitchUserFilter switchUserFilter;
+	private SessionRegistry sessionRegistry;
+	private ClientRegistrationRepository clientRegistrationRepository;
+	private OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
 	
 	@Autowired
-	public AccessDecisionManager accessDecisionManager;
-	
-	@Autowired
-	public CustomSuccessHandler customSuccessHandler;
-	
-	@Autowired
-	public UserDetailsService userDetailsService;
-	
-	@Autowired
-	public SwitchUserFilter switchUserFilter;
-	
-	@Autowired
-	public SessionRegistry sessionRegistry;
+	public AppConfig_Security(ProviderManager providerManager, AccessDecisionManager accessDecisionManager, CustomSuccessHandler customSuccessHandler, 
+			UserDetailsService userDetailsService, SwitchUserFilter switchUserFilter,SessionRegistry sessionRegistry, 
+			ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientService oAuth2AuthorizedClientService) {
+		this.providerManager = providerManager;
+		this.accessDecisionManager = accessDecisionManager;
+		this.customSuccessHandler= customSuccessHandler;
+		this.userDetailsService = userDetailsService;
+		this.switchUserFilter = switchUserFilter;
+		this.sessionRegistry = sessionRegistry;
+		this.clientRegistrationRepository = clientRegistrationRepository;
+		this.oAuth2AuthorizedClientService = oAuth2AuthorizedClientService;
+	}
 		
     public AppConfig_Security(){
     	super();
@@ -50,7 +59,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
     @Override
 	public void configure(WebSecurity web) throws Exception {
        disableFiltersOnStaticResources(web);
-       enableDebugMode(web);
+       //enableDebugMode(web);
 	}
 	
     /**
@@ -64,21 +73,15 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		authorization(http);
 		logout(http);
 		csrf(http);
+		header(http);
 		exceptionHandling(http);
 		sessionManagement(http);
 		enableRememberMeServices(http);
 	}
 
 	private void authentication(HttpSecurity http) throws Exception {
-		http
-		.authenticationProvider(providerManager.getProviders().get(0))
-		.formLogin()
-			.loginPage("/sign-in")
-			.loginProcessingUrl("/do-sign-in")
-			.successHandler(customSuccessHandler)
-			.failureUrl("/sign-in?error=true")
-			.usernameParameter("username")
-			.passwordParameter("password");
+		formBasedLogin(http);
+		oauth2Login(http);
 	}
 
 	private void authorization(HttpSecurity http) throws Exception {
@@ -86,7 +89,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 			.accessDecisionManager(accessDecisionManager)
 		  		.antMatchers("/", "/home").permitAll()
-		  		.antMatchers("/sign-in", "/sign-up").permitAll()
+		  		.antMatchers("/sign-in", "/sign-up", "/oauth_login").permitAll()
 		  		.antMatchers("/logout").authenticated()
 		  		.antMatchers("/my-account-user").access("hasRole('USER')")
 		  		.antMatchers("/my-account-admin").access("hasRole('ADMIN')")
@@ -136,7 +139,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 				.sessionFixation()
 					.migrateSession();
 		
-		//Per user per session
+		//Per user per session. This will enable the ConcurrentSessionFilter
 		http
 			.sessionManagement()
 				.maximumSessions(-1)
@@ -152,10 +155,13 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	}
 	
 	private void enableDebugMode(WebSecurity web) {
+		
+		//This will enable the debugFilter
 		web.debug(true);
 	}
 
 	private void disableFiltersOnStaticResources(WebSecurity web) {
+		
 		// XML Configuration => <http pattern="/static/**" security="none"/>
 		web
 		.ignoring()
@@ -182,5 +188,31 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 			.accessDecisionManager(accessDecisionManager)
 				.antMatchers("/switch_back_To_DBA").access("hasRole('DBA', 'ROLE_PREVIOUS_ADMINISTRATOR')");
+	}
+	
+	private void formBasedLogin(HttpSecurity http) throws Exception {
+		http
+		.authenticationProvider(providerManager.getProviders().get(0))
+		.formLogin()
+			.loginPage("/sign-in")
+			.loginProcessingUrl("/do-sign-in")
+			.successHandler(customSuccessHandler)
+			.failureUrl("/sign-in?error=true")
+			.usernameParameter("username")
+			.passwordParameter("password");
+	}
+	
+	private void header(HttpSecurity http) throws Exception {
+		http
+			.headers();
+	}
+
+	
+	private void oauth2Login(HttpSecurity http) throws Exception {
+		http
+			.oauth2Login()
+	      		.clientRegistrationRepository(clientRegistrationRepository)
+	      		.authorizedClientService(oAuth2AuthorizedClientService)
+	      		.loginPage("/oauth_login");
 	}
 }

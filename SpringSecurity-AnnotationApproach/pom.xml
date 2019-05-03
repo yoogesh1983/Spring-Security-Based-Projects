@@ -53,7 +53,18 @@
 			<artifactId>spring-security-acl</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
-
+		
+		<!-- Needed for OAuth2 -->
+		<dependency>
+    		<groupId>org.springframework.security</groupId>
+    		<artifactId>spring-security-oauth2-client</artifactId>
+    		<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+   			<groupId>org.springframework.security</groupId>
+   			<artifactId>spring-security-oauth2-jose</artifactId>
+    		<version>${springsecurity.version}</version>
+		</dependency>
 
 		<!-- Needed For Servlet -->
 		<dependency>

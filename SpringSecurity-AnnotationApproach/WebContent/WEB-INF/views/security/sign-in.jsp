@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<!DOCTYPE html>
 <html>
 
 <head>
-<link href="${pageContext.request.contextPath}/static/css/mycss.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/static/css/common.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/static/css/sign-in.css" rel="stylesheet" type="text/css">
 <title>Login Page</title>
 
 </head>
@@ -62,6 +63,20 @@
  </div>
  
  
+  <!-- OAuth2 Logic Started -->
+ <div > 
+ 	<p><a href="<c:url value='/oauth_login'/>">OAuth2</a></p>
+ </div>
+ 
+  <c:if test="${urls_oauth2 != null}">
+  
+	 <!-- We Just need this file at compile time and need not refresh data every-time the file loads since these values are kind of static so that we prefer include directive over include action tag -->
+	 <%@include  file = "oauth2.jsp" %>
+	 
+     <%-- <jsp:include page="oauth2.jsp" /> --%>
+  </c:if>
+ <!-- OAuth2 Logic Finished -->
+  
 </body>
 </html>
 

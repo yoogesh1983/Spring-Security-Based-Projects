@@ -38,3 +38,4 @@ hs_err_pid*
 
 #For MultiModule project (in StoreFront) module
 /Database.trace.db
+/bin/

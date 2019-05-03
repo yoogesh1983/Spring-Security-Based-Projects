@@ -1,0 +1,16 @@
+@CHARSET "ISO-8859-1";
+
+h1 {
+	color: green;
+}
+
+
+.formtable {
+	width: 40rem;
+	padding: 1rem;
+	border: .2rem solid red;
+}
+
+.error {
+	Color: red;
+}

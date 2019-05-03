@@ -15,7 +15,4 @@ public class SigninController
 		ModelAndView mv = new ModelAndView ("security/sign-in");
 		return mv;
 	}
-
-
-
 }
