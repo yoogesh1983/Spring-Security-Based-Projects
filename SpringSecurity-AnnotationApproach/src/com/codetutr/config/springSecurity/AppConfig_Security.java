@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
@@ -36,12 +37,14 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	private OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
 	private OAuth2AuthorizationRequestResolver oAuth2AuthorizationRequestResolver;
 	private AuthorizationRequestRepository<OAuth2AuthorizationRequest> authorizationRequestRepository;
+	private OAuth2AuthorizedClientRepository authorizedClientRepository;
 	
 	@Autowired
 	public AppConfig_Security(ProviderManager providerManager, AccessDecisionManager accessDecisionManager, CustomSuccessHandler customSuccessHandler, 
 			UserDetailsService userDetailsService, SwitchUserFilter switchUserFilter,SessionRegistry sessionRegistry, 
 			ClientRegistrationRepository clientRegistrationRepository, OAuth2AuthorizedClientService oAuth2AuthorizedClientService,
-			OAuth2AuthorizationRequestResolver oAuth2AuthorizationRequestResolver, AuthorizationRequestRepository<OAuth2AuthorizationRequest> authorizationRequestRepository) {
+			OAuth2AuthorizationRequestResolver oAuth2AuthorizationRequestResolver, AuthorizationRequestRepository<OAuth2AuthorizationRequest> authorizationRequestRepository,
+			OAuth2AuthorizedClientRepository authorizedClientRepository) {
 		this.providerManager = providerManager;
 		this.accessDecisionManager = accessDecisionManager;
 		this.customSuccessHandler= customSuccessHandler;
@@ -52,6 +55,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		this.oAuth2AuthorizedClientService = oAuth2AuthorizedClientService;
 		this.oAuth2AuthorizationRequestResolver = oAuth2AuthorizationRequestResolver;
 		this.authorizationRequestRepository = authorizationRequestRepository;
+		this.authorizedClientRepository = authorizedClientRepository;
 	}
 		
     public AppConfig_Security(){
@@ -218,16 +222,15 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	private void oauth2Login(HttpSecurity http) throws Exception {
 		initOauth2(http);
 		OAuth2AuthorizationRequestRedirectFilterRequirementSetup(http);
+		OAuth2AuthorizedClientRepositoryRequirementSetup(http);
 		OAuth2LoginAuthenticationFilterRequirementSetup(http);
 		AbstractAuthenticationProcessingFilterRequirementSetup(http);
 	}
 	
+
 	private void initOauth2(HttpSecurity http) throws Exception {
 		http
 			.oauth2Login()
-				/**
-				 * This is where you save clientId, Client Secret and other required information provided from google and FaceBook while registering as a client
-				 */
       			.clientRegistrationRepository(clientRegistrationRepository);
 	}
 
@@ -235,23 +238,21 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 		http
 			.oauth2Login() 
 				.authorizationEndpoint()
-				    /**
-				     * This will resolve OAuth2AuthorizationRequestRedirectFilterInterceptorUri and redirectUriTemplate defined at oauth2.properties
-				     * This is where the URI for Leg1 call is created as an Object i.e. OAuth2AuthorizationRequest So that it can be used later for validation purpose
-				     * OAuth2AuthorizationRequest is actually saved inside AuthorizationRequestRepository which is a member variable of OAuth2LoginAuthenticationFilter
-				     */
-					.authorizationRequestResolver(oAuth2AuthorizationRequestResolver);
+					.authorizationRequestResolver(oAuth2AuthorizationRequestResolver)
+					.authorizationRequestRepository(authorizationRequestRepository);
+	}
+	
+	private void OAuth2AuthorizedClientRepositoryRequirementSetup(HttpSecurity http) throws Exception {
+		http
+			.oauth2Login()
+      			.authorizedClientService(oAuth2AuthorizedClientService);
+		
 	}
 	
 	private void OAuth2LoginAuthenticationFilterRequirementSetup(HttpSecurity http) throws Exception {
 		http
 			.oauth2Login()
-			    /**
-			     * This is where an information of Resource Owner after the successful Leg2 process is saved
-			     */
-	      		.authorizedClientService(oAuth2AuthorizedClientService)
-	      		.authorizationEndpoint()
-	      			.authorizationRequestRepository(authorizationRequestRepository);
+	      		.authorizedClientRepository(authorizedClientRepository);
 	}
 	
 	private void AbstractAuthenticationProcessingFilterRequirementSetup(HttpSecurity http) throws Exception {
