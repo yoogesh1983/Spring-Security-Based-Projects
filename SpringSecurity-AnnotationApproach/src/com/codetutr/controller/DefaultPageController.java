@@ -67,9 +67,46 @@ public class DefaultPageController
 		while(iterator.hasNext()){
 			providers.add(iterator.next());
 		}
-		System.out.println("Total OAuth2 Client Registered at Resource Provider : " + providers.size());
+		
+		System.out.println("*********************************************************************************************");
+		System.out.println("                       Currently Registred OAuth2 venders : " + providers.size());
+		System.out.println("*********************************************************************************************\n");
+		
 		for (ClientRegistration clientRegistration : providers) {
-			System.out.println("Client Information : " + clientRegistration);
-		}		
+			
+			System.out.println("***********");
+			System.out.println(clientRegistration.getClientName() + ":");
+			System.out.println("*********** \n");
+			
+						System.out.println("     *******************");
+						System.out.println("     client information:");
+						System.out.println("     *******************");
+						System.out.println("                          registrationId = " + clientRegistration.getRegistrationId());
+						System.out.println("                          clientName = " + clientRegistration.getClientName());
+						System.out.println("                          clientId = " + clientRegistration.getClientId());
+						System.out.println("                          clientSecret = " + clientRegistration.getClientSecret());
+						System.out.println("                          clientAuthenticationMethod = " + clientRegistration.getClientAuthenticationMethod().getValue());
+						System.out.println("                          authorizationGrantType = " + clientRegistration.getAuthorizationGrantType().getValue());
+						System.out.println("                          redirectUriTemplate = " + clientRegistration.getRedirectUriTemplate());
+						System.out.println("                          redirectUriTemplate to be register at " + clientRegistration.getClientName() + "-client-API side as Authorized-redirect-URI = http://localhost:8080/SpringSecurity-AnnotationApproach/login/oauth2/code/" + clientRegistration.getRegistrationId());
+						System.out.println("                          scopes = " + clientRegistration.getScopes());
+
+						System.out.println("     *******************");
+						System.out.println("     providerDetails:");
+						System.out.println("     *******************");			
+						System.out.println("                          AuthorizationUri = " + clientRegistration.getProviderDetails().getAuthorizationUri());			
+						System.out.println("                          JwkSetUri = " + clientRegistration.getProviderDetails().getJwkSetUri());			
+						System.out.println("                          TokenUri = " + clientRegistration.getProviderDetails().getTokenUri());			
+						System.out.println("                          ConfigurationMetadata = " + clientRegistration.getProviderDetails().getConfigurationMetadata());	
+						
+						System.out.println("     *******************");
+						System.out.println("     UserInfoEndpoint:");
+						System.out.println("     *******************");			
+						System.out.println("                          URI = " + clientRegistration.getProviderDetails().getUserInfoEndpoint().getUri());			
+						System.out.println("                          UserNameAttributeName = " + clientRegistration.getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName());							
+						System.out.println("                          AuthenticationMethod = " + clientRegistration.getProviderDetails().getUserInfoEndpoint().getAuthenticationMethod().getValue());							
+			
+			System.out.println("\n\n");
+		}
 	}
 }

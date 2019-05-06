@@ -3,6 +3,7 @@ package com.codetutr.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.env.Environment;
@@ -34,7 +35,7 @@ public class OAuth2Controller {
 		Iterable<ClientRegistration> clientRegistrations = getRegisteredClients(clientRegistrationRepository);
 
 		clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(),
-				env.getProperty("authorizationRequestBaseUri") + "/" + registration.getRegistrationId()));
+				StringUtils.substring(env.getProperty("OAuth2AuthorizationRequestRedirectFilterInterceptorUri"), 1) + "/" + registration.getRegistrationId()));
 		model.addAttribute("urls_oauth2", oauth2AuthenticationUrls);
 		
 		return "security/sign-in";

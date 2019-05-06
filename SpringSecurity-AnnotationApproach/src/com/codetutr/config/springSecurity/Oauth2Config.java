@@ -14,6 +14,12 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
+import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
+import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 
 @PropertySource("classpath:oauth2/oauth2.properties")
 public class Oauth2Config {
@@ -24,42 +30,99 @@ public class Oauth2Config {
 	private Environment env;
 
 	/**
-	 *  This class will save all the information of the providers like google, facebook in a inMemoryMap<p>
+	 * *************************
+	 * initOauth2
+	 * *************************
+	 */
+	
+	 /**
+	 * This is where you save clientId, Client Secret and other required information provided from google and FaceBook while registering as a client <p>
+	 */
+	@Bean
+	public ClientRegistrationRepository clientRegistrationRepository() {
+		List<ClientRegistration> registrations = clients.stream()
+				.map(c -> getRegistration(c))
+				.filter(registration -> registration != null)
+				.collect(Collectors.toList());
+		return new InMemoryClientRegistrationRepository(registrations);
+	}
+	
+	
+	
+	/**
+	 * **********************************************************
+	 * OAuth2AuthorizationRequestRedirectFilterRequirementSetup
+	 * **********************************************************
+	 */
+	
+	/**
+	 * This is where the URI for Leg1 call is Created in the form of {@link OAuth2AuthorizationRequest} object So that it can be used later for validation purpose
+	 * and to initiate a Leg1 process. Make sure {@link OAuth2AuthorizationRequest} is created here but not saved here. This is actually saved in a 
+	 * {@link AuthorizationRequestRepository} which is one of the member variable of {@link OAuth2LoginAuthenticationFilter}.<p>
+	 * 
+	 * This Class has its own style of creating a requestRedirectURI which is hard to customize. That's why we always need to provide a 
+	 * {@code redirectUriTemplate = } {{@code baseUrl}}/{{@code action}}/{@code oauth2/code/}{{@code registrationId}} and it won't
+     * work if you provide others. Please look into the {@code expandRedirectUri()} method about how the redirectUri is made. by the way if you 
+     * really want to customize it, then you can have your own {@link OAuth2AuthorizationRequestResolver} implemented class. <p>
+	 */
+    @Bean
+	private OAuth2AuthorizationRequestResolver getAuthorizationRequestResolver() {
+		OAuth2AuthorizationRequestResolver authorizationRequestResolver = new DefaultOAuth2AuthorizationRequestResolver(
+				clientRegistrationRepository(), env.getProperty("OAuth2AuthorizationRequestRedirectFilterInterceptorUri"));
+		return authorizationRequestResolver;
+	}
+	
+    
+    
+	/**
+	 * **********************************************************
+	 * OAuth2LoginAuthenticationFilterRequirementSetup
+	 * **********************************************************
+	 */
+    
+	/**
+	 * This is where the {@link OAuth2AuthorizationRequest} is saved <p>
+	 * 
+	 * This is used by the {@link OAuth2AuthorizationRequestRedirectFilter} for persisting the Authorization Request before it initiates the authorization code grant flow. 
+	 * As well, used by the {@link OAuth2LoginAuthenticationFilter} for resolving the associated Authorization Request when handling the callback of the Authorization 
+	 * Response
+	 */
+    @Bean
+    public AuthorizationRequestRepository<OAuth2AuthorizationRequest> authorizationRequestRepository() {
+        return new HttpSessionOAuth2AuthorizationRequestRepository();
+    }
+    
+	/**
+	 *  This is where an information of Resource Owner after the successful Leg2 process is saved <p>
 	 */
 	@Bean
 	public OAuth2AuthorizedClientService authorizedClientService() {
 	    return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
 	}
+    
 	
-    @Bean
-    public ClientRegistrationRepository clientRegistrationRepository() {
-        List<ClientRegistration> registrations = clients.stream()
-          .map(c -> getRegistration(c))
-          .filter(registration -> registration != null)
-          .collect(Collectors.toList());
-        return new InMemoryClientRegistrationRepository(registrations);
-    }
-
 	private ClientRegistration getRegistration(String client) {
         String clientId = env.getProperty(client + ".client-id");
+        String clientSecret = env.getProperty(client + ".client-secret");
+        String redirectUriTemplate = env.getProperty("redirectUriTemplate");
      
         if (clientId == null) {
             return null;
         }
      
-        String clientSecret = env.getProperty(client + ".client-secret");
-      
         if (client.equals("google")) {
             return CommonOAuth2Provider.GOOGLE.getBuilder(client)
             			.clientId(clientId)
             				.clientSecret(clientSecret)
-            					.build();
+            					.redirectUriTemplate(redirectUriTemplate)
+            						.build();
         }
         if (client.equals("facebook")) {
             return CommonOAuth2Provider.FACEBOOK.getBuilder(client)
             			.clientId(clientId)
             				.clientSecret(clientSecret)
-            					.build();
+            					.redirectUriTemplate(redirectUriTemplate)
+            						.build();
         }
         return null;
     }
