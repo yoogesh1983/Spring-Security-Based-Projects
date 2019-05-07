@@ -221,10 +221,9 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	
 	private void oauth2Login(HttpSecurity http) throws Exception {
 		initOauth2(http);
-		OAuth2AuthorizationRequestRedirectFilterRequirementSetup(http);
-		OAuth2AuthorizedClientRepositoryRequirementSetup(http);
-		OAuth2LoginAuthenticationFilterRequirementSetup(http);
-		AbstractAuthenticationProcessingFilterRequirementSetup(http);
+		oauth2RequestRepositoryAdapter(http);
+		oauth2ResponseRepositoryAdapter(http);
+		abstractAuthenticationProcessingFilterRequirementSetup(http);
 	}
 	
 
@@ -234,7 +233,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
       			.clientRegistrationRepository(clientRegistrationRepository);
 	}
 
-	private void OAuth2AuthorizationRequestRedirectFilterRequirementSetup(HttpSecurity http) throws Exception {
+	private void oauth2RequestRepositoryAdapter(HttpSecurity http) throws Exception {
 		http
 			.oauth2Login() 
 				.authorizationEndpoint()
@@ -242,20 +241,14 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 					.authorizationRequestRepository(authorizationRequestRepository);
 	}
 	
-	private void OAuth2AuthorizedClientRepositoryRequirementSetup(HttpSecurity http) throws Exception {
+	private void oauth2ResponseRepositoryAdapter(HttpSecurity http) throws Exception {
 		http
 			.oauth2Login()
-      			.authorizedClientService(oAuth2AuthorizedClientService);
-		
-	}
-	
-	private void OAuth2LoginAuthenticationFilterRequirementSetup(HttpSecurity http) throws Exception {
-		http
-			.oauth2Login()
+				.authorizedClientService(oAuth2AuthorizedClientService)
 	      		.authorizedClientRepository(authorizedClientRepository);
 	}
 	
-	private void AbstractAuthenticationProcessingFilterRequirementSetup(HttpSecurity http) throws Exception {
+	private void abstractAuthenticationProcessingFilterRequirementSetup(HttpSecurity http) throws Exception {
 		http
 			.oauth2Login()
       			.loginPage("/oauth_login")

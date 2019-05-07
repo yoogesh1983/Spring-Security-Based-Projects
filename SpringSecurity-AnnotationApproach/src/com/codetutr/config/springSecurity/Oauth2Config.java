@@ -58,9 +58,9 @@ public class Oauth2Config {
 	
 	
 	/**
-	 * **********************************************************
-	 * OAuth2AuthorizationRequestRedirectFilterRequirementSetup
-	 * **********************************************************
+	 * *******************************
+	 * oauth2RequestRepositoryAdapter
+	 * ********************************
 	 */
 	
 	/**
@@ -98,9 +98,9 @@ public class Oauth2Config {
     
     
 	/**
-	 * **********************************************************
-	 * OAuth2AuthorizedClientRepositoryRequirementSetup
-	 * **********************************************************
+	 * ********************************
+	 * oauth2ResponseRepositoryAdapter
+	 * ********************************
 	 */
     
 	/**
@@ -113,15 +113,6 @@ public class Oauth2Config {
 	    return new InMemoryOAuth2AuthorizedClientService(getClientRegistrationRepository());
 	}
 	
-	
-	
-
-	/**
-	 * **********************************************************
-	 * OAuth2LoginAuthenticationFilterRequirementSetup
-	 * **********************************************************
-	 */
-   
     /**
      * This is actually the holder for {@link OAuth2AuthorizedClientService} where an information of Resource Owner after the successful Leg2 process is present  <p>
      * By default, {@link AuthenticatedPrincipalOAuth2AuthorizedClientRepository} is used by Spring-Security at {@link OAuth2LoginAuthenticationFilter} <p>
