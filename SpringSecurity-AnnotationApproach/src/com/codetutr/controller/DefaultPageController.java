@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.codetutr.config.springSecurity.AppConfig_Security;
-import com.codetutr.services.ProfileService;
+import com.codetutr.services.UserService;
 
 @Controller
 public class DefaultPageController 
 {	
 	@Autowired
-	ProfileService profileservice;
+	UserService userService;
 	
 	@Autowired
 	@Qualifier("springSecurityFilterChain")
@@ -38,7 +38,7 @@ public class DefaultPageController
 	
 	@PostConstruct
 	public void init() {
-		profileservice.initiateDatabase();
+		userService.initiateDatabase();
 		getActiveFiltersFromFilterChain();
 		getActiveOAuth2Providers(clientRegistrationRepository.iterator());
 	}

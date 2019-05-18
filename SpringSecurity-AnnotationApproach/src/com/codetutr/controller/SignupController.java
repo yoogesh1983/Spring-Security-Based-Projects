@@ -16,15 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.codetutr.model.Profile;
-import com.codetutr.services.ProfileService;
-import com.codetutr.validation.ProfileBeanValidator;
+import com.codetutr.entity.User;
+import com.codetutr.services.UserService;
+import com.codetutr.utility.UtilityHelper;
+import com.codetutr.validation.UserBeanValidator;
 
 @Controller
 public class SignupController 
 {
 	@Autowired
-	ProfileService profileservice;
+	UserService userService;
 	
 	@InitBinder
 	public void initBinder (WebDataBinder binder)
@@ -34,12 +35,12 @@ public class SignupController
 	
 	
 	@Autowired
-	@Qualifier("profileBeanValidator")
-	private ProfileBeanValidator profileBeanValidator;
+	@Qualifier("userBeanValidator")
+	private UserBeanValidator userBeanValidator;
 
 	
 	@RequestMapping(value = "/sign-up", method = RequestMethod.GET)
-	public ModelAndView Signup(HttpServletRequest request, @ModelAttribute("profile") Profile profile) 
+	public ModelAndView Signup(HttpServletRequest request, @ModelAttribute("user") User user) 
 	{
 		ModelAndView mv = new ModelAndView ("security/sign-up");
 		return mv;
@@ -47,12 +48,12 @@ public class SignupController
 	
 	
 	@RequestMapping(value ="/sign-up", method = RequestMethod.POST)
-	public String submitform(HttpServletRequest request, @ModelAttribute ("profile") Profile profile,BindingResult bindingResult, RedirectAttributes redirectAttributes, ModelMap model)
+	public String submitform(HttpServletRequest request, @ModelAttribute ("user") User user,BindingResult bindingResult, RedirectAttributes redirectAttributes, ModelMap model)
 	{
 
 		String redirectpath=null;
 		
-		profileBeanValidator.validate(profile, bindingResult);
+		userBeanValidator.validate(user, bindingResult);
 		
 		if(bindingResult.hasErrors())
 		{
@@ -60,7 +61,7 @@ public class SignupController
 			redirectpath = "security/sign-up";
 		}
 		
-		else if(profileservice.ismoreUsernameExists(profile.getUsername()))
+		else if(userService.ismoreUsernameExists(user.getUsername()))
 		{
 			bindingResult.reject("validation.username.already.exists");
 		    redirectpath =  "security/sign-up";
@@ -68,13 +69,13 @@ public class SignupController
 		else
 		{
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			profile.setAuthority("ROLE_USER");
-			profile.setPassword(passwordEncoder.encode(profile.getPassword()));
+			user.setAuthorities(UtilityHelper.getUserAuthList());
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			user.setEnabled(true);
 			
-			profile.setAuthority("ROLE_USER");
-		    Profile profile1 = profileservice.createProfile(profile);
-		    request.setAttribute("profile1",  profile1);
-		    model.addAttribute("profile",new Profile());   // to reset table
+		    User persistedUser = userService.createUser(user);
+		    request.setAttribute("user1",  persistedUser);
+		    model.addAttribute("user",new User());   // to reset table
 		    redirectpath =  "security/sign-up";
 		}
 		

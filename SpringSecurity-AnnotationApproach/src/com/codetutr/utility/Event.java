@@ -1,4 +1,4 @@
-package com.codetutr.model;
+package com.codetutr.utility;
 
 public class Event {
 	private String owner;

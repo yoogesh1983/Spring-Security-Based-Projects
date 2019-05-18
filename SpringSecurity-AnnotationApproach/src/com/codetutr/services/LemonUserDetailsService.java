@@ -11,13 +11,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.codetutr.model.Profile;
+import com.codetutr.entity.Authority;
+import com.codetutr.entity.User;
+
 
 @Service
 public class LemonUserDetailsService implements UserDetailsService 
 {
 	@Autowired
-	ProfileService profileservice;
+	UserService userService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
@@ -27,16 +29,19 @@ public class LemonUserDetailsService implements UserDetailsService
 			return null;
 		}
 		
-		Profile profile = profileservice.getProfileByUserName(username);
+		User dbUser = userService.getUserByUserName(username);
 		
-		if(profile == null)
+		if(dbUser == null)
 		{
 			return null;  // Spring security will handle it
 		}
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority(profile.getAuthority()));
-		UserDetails userDetails = new org.springframework.security.core.userdetails.User(profile.getUsername(), profile.getPassword(), true, true, true, true, authorities);
+		for (Authority next : dbUser.getAuthorities()) {
+			authorities.add(new SimpleGrantedAuthority(next.getRole()));
+		}
+		
+		UserDetails userDetails = new org.springframework.security.core.userdetails.User(dbUser.getUsername(), dbUser.getPassword(), true, true, true, true, authorities);
 		
 		return userDetails;
 	}

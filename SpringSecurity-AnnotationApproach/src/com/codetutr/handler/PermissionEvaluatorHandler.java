@@ -1,24 +1,33 @@
-package com.codetutr.model;
+package com.codetutr.handler;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 
-public class LemonPermissionEvaluator implements PermissionEvaluator {
+import com.codetutr.entity.Authority;
+import com.codetutr.entity.User;
+
+public class PermissionEvaluatorHandler implements PermissionEvaluator {
 
 	@Override
 	public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
-		boolean result = false;
-		if (!(targetDomainObject instanceof Profile)) {
-			result = false;
+		if (!(targetDomainObject instanceof User)) {
+			return false;
 		} else {
-			Profile profile = (Profile) targetDomainObject;
-			if (profile.getAuthority() != null && profile.getAuthority().equals("ROLE_DBA")) {
-				result = true;
+			User dbaUser = (User) targetDomainObject;
+			
+			if(!dbaUser.getAuthorities().isEmpty()){
+				List<Authority> authorities = dbaUser.getAuthorities();
+				for (Authority next : authorities) {
+					if(next.getRole().equals("ROLE_DBA")){
+						return true;
+					}
+				}
 			}
 		}
-		return result;
+		return false;
 	}
 
 	/**

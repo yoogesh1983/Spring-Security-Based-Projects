@@ -21,7 +21,7 @@
 </div>
 
 
-<springform:form  action="${pageContext.request.contextPath}/sign-up" commandName="profile" method="post">
+<springform:form  action="${pageContext.request.contextPath}/sign-up" commandName="user" method="post">
 <springform:errors class="error" path=""/> </p>
 <%-- <springform:errors style="color:red;" path=""/> </p> --%>
 
@@ -44,11 +44,11 @@
               <td>LastName</td>
 <!--          <td>Role</td>  -->
       <tr>
-              <td><c:out value="${profile1.uid}"></c:out></td>
-              <td><c:out value="${profile1.username}"></c:out></td>
-              <td><c:out value="${profile1.firstName}"></c:out></td>
-              <td><c:out value="${profile1.lastName}"></c:out></td>  
-<%--          <td><c:out value="${profile.Role}"></c:out></td> --%>
+              <td><c:out value="${user1.uid}"></c:out></td>
+              <td><c:out value="${user1.username}"></c:out></td>
+              <td><c:out value="${user1.firstName}"></c:out></td>
+              <td><c:out value="${user1.lastName}"></c:out></td>  
+<%--          <td><c:out value="${user1.Role}"></c:out></td> --%>
      </tr>
               
 

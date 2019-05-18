@@ -80,6 +80,7 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 		
 		/**
 		 * This will set the current Environment Profile to {@link dev} mode
+		 * Other options are {@link local} {@link prod}
 		 */
 		servletContext.setInitParameter("spring.profiles.active", "dev");
 		

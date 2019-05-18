@@ -8,9 +8,10 @@ CREATE TABLE USERS (
 );
 
 CREATE TABLE AUTHORITIES (
-    username VARCHAR(50) NOT NULL,
-    authority VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_authorities_users FOREIGN KEY(username) REFERENCES users(username)
+	uid VARCHAR(50) NOT NULL PRIMARY KEY,
+    fk_uid VARCHAR(50) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_authorities_users FOREIGN KEY(fk_uid) REFERENCES users(uid)
 );
 
-CREATE UNIQUE INDEX ix_auth_username ON authorities (username,authority);
+CREATE UNIQUE INDEX ix_auth_username ON authorities (uid,role);

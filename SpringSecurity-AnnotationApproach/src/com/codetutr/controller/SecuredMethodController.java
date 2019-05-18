@@ -1,5 +1,6 @@
 package com.codetutr.controller;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codetutr.model.Event;
-import com.codetutr.model.Profile;
+import com.codetutr.entity.Authority;
+import com.codetutr.entity.User;
 import com.codetutr.services.SecuredMethodService;
+import com.codetutr.utility.Event;
+import com.codetutr.utility.UtilityHelper;
 
 @RestController
 @RequestMapping(value = "/secure")
@@ -52,28 +55,22 @@ public class SecuredMethodController {
 	 */
 	@RequestMapping(value = "/editPermission", method = RequestMethod.GET)
 	public String userWithEditPermission(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-		Profile profile = new Profile();
-		profile.setUsername(request.getRemoteUser());
+		User user = new User(null, request.getRemoteUser(), null, null, null, true, new ArrayList<Authority>());
 		for(GrantedAuthority next: authentication.getAuthorities()) {
 			if(next.getAuthority().equals("ROLE_DBA")) {
-				profile.setAuthority(next.getAuthority());
+				user.setAuthorities(UtilityHelper.getDbaAuthList());
 				break;
 			}
 		}
-		return securedService.userWithEditPermission(profile);
+		return securedService.userWithEditPermission(user);
 	}
 	
 	@RequestMapping(value = "/events-preFilter", method = RequestMethod.GET)
 	public List<Event> saveEvents() {
-		List<Event> events = new LinkedList<>();
-		events.add(new Event("dba@gmail.com", ""));
-		events.add(new Event("admin@gmail.com", "dba@gmail.com"));
-		events.add(new Event("user@gmail.com", "dba@gmail.com"));
-		events.add(new Event("unknown@gmail.com", "admin@gmail.com"));
-		List<Event> lists = securedService.saveEvents(events);
-		return lists;
+		List<Event> events = UtilityHelper.addEventsIntoList(new LinkedList<>());
+		return securedService.saveEvents(events);
 	}
-	
+
 	@RequestMapping(value = "/events-postFilter", method = RequestMethod.GET)
 	public List<Event> getEvents() {
 		 return securedService.getEvents();

@@ -20,7 +20,7 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 
-import com.codetutr.model.LemonPermissionEvaluator;
+import com.codetutr.handler.PermissionEvaluatorHandler;
 
 public class AuthorizationConfig {
 
@@ -68,7 +68,7 @@ public class AuthorizationConfig {
 	 */
 	@Bean
 	public PermissionEvaluator getPermissionEvaluator() {
-		PermissionEvaluator permissionEvaluator = new LemonPermissionEvaluator();
+		PermissionEvaluator permissionEvaluator = new PermissionEvaluatorHandler();
 		return permissionEvaluator;
 	}
 	

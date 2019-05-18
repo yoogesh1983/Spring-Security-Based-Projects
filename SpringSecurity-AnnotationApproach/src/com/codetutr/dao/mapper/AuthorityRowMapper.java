@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class AuthorityRowMapper implements RowMapper<String> {
+import com.codetutr.entity.Authority;
+
+public class AuthorityRowMapper implements RowMapper<Authority> {
 
 	private final String columnLabelPrefix;
 	
@@ -14,8 +16,11 @@ public class AuthorityRowMapper implements RowMapper<String> {
 	}
 
 	@Override
-	public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return rs.getString(columnLabelPrefix + "authority");
+	public Authority mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Authority authority = new Authority();
+		authority.setUid(rs.getLong(columnLabelPrefix + "uid"));
+		authority.setRole(rs.getString(columnLabelPrefix + "role"));
+        return authority;
 	}
 }
   
