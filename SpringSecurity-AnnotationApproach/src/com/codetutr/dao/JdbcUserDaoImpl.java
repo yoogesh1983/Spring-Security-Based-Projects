@@ -37,11 +37,12 @@ public class JdbcUserDaoImpl implements IUserDao {
 	
 	@Override
 	public User createUser(User user) {
-		Object[]  params = {user.getUid().toString(), user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.isEnabled()};
+		Long uid = UtilityHelper.generateLong();
+		Object[]  params = {uid, user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(), user.isEnabled()};
         jdbcTemplate.update("INSERT INTO USERS (uid, username, password, firstName, lastName, enabled) VALUES(?,?,?,?,?,?)", params);
         
 		for (Authority next : user.getAuthorities()) {
-			jdbcTemplate.update("INSERT INTO AUTHORITIES (uid, fk_uid, role) VALUES(?,?,?)", new Object[] {UtilityHelper.generateLong().toString(), user.getUid(), next.getRole()});
+			jdbcTemplate.update("INSERT INTO AUTHORITIES (uid, fk_uid, role) VALUES(?,?,?)", new Object[] {UtilityHelper.generateLong(), uid, next.getRole()});
 		}
 		
 		return getUserByUserName(user.getUsername());

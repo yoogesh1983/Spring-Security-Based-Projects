@@ -21,7 +21,7 @@
 </div>
 
 
-<springform:form  action="${pageContext.request.contextPath}/sign-up" commandName="user" method="post">
+<springform:form  action="${pageContext.request.contextPath}/sign-up" modelAttribute="user" method="post">
 <springform:errors class="error" path=""/> </p>
 <%-- <springform:errors style="color:red;" path=""/> </p> --%>
 
