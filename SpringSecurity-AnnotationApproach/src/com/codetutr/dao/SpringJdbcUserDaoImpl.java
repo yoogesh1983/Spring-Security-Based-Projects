@@ -19,7 +19,7 @@ import com.codetutr.utility.UtilityHelper;
 
 @Profile("SpringJdbc")
 @Repository
-@Transactional(transactionManager = "jdbcTemplateTransactionManager", propagation =Propagation.REQUIRED)
+@Transactional(transactionManager = "springJdbcTransactionManager", propagation = Propagation.REQUIRED)
 public class SpringJdbcUserDaoImpl implements IUserDao {
 
 	@Autowired

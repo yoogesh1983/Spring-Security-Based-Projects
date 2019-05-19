@@ -16,7 +16,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @EnableSpringDataWebSupport
 @EnableJpaAuditing
 @EnableJpaRepositories(basePackages = "com.codetutr.dao")
-public class SpringDataJPAConfig {
+public class SpringJPAConfig {
 	
 	@Autowired
 	private DataSource datasource;

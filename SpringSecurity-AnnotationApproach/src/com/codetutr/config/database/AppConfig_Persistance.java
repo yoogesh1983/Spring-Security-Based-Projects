@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@Import(value={DatasourceConfig.class, SpringJDBCConfig.class, SpringDataJPAConfig.class})
+@Import(value={DatasourceConfig.class, SpringJDBCConfig.class, SpringJPAConfig.class})
 public class AppConfig_Persistance {
 
 	private DataSource datasource; 
@@ -26,15 +26,15 @@ public class AppConfig_Persistance {
 		this.entityManagerFactoryBean = entityManagerFactoryBean;
 	}
 	
-	@Bean(name="jdbcTemplateTransactionManager")
-	public PlatformTransactionManager getJdbcTemplateTransactionManager() {
+	@Bean(name="springJdbcTransactionManager")
+	public PlatformTransactionManager getSpringJdbcTransactionManager() {
 		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
 		transactionManager.setDataSource(datasource);
 		return transactionManager;
 	}
 	
 	@Bean(name="transactionManager")
-	public PlatformTransactionManager getJpaTransactionManager() {
+	public PlatformTransactionManager getSpringJpaTransactionManager() {
 		final JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactoryBean.getObject());
 		return transactionManager; 

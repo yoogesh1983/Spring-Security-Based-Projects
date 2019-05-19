@@ -8,9 +8,12 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.codetutr.config.database.AppConfig_Persistance;
+import com.codetutr.config.logging.Log;
 import com.codetutr.config.logging.LogFilter;
 import com.codetutr.config.springMvc.AppConfig_Mvc;
 import com.codetutr.config.springSecurity.AppConfig_Security;
+import com.codetutr.properties.LogProperties;
+import com.codetutr.properties.ProfileProperties;
 
 /**
  * 
@@ -79,17 +82,21 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 		super.onStartup(servletContext);
 		
 		/**
-		 * This will set the current Environment Profile to {@link SpringJdbc} mode
-		 * Other options are {@link Mock} {@link SpringDataJPA}  {@link HibernateJPA} {@link Hibernate}
+		 * Initiate Logging
 		 */
-		servletContext.setInitParameter("spring.profiles.active", "SpringDataJPA");
+		new Log().configure(servletContext.getRealPath("/WEB-INF"));
 		
 		/**
-		 * This Listner needs to be registered to Listen for Max-session Users configured on AppConfig_Security.java
+		 * This will set the current Environment Profile
+		 */
+		servletContext.setInitParameter("spring.profiles.active", ProfileProperties.getInstance().getProfile());
+		Log.logInfo(this.getClass().getName(), "onStartup()", "Application started with Profile: " + ProfileProperties.getInstance().getProfile());
+		
+		/**
+		 * This Listener needs to be registered to Listen for Max-session Users configured on AppConfig_Security.java
 		 * The Servletcontainer will notify Spring Security (through this HttpSessionEventPublisher class)of session life cycle events
 		 */
 		servletContext.addListener(HttpSessionEventPublisher.class);
 	}
-
 
 }

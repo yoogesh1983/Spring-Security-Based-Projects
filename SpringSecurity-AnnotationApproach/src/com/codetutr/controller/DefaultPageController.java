@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.codetutr.config.springSecurity.AppConfig_Security;
+import com.codetutr.properties.ProfileProperties;
 import com.codetutr.services.UserService;
 
 @Controller
@@ -54,7 +55,7 @@ public class DefaultPageController
 	 * The enableDebugMode() must be commented out at {@link AppConfig_Security} to make this work <p>
 	 */
 	private void getActiveFiltersFromFilterChain() {
-		System.out.println("Following filters are active in the application: ");
+		System.out.println("With a " + ProfileProperties.getInstance().getProfile() +" environment, Following filters are active in the application: ");
 	    FilterChainProxy filterChainProxy = (FilterChainProxy) springSecurityFilterChain;
 	    List<SecurityFilterChain> list = filterChainProxy.getFilterChains();
 	    list.stream()

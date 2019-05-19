@@ -1,4 +1,4 @@
-package com.codetutr.config.logging;
+package com.codetutr.properties;
 
 import org.apache.commons.lang3.StringUtils;
 

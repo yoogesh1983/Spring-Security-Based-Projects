@@ -14,7 +14,7 @@ import com.codetutr.utility.UtilityHelper;
 
 @Profile("SpringDataJPA")
 @Repository
-@Transactional(transactionManager = "transactionManager", propagation =Propagation.REQUIRED)
+@Transactional(transactionManager = "transactionManager", propagation = Propagation.REQUIRED)
 public class SpringDataJpaUserDaoImpl implements IUserDao {
 
 	private IUserRepository userRepository;
