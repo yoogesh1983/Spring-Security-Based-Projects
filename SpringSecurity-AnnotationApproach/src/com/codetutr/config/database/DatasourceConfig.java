@@ -36,8 +36,13 @@ public class DatasourceConfig {
 				.ignoreFailedDrops(true).continueOnError(true)
 				
 				/**
-				 * DB Details:
+				 * Set the Database
 				 */
-				.setType(EmbeddedDatabaseType.H2).addScript("/databaseScript/security-schema.sql").build();
+				.setType(EmbeddedDatabaseType.H2)
+				
+				/**
+				 * Add the SQL script
+				 */
+				.addScript("/databaseScript/security-schema.sql").build();
 	}
 }

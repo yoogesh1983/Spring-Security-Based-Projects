@@ -46,13 +46,10 @@ public class MockUserDaoImpl implements IUserDao {
 			System.out.println("*****PLEASE ENTER CORRECT USER ID*******");
 			return new User(null, null, null, null, null, false, null);
 		}
-		return UPDATE(new User(user.getUid(), user.getUsername(), user.getPassword(), user.getFirstName(),
-				user.getLastName(), false, user.getAuthorities()));
-	}
-
-	private User UPDATE(User user) {
-		userTable.put(user.getUid(), user);
-		return user;
+		User updatedUser = new User(user.getUid(), user.getUsername(), user.getPassword(), user.getFirstName(),
+				user.getLastName(), false, user.getAuthorities());
+		userTable.put(updatedUser.getUid(), updatedUser);
+		return updatedUser;
 	}
 
 	@Override
@@ -63,7 +60,7 @@ public class MockUserDaoImpl implements IUserDao {
 			System.out.print("*****PLEASE ENTER CORRECT USER ID*******");
 			return false;
 		}
-		Set<Entry<Long, User>> set = getEntrySet();
+		Set<Entry<Long, User>> set = userTable.entrySet();
 		Iterator<Entry<Long, User>> i = set.iterator();
 		while (i.hasNext()) {
 			Entry<Long, User> me = i.next();
@@ -76,13 +73,9 @@ public class MockUserDaoImpl implements IUserDao {
 			System.out.println("*****COULD NOT FIND ID IN A DATABASE*******");
 			return false;
 		} else {
-			return DELETE(guid);
+			userTable.remove(guid);
+			return true;
 		}
-	}
-
-	private boolean DELETE(long id) {
-		userTable.remove(id);
-		return true;
 	}
 
 	@Override
@@ -100,7 +93,7 @@ public class MockUserDaoImpl implements IUserDao {
 			return new User(null, null, null, null, null, false, null);
 		}
 
-		Set<Entry<Long, User>> set = getEntrySet();
+		Set<Entry<Long, User>> set = userTable.entrySet();
 		Iterator<Entry<Long, User>> i = set.iterator();
 		while (i.hasNext()) {
 			Entry<Long, User> me = i.next();
@@ -113,25 +106,41 @@ public class MockUserDaoImpl implements IUserDao {
 			System.out.println("*****COULD NOT FIND ID IN A DATABASE*******");
 			return new User(null, null, null, null, null, false, null);
 		} else {
-			return GET_BY_ID(guid);
+			return userTable.get(guid);
 		}
-	}
-
-	public User GET_BY_ID(Long id) {
-		return userTable.get(id);
 	}
 
 	@Override
 	public User getUserByUserName(String username) {
-		ArrayList<User> al = GET_BY_USERNAME(username);
-		if (al != null && al.size() == 1) {
-			return al.get(0);
+		ArrayList<User> users = getAllUsersByUsername(username);
+		if (users != null && users.size() == 1) {
+			return users.get(0);
 		} else {
 			return null;
 		}
 	}
 
-	public ArrayList<User> GET_BY_USERNAME(Object obj) {
+	// Read single using other parameter (not primary key)
+	@Override
+	public boolean ismoreUsernameExists(String username) {
+		return !getAllUsersByUsername(username).isEmpty();
+	}
+
+	@Override
+	public List<User> getUserByName(String name) {
+		ArrayList<User> users = new ArrayList<User>();
+		Set<Entry<Long, User>> set = userTable.entrySet();
+		Iterator<Entry<Long, User>> i = set.iterator();
+		while (i.hasNext()) {
+			Entry<Long, User> me = i.next();
+			if (me.getValue().getFirstName().equals(name)) {
+				users.add(userTable.get(me.getKey()));
+			}
+		}
+		return users;
+	}
+	
+	public ArrayList<User> getAllUsersByUsername(Object obj) {
 		ArrayList<User> al = new ArrayList<User>();
 		Set<Entry<Long, User>> set = userTable.entrySet();
 		Iterator<Entry<Long, User>> i = set.iterator();
@@ -142,35 +151,5 @@ public class MockUserDaoImpl implements IUserDao {
 			}
 		}
 		return al;
-	}
-
-	// Read single using other parameter (not primary key)
-	@Override
-	public boolean ismoreUsernameExists(String username) {
-		boolean found = false;
-		ArrayList<User> al = GET_BY_USERNAME(username);
-		if (!al.isEmpty()) {
-			found = true;
-		}
-		return found;
-	}
-
-	@Override
-	public List<User> getUserByName(String name) {
-		ArrayList<User> al = new ArrayList<User>();
-		Set<Entry<Long, User>> set = userTable.entrySet();
-		Iterator<Entry<Long, User>> i = set.iterator();
-		while (i.hasNext()) {
-			Entry<Long, User> me = i.next();
-			if (me.getValue().getFirstName().equals(name)) {
-
-				al.add(userTable.get(me.getKey()));
-			}
-		}
-		return al;
-	}
-
-	public Set<Entry<Long, User>> getEntrySet() {
-		return userTable.entrySet();
 	}
 }

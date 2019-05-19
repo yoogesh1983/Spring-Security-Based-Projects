@@ -102,8 +102,7 @@ public class JdbcUserDaoImpl implements IUserDao {
 	}
 	
 	private List<Authority> getAuthorityFromAuthoritiesTable(Long uid) {
-		List<Authority> authorities = jdbcTemplate.query("SELECT * FROM AUTHORITIES WHERE fk_uid=?", new AuthorityRowMapper("AUTHORITIES."), uid);
-		return authorities;
+		return jdbcTemplate.query("SELECT * FROM AUTHORITIES WHERE fk_uid=?", new AuthorityRowMapper("AUTHORITIES."), uid);
 	}
 	
 }

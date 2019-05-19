@@ -38,6 +38,10 @@ public class JpaConfig {
     
     final Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
+        /**
+         * It will not create a table (thanks to the "update") here if the security-schema.sql script is already run during a dataSource creation
+         * If not, then it will create a table
+         */
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return hibernateProperties;
