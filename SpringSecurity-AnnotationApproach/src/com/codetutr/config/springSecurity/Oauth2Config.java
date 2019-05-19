@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequest
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 
-@PropertySource("classpath:oauth2/oauth2.properties")
+@PropertySource("classpath:properties/oauth2.properties")
 public class Oauth2Config {
 	
 	private static List<String> clients = Arrays.asList("google", "facebook");
