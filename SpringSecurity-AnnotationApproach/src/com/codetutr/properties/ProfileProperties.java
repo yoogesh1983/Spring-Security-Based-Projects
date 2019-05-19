@@ -4,7 +4,7 @@ import com.codetutr.utility.AbstractProperties;
 
 public class ProfileProperties extends AbstractProperties{
 
-	public static final String PROPERTY_FILE_NAME = "profile/profile.properties";
+	public static final String PROPERTY_FILE_NAME = "properties/profile.properties";
 	private static ProfileProperties instance;
 	
 	private final String profile;

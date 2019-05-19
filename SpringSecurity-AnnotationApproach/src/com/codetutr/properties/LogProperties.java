@@ -6,7 +6,7 @@ import com.codetutr.utility.AbstractProperties;
 
 public class LogProperties extends AbstractProperties
 {
-	public static final String PROPERTY_FILE_NAME = "logging/log.properties";
+	public static final String PROPERTY_FILE_NAME = "properties/log.properties";
 	public final static String CURRENT_ENVIRONMENT = "RuntimeEnvironment";
 	private static LogProperties instance;
 	
