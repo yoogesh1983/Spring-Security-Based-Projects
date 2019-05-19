@@ -20,7 +20,7 @@ import com.codetutr.utility.UtilityHelper;
 @Profile("SpringJdbc")
 @Repository
 @Transactional(transactionManager = "jdbcTemplateTransactionManager", propagation =Propagation.REQUIRED)
-public class JdbcUserDaoImpl implements IUserDao {
+public class SpringJdbcUserDaoImpl implements IUserDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -30,9 +30,9 @@ public class JdbcUserDaoImpl implements IUserDao {
 	
 	@Override
 	public void initiateDatabase() {
-		createUser(new User(UtilityHelper.generateLong(), "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", true, UtilityHelper.getUserAuthList()));
-		createUser(new User(UtilityHelper.generateLong(), "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", true, UtilityHelper.getAdminAuthList()));
-		createUser(new User(UtilityHelper.generateLong(), "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", true, UtilityHelper.getDbaAuthList()));
+		createUser(new User(UtilityHelper.generateLong(), "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", true, UtilityHelper.getUserAuthList(null)));
+		createUser(new User(UtilityHelper.generateLong(), "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", true, UtilityHelper.getAdminAuthList(null)));
+		createUser(new User(UtilityHelper.generateLong(), "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", true, UtilityHelper.getDbaAuthList(null)));
 	}
 	
 	@Override

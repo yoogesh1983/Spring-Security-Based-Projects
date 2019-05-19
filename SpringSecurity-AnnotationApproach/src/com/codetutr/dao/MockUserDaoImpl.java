@@ -28,9 +28,9 @@ public class MockUserDaoImpl implements IUserDao {
 	public void initiateDatabase() {
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userTable.put(1L, new User(1L, "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", true, UtilityHelper.getUserAuthList()));
-		userTable.put(2L, new User(2L, "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", true, UtilityHelper.getAdminAuthList()));
-		userTable.put(3L, new User(3L, "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", true, UtilityHelper.getDbaAuthList()));
+		userTable.put(1L, new User(1L, "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", true, UtilityHelper.getUserAuthList(null)));
+		userTable.put(2L, new User(2L, "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", true, UtilityHelper.getAdminAuthList(null)));
+		userTable.put(3L, new User(3L, "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", true, UtilityHelper.getDbaAuthList(null)));
 	}
 
 	@Override

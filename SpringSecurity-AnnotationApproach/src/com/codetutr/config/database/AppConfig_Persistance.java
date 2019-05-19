@@ -33,7 +33,7 @@ public class AppConfig_Persistance {
 		return transactionManager;
 	}
 	
-	@Bean(name="jpaTransactionManager")
+	@Bean(name="transactionManager")
 	public PlatformTransactionManager getJpaTransactionManager() {
 		final JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactoryBean.getObject());

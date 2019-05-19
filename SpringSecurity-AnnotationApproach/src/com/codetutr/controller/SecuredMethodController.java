@@ -58,7 +58,7 @@ public class SecuredMethodController {
 		User user = new User(null, request.getRemoteUser(), null, null, null, true, new ArrayList<Authority>());
 		for(GrantedAuthority next: authentication.getAuthorities()) {
 			if(next.getAuthority().equals("ROLE_DBA")) {
-				user.setAuthorities(UtilityHelper.getDbaAuthList());
+				user.setAuthorities(UtilityHelper.getDbaAuthList(user));
 				break;
 			}
 		}

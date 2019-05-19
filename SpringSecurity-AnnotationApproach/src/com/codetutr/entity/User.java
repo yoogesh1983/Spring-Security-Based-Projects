@@ -11,13 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="USERS")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="uid", nullable=false, length=50)
+	@Column(name="uid", length=50)
 	private Long uid;
 	
 	@Column(name="username", nullable=false, length=50)
@@ -42,16 +44,6 @@ public class User {
 		super();
 	}
 
-	
-	/**
-	 * @param uid
-	 * @param username
-	 * @param password
-	 * @param firstName
-	 * @param lastName
-	 * @param enabled
-	 * @param authorities
-	 */
 	public User(Long uid, String username, String password, String firstName, String lastName, boolean enabled,
 			List<Authority> authorities) {
 		super();
@@ -63,123 +55,74 @@ public class User {
 		this.enabled = enabled;
 		this.authorities = authorities;
 	}
+	
+	public User(String username, String password, String firstName, String lastName, boolean enabled,
+			List<Authority> authorities) {
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.enabled = enabled;
+		this.authorities = authorities;
+	}
 
-
-	/**
-	 * @return the uid
-	 */
 	public Long getUid() {
 		return uid;
 	}
 
-
-	/**
-	 * @param uid the uid to set
-	 */
 	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 
-
-	/**
-	 * @return the username
-	 */
 	public String getUsername() {
 		return username;
 	}
 
-
-	/**
-	 * @param username the username to set
-	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-
-	/**
-	 * @return the password
-	 */
 	public String getPassword() {
 		return password;
 	}
 
-
-	/**
-	 * @param password the password to set
-	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
-	/**
-	 * @return the firstName
-	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
-
-	/**
-	 * @param firstName the firstName to set
-	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
-	/**
-	 * @return the lastName
-	 */
 	public String getLastName() {
 		return lastName;
 	}
 
-
-	/**
-	 * @param lastName the lastName to set
-	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-
-	/**
-	 * @return the enabled
-	 */
 	public boolean isEnabled() {
 		return enabled;
 	}
 
-
-	/**
-	 * @param enabled the enabled to set
-	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-
-	/**
-	 * @return the authorities
-	 */
+	@JsonIgnore
 	public List<Authority> getAuthorities() {
 		return authorities;
 	}
 
-
-	/**
-	 * @param authorities the authorities to set
-	 */
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -194,10 +137,6 @@ public class User {
 		return result;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
