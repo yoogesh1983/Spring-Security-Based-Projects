@@ -16,7 +16,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @EnableSpringDataWebSupport
 @EnableJpaAuditing
 @EnableJpaRepositories(basePackages = "com.yoogesh.persistence.dao.SpringData")
-public class JpaConfig {
+public class SpringDataJPAConfig {
 	
 	@Autowired
 	private DataSource datasource;

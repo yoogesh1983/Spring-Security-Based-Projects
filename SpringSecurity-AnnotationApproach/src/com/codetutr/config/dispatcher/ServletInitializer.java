@@ -79,10 +79,10 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 		super.onStartup(servletContext);
 		
 		/**
-		 * This will set the current Environment Profile to {@link dev} mode
-		 * Other options are {@link local} {@link prod}
+		 * This will set the current Environment Profile to {@link SpringJdbc} mode
+		 * Other options are {@link Mock} {@link SpringDataJPA}  {@link HibernateJPA} {@link Hibernate}
 		 */
-		servletContext.setInitParameter("spring.profiles.active", "dev");
+		servletContext.setInitParameter("spring.profiles.active", "SpringJdbc");
 		
 		/**
 		 * This Listner needs to be registered to Listen for Max-session Users configured on AppConfig_Security.java

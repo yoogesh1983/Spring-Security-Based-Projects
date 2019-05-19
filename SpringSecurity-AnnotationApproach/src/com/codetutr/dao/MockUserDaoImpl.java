@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.codetutr.entity.User;
 import com.codetutr.utility.UtilityHelper;
 
-@Profile("local")
+@Profile("Mock")
 @Repository
 public class MockUserDaoImpl implements IUserDao {
 

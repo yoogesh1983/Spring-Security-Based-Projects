@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@Import(value={DatasourceConfig.class, JdbcTemplateConfig.class, JpaConfig.class})
+@Import(value={DatasourceConfig.class, SpringJDBCConfig.class, SpringDataJPAConfig.class})
 public class AppConfig_Persistance {
 
 	private DataSource datasource; 

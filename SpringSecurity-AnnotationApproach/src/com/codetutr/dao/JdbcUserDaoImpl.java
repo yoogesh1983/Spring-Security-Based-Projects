@@ -17,7 +17,7 @@ import com.codetutr.entity.Authority;
 import com.codetutr.entity.User;
 import com.codetutr.utility.UtilityHelper;
 
-@Profile("dev")
+@Profile("SpringJdbc")
 @Repository
 @Transactional(transactionManager = "jdbcTemplateTransactionManager", propagation =Propagation.REQUIRED)
 public class JdbcUserDaoImpl implements IUserDao {
