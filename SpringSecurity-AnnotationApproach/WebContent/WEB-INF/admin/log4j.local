@@ -12,6 +12,3 @@ log4j.appender.stdout.File=C:\\logs\\springFrameworkAnnotation.log
 #(log4j.appender.stdout.MaxFileSize X log4j.appender.stdout.MaxBackupIndex) should not exceed 50MB in dev/uat/prod environment.
 log4j.appender.stdout.MaxFileSize=5MB
 log4j.appender.stdout.MaxBackupIndex=3
-
-#Debug for SpringSecurity
-logging.level.org.springframework.security= DEBUG

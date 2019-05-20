@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.debug.DebugFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,16 +41,25 @@ public class DefaultPageController
 	@PostConstruct
 	public void init() {
 		userService.initiateDatabase();
-		getActiveFiltersFromFilterChain();
+		printFilterChain();
 		getActiveOAuth2Providers(clientRegistrationRepository.iterator());
 	}
-	
+
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model, HttpServletRequest request, HttpServletResponse response) 
 	{
 		return "security/sign-in";
 	}
 	
+	
+	private void printFilterChain() {
+		if(springSecurityFilterChain instanceof DebugFilter) {
+			System.out.println("Unable to print the filters in the filterchain since DebugFilter is currently Set to On. Filterchain: " + springSecurityFilterChain);
+		}
+		else {
+			getActiveFiltersFromFilterChain();
+		}
+	}
 	
 	/**
 	 * The enableDebugMode() must be commented out at {@link AppConfig_Security} to make this work <p>
