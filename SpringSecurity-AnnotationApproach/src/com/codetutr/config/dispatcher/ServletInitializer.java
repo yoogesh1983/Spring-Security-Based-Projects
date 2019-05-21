@@ -90,7 +90,7 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 		 * This will set the current Environment Profile
 		 */
 		servletContext.setInitParameter("spring.profiles.active", ProfileProperties.getInstance().getProfile());
-		Log.logInfo(this.getClass().getName(), "onStartup()", "Application started with Profile: " + ProfileProperties.getInstance().getProfile());
+		Log.logInfo(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "Application started with Profile: " + ProfileProperties.getInstance().getProfile());
 		
 		/**
 		 * This Listener needs to be registered to Listen for Max-session Users configured on AppConfig_Security.java

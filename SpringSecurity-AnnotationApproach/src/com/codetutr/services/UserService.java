@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codetutr.config.logging.Log;
 import com.codetutr.dao.IUserDao;
 import com.codetutr.entity.User;
 
@@ -16,8 +17,12 @@ public class UserService {
 	
 	// Initialization of database
 	public void initiateDatabase() {
+		
+		Log.logInfo(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "Initialization of database started");
 		userDao.initiateDatabase();		
+		Log.logInfo(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "Initialization of database completed");
 	}
+
 
 	// CREATE
 	public User createUser(User user) {

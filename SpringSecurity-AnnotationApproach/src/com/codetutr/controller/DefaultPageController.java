@@ -54,7 +54,7 @@ public class DefaultPageController
 	
 	private void printFilterChain() {
 		if(springSecurityFilterChain instanceof DebugFilter) {
-			System.out.println("Unable to print the filters in the filterchain since DebugFilter is currently Set to On. Filterchain: " + springSecurityFilterChain);
+			System.out.println("[*** DebugFilter in Spring-security is currently Set to On. Please get the active filters in a Filterchain from a Log file ***]");
 		}
 		else {
 			getActiveFiltersFromFilterChain();

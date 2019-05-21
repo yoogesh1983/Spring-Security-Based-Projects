@@ -352,7 +352,7 @@ public static void logDebug(String className, String methodName, String message)
 	  }
 	  else
 	  {
-		  value = methodName + " -  " + message;  
+		  value = methodName + "() -  " + message;  
 	  }
 	  
 	 return value;
