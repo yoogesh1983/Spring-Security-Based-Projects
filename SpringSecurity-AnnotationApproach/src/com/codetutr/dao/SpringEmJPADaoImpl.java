@@ -24,7 +24,7 @@ import com.codetutr.utility.UtilityHelper;
 @Profile("SpringEmJPA")
 public class SpringEmJPADaoImpl implements IUserDao {
 
-    @PersistenceContext
+    @PersistenceContext(unitName="entityManagerUnit")
     private EntityManager entityManager;
     
     @Autowired

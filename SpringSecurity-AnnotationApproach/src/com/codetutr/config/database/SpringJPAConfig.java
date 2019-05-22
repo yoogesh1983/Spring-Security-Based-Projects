@@ -28,6 +28,7 @@ public class SpringJPAConfig {
         entityManagerFactory.setPackagesToScan(new String[] { "com.codetutr.entity" });
         entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactory.setJpaProperties(UtilityHelper.getAdditionalProperties());
+        entityManagerFactory.setPersistenceUnitName("entityManagerUnit");
         return entityManagerFactory;
     }
     
