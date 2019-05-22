@@ -9,10 +9,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class SpringJDBCConfig {
 	
 	@Autowired
-	private DataSource datasource;
+	private DataSource dataSource;
 	
 	@Bean
 	public JdbcTemplate getJdbcTemplate() {
-		return new JdbcTemplate(datasource);
+		return new JdbcTemplate(dataSource);
 	}
 }

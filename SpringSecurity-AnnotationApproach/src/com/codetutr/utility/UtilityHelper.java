@@ -2,6 +2,7 @@ package com.codetutr.utility;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
 
@@ -59,4 +60,15 @@ public class UtilityHelper {
 		events.add(new Event("unknown@gmail.com", "admin@gmail.com"));
 		return events;
 	}
+	
+    public static Properties getAdditionalProperties() {
+        final Properties hibernateProperties = new Properties();
+        /**
+         * It will not create a table (thanks to the "update") here if the security-schema.sql script is already run during a dataSource creation
+         * If not, then it will create a table
+         */
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        return hibernateProperties;
+    }
 }
