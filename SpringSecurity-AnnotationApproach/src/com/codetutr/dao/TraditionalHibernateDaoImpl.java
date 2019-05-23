@@ -2,6 +2,9 @@ package com.codetutr.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -19,7 +22,13 @@ import com.codetutr.utility.UtilityHelper;
 public class TraditionalHibernateDaoImpl implements IUserDao{
 
 	@Autowired
-    private HibernateTemplate hibernateTemplate;
+    private SessionFactory sessionFactory;
+	
+	/**
+	 * HibernateTemplate currently is not being used since it is giving some error.SessionFactory is being is used instead.
+	 */
+	@Autowired
+	private HibernateTemplate hibernateTemplate;
     
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -42,8 +51,11 @@ public class TraditionalHibernateDaoImpl implements IUserDao{
 	
 	@Override
 	public User createUser(User user) {
-		System.out.println(hibernateTemplate.save(user));
-		System.out.println("User is persisted successfully");
+		Session s = sessionFactory.openSession();
+		Transaction t = s.beginTransaction();
+			s.saveOrUpdate(user);
+		t.commit();
+		s.close();
 		return user;
 	}
 
