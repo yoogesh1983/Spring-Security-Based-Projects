@@ -17,5 +17,5 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               ![./docs/Project_View_After_Change.PNG](./docs/Project_View_After_Change.PNG)
               
-&nbsp;=> You may need to clear browser cache if you get 405 Error></br>
-&nbsp;=> Similarly, You must refresh the project once the maven &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>clean install</b> is done
+&nbsp;=> You may need to clear browser cache if you get 405 Error</br>
+&nbsp;=> Similarly, You must refresh the project once the maven <b>clean install</b> is done
