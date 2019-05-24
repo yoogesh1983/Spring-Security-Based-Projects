@@ -53,22 +53,27 @@ public class TraditionalHibernateDaoImpl implements IUserDao{
 	public User createUser(User user) {
 		Session s = sessionFactory.openSession();
 		Transaction t = s.beginTransaction();
-			s.saveOrUpdate(user);
+			Long key = (Long) s.save(user);
+			User savedUser = s.get(User.class, key);
 		t.commit();
 		s.close();
-		return user;
+		return savedUser;
 	}
 
 	@Override
 	public User updateUser(User user) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean deleteUser(long guid) {
-		// TODO Auto-generated method stub
-		return false;
+		Session s = sessionFactory.openSession();
+		Transaction t = s.beginTransaction();
+			User user = s.get(User.class, guid);
+			s.delete(user);
+		t.commit();
+		s.close();
+		return true;
 	}
 
 	@Override
