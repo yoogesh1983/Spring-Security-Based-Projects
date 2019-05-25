@@ -4,9 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,8 +17,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.codetutr.config.logging.Log;
-import com.codetutr.entity.Authority;
 import com.codetutr.entity.User;
 import com.codetutr.utility.UtilityHelper;
 
@@ -59,13 +55,21 @@ public class SpringEmJPADaoImpl implements IUserDao {
 
 	@Override
 	public User updateUser(User user) {
-		return entityManager.merge(user);
+		User merged =  entityManager.merge(user);
+		entityManager.flush();
+		return merged;
 	}
 
 	@Override
 	public boolean deleteUser(long guid) {
-		entityManager.remove(entityManager.find(User.class, guid));
-		return true;
+		if(null == Long.valueOf(guid)) {
+			return false;
+		}
+		else {
+			User user = entityManager.find(User.class, guid);
+			entityManager.remove(user);
+			return true;
+		}
 	}
 
 	@Override
@@ -92,31 +96,12 @@ public class SpringEmJPADaoImpl implements IUserDao {
 		return entityManager.find(User.class, guid);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public User getUserByUserName(String username) {
 		
-		User user = null;
-		
-		try {
-			
-			//get user
-			Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :firstParam")
+		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u LEFT OUTER JOIN FETCH u.authorities WHERE u.username = (:firstParam)", User.class)
 							.setParameter("firstParam", username);
-			
-			user = (User) query.getSingleResult();
-			
-			query = entityManager.createQuery("SELECT a FROM Authority a WHERE a.user = ?1")
-					.setParameter(1, user);
-			List<Authority> authorities = (List<Authority>) query.getResultList();
-			
-			//set authority to user
-			user.setAuthorities(authorities);
-		}
-		catch(NoResultException exception) {
-			Log.logInfo(this.getClass().getName(), "getUserByUserName(String)", "Could not find the user " +  username, exception);
-		}
-		return user;
+		return query.getSingleResult();
 	}
 
 	@Override
@@ -124,11 +109,12 @@ public class SpringEmJPADaoImpl implements IUserDao {
 		return getUserByUserName(username) != null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUserByName(String name) {
-		Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.firstName = ?1")
-				.setParameter(1, name);
-		return (List<User>) query.getResultList();
+		return entityManager.createQuery("SELECT u FROM User u WHERE u.firstName = ?1", User.class)
+						.setParameter(1, name)
+							.setFirstResult(0)
+								.setMaxResults(10)
+									.getResultList();
 	}
 }
