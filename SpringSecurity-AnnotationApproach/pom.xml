@@ -10,6 +10,8 @@
 	<properties>
 		<springframework.version>5.1.6.RELEASE</springframework.version>
 		<springsecurity.version>5.1.5.RELEASE</springsecurity.version>
+		<oauth.version>2.3.5.RELEASE</oauth.version>
+		<jwt.version>1.0.10.RELEASE</jwt.version>
 		<json.version>2.9.8</json.version>
 		<apache-log4j.version>1.2.17</apache-log4j.version>
 	</properties>
@@ -61,15 +63,34 @@
 			<version>${springsecurity.version}</version>
 		</dependency>
 		
-		<!-- Needed for OAuth2 -->
+		<!-- Needed for OAuth2 (Separate project from SprinSecurity)-->
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>${oauth.version}</version>
+		</dependency>
+		<dependency>
+   			<groupId>org.springframework.security</groupId>
+   			<artifactId>spring-security-oauth2-jose</artifactId>
+    		<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    	<artifactId>spring-security-jwt</artifactId>
+            <version>${jwt.version}</version>
+		</dependency>
+		
+		<!-- Needed for OAuth2Client for SpringSecurity -->		
 		<dependency>
     		<groupId>org.springframework.security</groupId>
     		<artifactId>spring-security-oauth2-client</artifactId>
     		<version>${springsecurity.version}</version>
 		</dependency>
+		
+		<!-- Needed for OAuth2 Resource Server for SpringSecurity-->		
 		<dependency>
    			<groupId>org.springframework.security</groupId>
-   			<artifactId>spring-security-oauth2-jose</artifactId>
+   			<artifactId>spring-security-oauth2-resource-server</artifactId>
     		<version>${springsecurity.version}</version>
 		</dependency>
 
