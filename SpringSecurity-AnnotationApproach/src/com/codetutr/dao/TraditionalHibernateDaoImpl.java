@@ -25,7 +25,9 @@ public class TraditionalHibernateDaoImpl implements IUserDao{
     private SessionFactory sessionFactory;
 	
 	/**
-	 * HibernateTemplate currently is not being used since it is giving some error.SessionFactory is being is used instead.
+	 * Hibernate now conforms with the JPA specification to not allow flushing updates outside of a transaction boundary from Hibernate ORM 5.2. To restore 5.1 
+	 * behavior, allowing flush operations outside of a transaction boundary, set [hibernate.allow_update_outside_transaction=true] in additional Properties.
+	 * Otherwise you will get {@link no transaction is in progress} exception.
 	 */
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
@@ -62,17 +64,14 @@ public class TraditionalHibernateDaoImpl implements IUserDao{
 
 	@Override
 	public User updateUser(User user) {
+		hibernateTemplate.update(user);
 		return null;
 	}
 
 	@Override
 	public boolean deleteUser(long guid) {
-		Session s = sessionFactory.openSession();
-		Transaction t = s.beginTransaction();
-			User user = s.get(User.class, guid);
-			s.delete(user);
-		t.commit();
-		s.close();
+		User user =  (User) hibernateTemplate.find("from User where uid=?" , guid);
+		hibernateTemplate.delete(user);
 		return true;
 	}
 
@@ -90,8 +89,9 @@ public class TraditionalHibernateDaoImpl implements IUserDao{
 
 	@Override
 	public User getUserByUserName(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Trying to get a username : " + username);
+		List<User> users = (List<User>) hibernateTemplate.find("from User where username=?0" , username);
+		return users.get(0);
 	}
 
 	@Override

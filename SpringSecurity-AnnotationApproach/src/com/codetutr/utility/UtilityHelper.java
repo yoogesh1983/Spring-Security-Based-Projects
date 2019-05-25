@@ -69,6 +69,7 @@ public class UtilityHelper {
          */
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        hibernateProperties.setProperty("hibernate.allow_update_outside_transaction", "true");
         return hibernateProperties;
     }
 }
