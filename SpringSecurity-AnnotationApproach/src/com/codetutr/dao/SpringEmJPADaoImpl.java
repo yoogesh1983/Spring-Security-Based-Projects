@@ -1,11 +1,16 @@
 package com.codetutr.dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -63,11 +68,23 @@ public class SpringEmJPADaoImpl implements IUserDao {
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAllUsers() {
-		Query query = entityManager.createQuery("SELECT u FROM User u");
-		return (List<User>) query.getResultList();
+		List<User> users = new LinkedList<>();
+		
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
+		Root<User> from = criteriaQuery.from(User.class);
+		CriteriaQuery<Object> select = criteriaQuery.select(from);
+		TypedQuery<Object> typedQuery = entityManager.createQuery(select);
+		List<Object> result = typedQuery.getResultList();
+		for (Object next : result) {
+			User user = (User) next;
+			user.setAuthorities(null);
+			users.add(user);
+		}
+		
+		return users;
 	}
 
 	@Override

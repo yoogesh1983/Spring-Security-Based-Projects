@@ -2,9 +2,12 @@ package com.codetutr.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codetutr.entity.Authority;
 import com.codetutr.entity.User;
 import com.codetutr.utility.UtilityHelper;
 
@@ -27,7 +31,7 @@ public class TraditionalHibernateDaoImpl implements IUserDao{
 	/**
 	 * Hibernate now conforms with the JPA specification to not allow flushing updates outside of a transaction boundary from Hibernate ORM 5.2. To restore 5.1 
 	 * behavior, allowing flush operations outside of a transaction boundary, set [hibernate.allow_update_outside_transaction=true] in additional Properties.
-	 * Otherwise you will get {@link no transaction is in progress} exception.
+	 * Otherwise you will get {@link no transaction is not in progress} exception.
 	 */
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
@@ -56,54 +60,94 @@ public class TraditionalHibernateDaoImpl implements IUserDao{
 		Session s = sessionFactory.openSession();
 		Transaction t = s.beginTransaction();
 			Long key = (Long) s.save(user);
-			User savedUser = s.get(User.class, key);
 		t.commit();
 		s.close();
-		return savedUser;
+		return getUser(key);
 	}
 
 	@Override
 	public User updateUser(User user) {
-		hibernateTemplate.update(user);
-		return null;
+		User database = getUserByUserName(user.getUsername());
+		if(null != database) {
+			user.setUid(database.getUid());
+			hibernateTemplate.update(user);
+			return getUser(user.getUid());
+		}
+		return database;
 	}
 
 	@Override
 	public boolean deleteUser(long guid) {
-		User user =  (User) hibernateTemplate.find("from User where uid=?" , guid);
-		hibernateTemplate.delete(user);
-		return true;
+		Session s = sessionFactory.openSession();
+		Transaction t = s.beginTransaction();
+			String hql = "delete User u Where u.uid = ?";
+			Query<User> q = s.createQuery(hql);
+			q.setParameter(0, guid);
+			int rows = q.executeUpdate();
+		t.commit();
+		s.close();
+		return rows > 0;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sessionFactory.openSession();
+		Transaction t = s.beginTransaction();
+			String hql = "SELECT u from User u";
+			Query<User> q = s.createQuery(hql);
+			List<User> users = q.list();
+			for (User next : users) {
+				next.setAuthorities(null);
+			}
+		t.commit();
+		s.close();
+		return users;
 	}
 
 	@Override
 	public User getUser(Long guid) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = hibernateTemplate.get(User.class, guid);
+		if(null != user) {
+			return getUserByUserName(user.getUsername());
+		}
+		return user;
 	}
 
 	@Override
 	public User getUserByUserName(String username) {
-		System.out.println("Trying to get a username : " + username);
-		List<User> users = (List<User>) hibernateTemplate.find("from User where username=?0" , username);
-		return users.get(0);
+		Session s = sessionFactory.openSession();
+		Transaction t = s.beginTransaction();
+			Criteria cr = s.createCriteria (User.class );
+			cr.add(Restrictions.eq("username", username ));
+			User user = (User) cr.uniqueResult();
+			if(null != user) {
+				cr = s.createCriteria (Authority.class );
+				cr.add(Restrictions.eq("user", user ));
+				List<Authority> authorities = cr.list();
+				user.setAuthorities(authorities);
+			}
+		t.commit();
+		s.close();
+		return user;
 	}
 
 	@Override
 	public boolean ismoreUsernameExists(String username) {
-		// TODO Auto-generated method stub
-		return false;
+		return !(getUserByUserName(username) == null);
 	}
 
 	@Override
 	public List<User> getUserByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sessionFactory.openSession();
+		Transaction t = s.beginTransaction();
+			Criteria cr = s.createCriteria (User.class );
+			cr.add(Restrictions.eq("firstName", name ));
+			List<User> users = cr.list();
+			for (User next : users) {
+				next.setAuthorities(null);
+			}
+		t.commit();
+		s.close();
+		return users;
 	}
-
 }
