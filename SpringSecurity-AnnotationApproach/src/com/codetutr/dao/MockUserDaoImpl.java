@@ -8,8 +8,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.codetutr.entity.User;
@@ -19,6 +20,9 @@ import com.codetutr.utility.UtilityHelper;
 @Repository
 public class MockUserDaoImpl implements IUserDao {
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	private static Map<Long, User> userTable = new HashMap<Long, User>();
 
 	public MockUserDaoImpl() {
@@ -27,7 +31,6 @@ public class MockUserDaoImpl implements IUserDao {
 	@Override
 	public void initiateDatabase() {
 
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userTable.put(1L, new User(1L, "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", true, UtilityHelper.getUserAuthList(null)));
 		userTable.put(2L, new User(2L, "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", true, UtilityHelper.getAdminAuthList(null)));
 		userTable.put(3L, new User(3L, "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", true, UtilityHelper.getDbaAuthList(null)));
