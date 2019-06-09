@@ -92,6 +92,7 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 	private void authentication(HttpSecurity http) throws Exception {
 		formBasedLogin(http);
 		oauth2Login(http);
+		httpBasic(http);
 	}
 
 	private void authorization(HttpSecurity http) throws Exception {
@@ -211,6 +212,10 @@ public class AppConfig_Security extends WebSecurityConfigurerAdapter {
 			.failureUrl("/sign-in?error=true")
 			.usernameParameter("username")
 			.passwordParameter("password");
+	}
+	
+	private void httpBasic(HttpSecurity http) throws Exception {
+		http.httpBasic();
 	}
 	
 	private void header(HttpSecurity http) throws Exception {
