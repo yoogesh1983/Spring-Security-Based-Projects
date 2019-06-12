@@ -1,15 +1,22 @@
 package com.codetutr.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codetutr.config.logging.Log;
 import com.codetutr.entity.User;
+import com.codetutr.properties.ProfileProperties;
 import com.codetutr.utility.UtilityHelper;
 
 @Profile("SpringDataJPA")
@@ -43,6 +50,8 @@ public class SpringDataJpaUserDaoImpl implements IUserDao {
 		User dba = new User(null, "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", true, null);
 		dba.setAuthorities(UtilityHelper.getDbaAuthList(dba));
 		createUser(dba);
+		
+		Log.logInfo(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "Inserting initial database completed. Total " + userRepository.count() + " profile found. First List of these profile is : " + getAllUsers());
 	}
 
 	@Override
@@ -57,13 +66,23 @@ public class SpringDataJpaUserDaoImpl implements IUserDao {
 
 	@Override
 	public boolean deleteUser(long guid) {
-		userRepository.deleteById(guid);
-		return true;
+		if(userRepository.existsById(guid)) {
+			userRepository.deleteById(guid);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		return userRepository.findAll();
+		List<User> users = new ArrayList<>();
+		//returns only two results in a first page which is sorted in accending order by username
+		Pageable pageable = PageRequest.of(0, 2, Direction.ASC, "firstName");
+		Page<User> result = userRepository.findAll(pageable);
+		for (User next : result) {
+			users.add(next);
+		}
+		return users;
 	}
 
 	@Override
@@ -80,7 +99,7 @@ public class SpringDataJpaUserDaoImpl implements IUserDao {
 
 	@Override
 	public boolean ismoreUsernameExists(String username) {
-		return userRepository.findUserByUsername(username) != null;
+		return userRepository.findUserByUsernameContains(username).size() > 0;
 	}
 
 	@Override
