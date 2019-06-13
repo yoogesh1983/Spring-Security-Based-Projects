@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.codetutr.config.logging.Log;
 import com.codetutr.entity.User;
-import com.codetutr.properties.ProfileProperties;
 import com.codetutr.utility.UtilityHelper;
 
 @Profile("SpringDataJPA")
@@ -78,7 +77,7 @@ public class SpringDataJpaUserDaoImpl implements IUserDao {
 		List<User> users = new ArrayList<>();
 		//returns only two results in a first page which is sorted in accending order by username
 		Pageable pageable = PageRequest.of(0, 2, Direction.ASC, "firstName");
-		Page<User> result = userRepository.findAll(pageable);
+		Page<User> result = userRepository.findAll(pageable);   // List<User> result = userRepository.findAllUsersJPQL(pageable);
 		for (User next : result) {
 			users.add(next);
 		}
