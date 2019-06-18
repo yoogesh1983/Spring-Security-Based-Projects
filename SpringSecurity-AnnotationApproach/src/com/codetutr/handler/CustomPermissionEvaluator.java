@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import com.codetutr.entity.Authority;
 import com.codetutr.entity.User;
 
-public class PermissionEvaluatorHandler implements PermissionEvaluator {
+public class CustomPermissionEvaluator implements PermissionEvaluator {
 
 	@Override
 	public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
