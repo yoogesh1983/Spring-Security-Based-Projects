@@ -14,7 +14,14 @@ CREATE TABLE AUTHORITIES (
 	uid VARCHAR(50) NOT NULL PRIMARY KEY,
     fk_uid VARCHAR(50) NOT NULL,
     role VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_authorities_users FOREIGN KEY(fk_uid) REFERENCES users(uid)
 );
+
+
+ALTER TABLE AUTHORITIES
+	ADD CONSTRAINT fk_authorities_users
+		FOREIGN KEY(fk_uid)
+			REFERENCES users(uid)
+				ON DELETE CASCADE;
+
 
 CREATE UNIQUE INDEX ix_auth_username ON authorities (uid,role);

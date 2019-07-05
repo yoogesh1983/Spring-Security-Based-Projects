@@ -1,12 +1,10 @@
 package com.codetutr.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.codetutr.entity.Authority;
 import com.codetutr.entity.User;
 import com.codetutr.services.UserService;
 import com.codetutr.utility.UtilityHelper;
@@ -28,7 +25,10 @@ import com.codetutr.validation.UserBeanValidator;
 public class SignupController 
 {
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@InitBinder
 	public void initBinder (WebDataBinder binder)
@@ -71,7 +71,6 @@ public class SignupController
 		}
 		else
 		{
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			user.setEnabled(true);
 			user.setAuthorities(UtilityHelper.getUserAuthList(user));

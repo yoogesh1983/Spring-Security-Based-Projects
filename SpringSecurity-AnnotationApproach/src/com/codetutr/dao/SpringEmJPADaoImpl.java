@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codetutr.config.logging.Log;
 import com.codetutr.entity.User;
 import com.codetutr.utility.UtilityHelper;
 
@@ -99,9 +101,15 @@ public class SpringEmJPADaoImpl implements IUserDao {
 	@Override
 	public User getUserByUserName(String username) {
 		
-		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u LEFT OUTER JOIN FETCH u.authorities WHERE u.username = (:firstParam)", User.class)
+		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u LEFT JOIN FETCH u.authorities WHERE u.username = (:firstParam)", User.class)
 							.setParameter("firstParam", username);
-		return query.getSingleResult();
+		try {
+			return query.getSingleResult();
+		} 
+		catch(NoResultException e) {
+			Log.logError(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "User " + username + " could not be found in a database.");
+			return null;
+		}
 	}
 
 	@Override
