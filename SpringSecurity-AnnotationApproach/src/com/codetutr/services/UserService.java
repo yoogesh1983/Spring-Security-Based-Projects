@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.codetutr.config.logging.Log;
 import com.codetutr.dao.IUserDao;
 import com.codetutr.entity.User;
+import com.codetutr.utility.UtilityHelper;
 
 @Service
 public class UserService {
@@ -18,9 +19,9 @@ public class UserService {
 	// Initialization of database
 	public void initiateDatabase() {
 		
-		Log.logInfo(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "Initialization of database started");
+		Log.logInfo(this.getClass().getName(), UtilityHelper.getMethodName(new Object() {}), "Initialization of database started");
 		userDao.initiateDatabase();		
-		Log.logInfo(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "Initialization of database completed");
+		Log.logInfo(this.getClass().getName(), UtilityHelper.getMethodName(new Object() {}), "Initialization of database completed");
 	}
 
 

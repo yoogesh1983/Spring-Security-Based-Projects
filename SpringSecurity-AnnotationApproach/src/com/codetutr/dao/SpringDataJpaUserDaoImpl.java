@@ -50,7 +50,7 @@ public class SpringDataJpaUserDaoImpl implements IUserDao {
 		dba.setAuthorities(UtilityHelper.getDbaAuthList(dba));
 		createUser(dba);
 		
-		Log.logInfo(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "Inserting initial database completed. Total " + userRepository.count() + " profile found. First List of these profile is : " + getAllUsers());
+		Log.logInfo(this.getClass().getName(), UtilityHelper.getMethodName(new Object() {}), "Inserting initial database completed. Total " + userRepository.count() + " profile found. First List of these profile is : " + getAllUsers());
 	}
 
 	@Override

@@ -72,4 +72,8 @@ public class UtilityHelper {
         hibernateProperties.setProperty("hibernate.allow_update_outside_transaction", "true");
         return hibernateProperties;
     }
+
+	public static String getMethodName(Object object) {
+		return object.getClass().getEnclosingMethod().getName();
+	}
 }

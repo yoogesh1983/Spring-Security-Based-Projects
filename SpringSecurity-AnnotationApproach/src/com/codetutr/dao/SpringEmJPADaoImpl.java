@@ -107,7 +107,7 @@ public class SpringEmJPADaoImpl implements IUserDao {
 			return query.getSingleResult();
 		} 
 		catch(NoResultException e) {
-			Log.logError(this.getClass().getName(), new Object() {}.getClass().getEnclosingMethod().getName(), "User " + username + " could not be found in a database.");
+			Log.logError(this.getClass().getName(), UtilityHelper.getMethodName(new Object() {}), "User " + username + " could not be found in a database.");
 			return null;
 		}
 	}
