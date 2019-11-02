@@ -7,12 +7,12 @@ import javax.servlet.ServletException;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.codetutr.config.cronJob.AppConfig_CronJob;
 import com.codetutr.config.database.AppConfig_Persistance;
 import com.codetutr.config.logging.Log;
 import com.codetutr.config.logging.LogFilter;
 import com.codetutr.config.springMvc.AppConfig_Mvc;
 import com.codetutr.config.springSecurity.AppConfig_Security;
-import com.codetutr.properties.LogProperties;
 import com.codetutr.properties.ProfileProperties;
 import com.codetutr.utility.UtilityHelper;
 
@@ -52,7 +52,8 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 				/**
 				 * Initializes the Persistence Configuration
 				 */
-				AppConfig_Persistance.class };
+				AppConfig_Persistance.class
+		};
 	}
 
 	@Override
@@ -65,6 +66,13 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 				 * 
 				 * AppConfig_Mvc.class
 				 */
+				
+				
+				/**
+				 * Initializes the cronJob configuration by Child ApplicationContext via DispatcherServlet
+				 *  (In spring term though it is called Task Scheduler)
+				 */
+				AppConfig_CronJob.class
 		};
 	}
 
