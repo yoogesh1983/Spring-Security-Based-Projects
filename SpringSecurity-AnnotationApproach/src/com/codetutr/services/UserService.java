@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codetutr.config.logging.Log;
-import com.codetutr.dao.IUserDao;
+import com.codetutr.dao.user.IUserDao;
 import com.codetutr.entity.User;
 import com.codetutr.utility.UtilityHelper;
 

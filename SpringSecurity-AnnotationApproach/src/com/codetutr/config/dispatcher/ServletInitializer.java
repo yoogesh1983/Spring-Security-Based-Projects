@@ -13,6 +13,7 @@ import com.codetutr.config.logging.Log;
 import com.codetutr.config.logging.LogFilter;
 import com.codetutr.config.springMvc.AppConfig_Mvc;
 import com.codetutr.config.springSecurity.AppConfig_Security;
+import com.codetutr.config.springStateMachine.AppConfig_StateMachine;
 import com.codetutr.properties.ProfileProperties;
 import com.codetutr.utility.UtilityHelper;
 
@@ -72,7 +73,12 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 				 * Initializes the cronJob configuration by Child ApplicationContext via DispatcherServlet
 				 *  (In spring term though it is called Task Scheduler)
 				 */
-				AppConfig_CronJob.class
+				AppConfig_CronJob.class,
+				
+				/**
+				 * Initializes the spring state machine
+				 */
+				AppConfig_StateMachine.class
 		};
 	}
 

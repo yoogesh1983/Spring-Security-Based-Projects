@@ -1,4 +1,4 @@
-package com.codetutr.dao;
+package com.codetutr.dao.user;
 
 import java.util.List;
 
