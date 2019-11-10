@@ -1,4 +1,4 @@
-package com.codetutr.stateMahine;
+package com.codetutr.stateMahine.interceptor;
 
 import java.util.Optional;
 
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import com.codetutr.config.springStateMachine.StateMachineService;
 import com.codetutr.dao.payment.IPaymentDao;
 import com.codetutr.entity.Payment;
+import com.codetutr.stateMahine.PaymentEvent;
+import com.codetutr.stateMahine.PaymentState;
 
 @Component
 public class PaymentStateChangeInterceptor extends StateMachineInterceptorAdapter<PaymentState, PaymentEvent>{

@@ -3,6 +3,7 @@ package com.codetutr.config.springStateMachine;
 import java.util.EnumSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachineFactory;
 import org.springframework.statemachine.config.StateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
@@ -12,15 +13,21 @@ import org.springframework.statemachine.guard.Guard;
 import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 import org.springframework.statemachine.state.State;
 
-import com.codetutr.services.ElavonPaymentService;
 import com.codetutr.stateMahine.PaymentEvent;
 import com.codetutr.stateMahine.PaymentState;
 
 @EnableStateMachineFactory
 public class AppConfig_StateMachine extends StateMachineConfigurerAdapter<PaymentState, PaymentEvent> {
 	
-	@Autowired
-	private ElavonPaymentService elavonPaymentService;
+	@Autowired private Action<PaymentState, PaymentEvent> authAction;
+	@Autowired private Action<PaymentState, PaymentEvent> authApproveAction;
+	@Autowired private Action<PaymentState, PaymentEvent> authDeclineAction;
+	@Autowired private Action<PaymentState, PaymentEvent> captureAction;
+	@Autowired private Action<PaymentState, PaymentEvent> captureApproveAction;
+	@Autowired private Action<PaymentState, PaymentEvent> captureDeclineAction;
+	
+	//Validator
+	@Autowired private Guard<PaymentState, PaymentEvent> paymentIdGuard;
 
 	@Override
 	public void configure(StateMachineStateConfigurer<PaymentState, PaymentEvent> states) throws Exception {
@@ -52,20 +59,20 @@ public class AppConfig_StateMachine extends StateMachineConfigurerAdapter<Paymen
 				    * we are not changing the state here. The state will be the same i.e. NEW
 				    * By the way if the paymentId is null, then it will never called because we have applied guard here
 				    */		
-					.withExternal().source(PaymentState.NEW).target(PaymentState.NEW).event(PaymentEvent.AUTH_INITIATE).action(elavonPaymentService.authorizePayment()).guard(paymentIdValidator()).and()
+					.withExternal().source(PaymentState.NEW).target(PaymentState.NEW).event(PaymentEvent.AUTH_INITIATE).action(authAction).guard(paymentIdGuard).and()
 
 					/**
 					 * When the event is AUTH_APPROVED then change the state to AUTH from NEW.
 					 * However if the event is AUTH_DECLINE, then change to state to AUTH_ERROR
 					 */		
-					.withExternal().source(PaymentState.NEW).target(PaymentState.AUTH).event(PaymentEvent.AUTH_APPROVED).and()
-					.withExternal().source(PaymentState.NEW).target(PaymentState.AUTH_ERROR).event(PaymentEvent.AUTH_DECLINE).and()	
+					.withExternal().source(PaymentState.NEW).target(PaymentState.AUTH).event(PaymentEvent.AUTH_APPROVED).action(authApproveAction).and()
+					.withExternal().source(PaymentState.NEW).target(PaymentState.AUTH_ERROR).event(PaymentEvent.AUTH_DECLINE).action(authDeclineAction).and()	
 					
 					
 					//For Capture
-					.withExternal().source(PaymentState.AUTH).target(PaymentState.AUTH).event(PaymentEvent.CAPTURE_INITIATE).action(elavonPaymentService.capturePayment()).guard(paymentIdValidator()).and()
-					.withExternal().source(PaymentState.AUTH).target(PaymentState.CAPTURE).event(PaymentEvent.CAPTURE_APPROVED).and()
-					.withExternal().source(PaymentState.AUTH).target(PaymentState.CAPTURE_ERROR).event(PaymentEvent.CAPTURE_DECLINE);
+					.withExternal().source(PaymentState.AUTH).target(PaymentState.AUTH).event(PaymentEvent.CAPTURE_INITIATE).action(captureAction).guard(paymentIdGuard).and()
+					.withExternal().source(PaymentState.AUTH).target(PaymentState.CAPTURE).event(PaymentEvent.CAPTURE_APPROVED).action(captureApproveAction).and()
+					.withExternal().source(PaymentState.AUTH).target(PaymentState.CAPTURE_ERROR).event(PaymentEvent.CAPTURE_DECLINE).action(captureDeclineAction);
 	}
 	
 	@Override
@@ -78,14 +85,4 @@ public class AppConfig_StateMachine extends StateMachineConfigurerAdapter<Paymen
 		};
 		config.withConfiguration().listener(adapter);
 	}
-	
-	
-	public Guard<PaymentState, PaymentEvent> paymentIdValidator(){
-		return context ->{
-			return context.getMessageHeader(StateMachineService.PAYMENT_ID_HEADER) != null;
-		};
-	}
-	
-
-	
 }

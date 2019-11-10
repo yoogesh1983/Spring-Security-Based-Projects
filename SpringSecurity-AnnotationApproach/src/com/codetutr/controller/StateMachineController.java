@@ -35,9 +35,10 @@ public class StateMachineController {
 		//Authorize payment
 		StateMachine<PaymentState, PaymentEvent> sm = stateMachineService.authorizePayment(payment.getId());
 		
+		if(sm.getState().getId().equals(PaymentState.AUTH)) {
 		System.out.println("After Authorization: " + paymentDao.findPaymentById(payment.getId()));
 		System.out.println("After Authorization [Obtaining state from StateMachine rather than the DB]: " + sm.getState().getId());
-		
+		}
 		
 		//Capture payment.By the way if the authorization failed, elavon will never be called (since it will be called only if the state is AUTH)
 		StateMachine<PaymentState, PaymentEvent> smCapture = stateMachineService.capturePayment(payment.getId());

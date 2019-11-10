@@ -12,7 +12,7 @@ import com.codetutr.dao.payment.IPaymentDao;
 import com.codetutr.entity.Payment;
 import com.codetutr.stateMahine.PaymentEvent;
 import com.codetutr.stateMahine.PaymentState;
-import com.codetutr.stateMahine.PaymentStateChangeInterceptor;
+import com.codetutr.stateMahine.interceptor.PaymentStateChangeInterceptor;
 
 @Service
 public class StateMachineService {
