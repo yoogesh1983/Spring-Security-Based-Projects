@@ -1,4 +1,4 @@
-package com.codetutr.config.dispatcher;
+package com.codetutr;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;

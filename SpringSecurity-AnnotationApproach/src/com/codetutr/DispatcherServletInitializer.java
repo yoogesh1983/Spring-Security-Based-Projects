@@ -1,4 +1,4 @@
-package com.codetutr.config.dispatcher;
+package com.codetutr;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletContext;
@@ -33,7 +33,7 @@ import com.codetutr.utility.UtilityHelper;
  * <p>
  *
  */
-public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
