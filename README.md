@@ -1,5 +1,5 @@
 # Spring-Security-Based-Projects
-A complete Spring-Security Based Projects that contain following Applications: </br> </br>
+A complete Spring-Security Based Projects that contain following Applications: </br>
 
 => SpringBootSecurity </br>
 => MultiModule Application </br>
