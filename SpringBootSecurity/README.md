@@ -12,25 +12,13 @@ Do the following once the compile is done and war is creted inside a target fold
 The application can now be browsed at http://localhost:8888/SpringBootSecurity/dispatcher </br>
 
 <b>When running from eclipse with embedded tomcat:</b> </br>
-> Right click to the DispatcherServletInitializer.java</br>
+> Right click to the <b>DispatcherServletInitializer.java</b></br>
 > Run As -> Java Application</br>
 
 The application can now be browsed at http://localhost:8888/SpringBootSecurity/dispatcher </br>
 
 <b>When deploying to the external tomcat:</b> </br>
 > copy the <b>SpringBootSecurity.war</b> from a target folder and put inside the <b>webapp</b> folder of tomcat server</br>
-> Start the server by double clicking on a startup.bat inside a bin folder of tomcat</br>
+> Start the server by double clicking on a <b>startup.bat</b> inside a <b>bin</b> folder of tomcat</br>
 
 The application can now be browsed at http://localhost:8080/SpringBootSecurity/dispatcher </br>
-
-# How to clone a project (Using VisualStudio Code) </br>
-> Ctrl+Shift+p </br>
-> git clone </br>
-> Enter a URL </br>
-> select a folder you want to save the the project into your local</br>
-> Close the project from Visual code and again open the particular project inside the folder i.e. REACTContact_SSR </br>
-
-Run a following command to commit git from visualcode (Otherwise it will not show the username password modal popup) </br>
-> git config --global user.email "yoogesh1983@gmail.com" </br>
-> git config --global user.name "Yoogesh"</br>
-
