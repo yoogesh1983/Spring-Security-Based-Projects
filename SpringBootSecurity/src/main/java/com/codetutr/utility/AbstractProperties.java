@@ -262,13 +262,13 @@ private void handleWhileReadingRunningFromCommandLine(Properties properties, Str
  * While Running an application from command line, above way doesn't work. so it needs below logic.
  */
 protected String getPropertyFilepathForJar(String propertyFilePath) {
-	System.out.println("Original path before updating a path : " + propertyFilePath);
+	//System.out.println("Original path before updating a path : " + propertyFilePath);
 	String stringBeforeTarget = StringUtils.substringBefore(propertyFilePath, "target");
 	String StringAfterClasses = StringUtils.substringAfter(propertyFilePath, "classes");
 	String StringAfterRemovingFileColon = RegExUtils.replaceAll(stringBeforeTarget, "file:", "");
 	String StringAfterRemovingExplanation = RegExUtils.replaceAll(StringAfterClasses, "!", "");
 	String result = RegExUtils.replaceAll(StringAfterRemovingFileColon + "target\\classes" + StringAfterRemovingExplanation, "\\\\", "/");
-	System.out.println("Path after modifying : " + result);
+	//System.out.println("Path after modifying : " + result);
 	return result;
 }
 
