@@ -1,8 +1,8 @@
 # What is the Application about ? </br>
-&nbsp;=> This is a Spring-Boot application that uses Spring-Security.</br>
+&nbsp;=> This is a Spring-Boot application that uses Spring-Security</br>
 
 # How to run the application ? </br>
-&nbsp;=> This application needs to be run at tomcat and may get 403 when run into wild-fly server </br>
+&nbsp;=> This application can be run from the commandLine or from the eclipse using embedded server at Port <b>8888</b> and can also be run at external webServer like tomcat at port <b>8080</b> </br>
 &nbsp;=> Right click on a project => Maven => update-project</br>
 &nbsp;=> Right click on a project => run as => Run on server => run </br>
 &nbsp;=> You can now browse the application at <strong>http://localhost:8080/SpringSecurity-AnnotationApproach/</strong> </br>
