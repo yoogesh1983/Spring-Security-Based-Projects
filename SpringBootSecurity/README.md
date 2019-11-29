@@ -3,8 +3,9 @@
 - This application can be run from the <b>commandLine</b> or from the eclipse using embedded server at Port <b>8888</b> and can also be run at external webServer like <b>tomcat</b> at port <b>8080</b> </br>
 
 # How to run the Application? </br>
-- Do the following once the compile is done and war is creted inside a target folder:</br>
-When running from a command line: </br>
+Do the following once the compile is done and war is creted inside a target folder:</br>
+
+<b>When running from a command line:</b> </br>
 > npm install </br>
 > npm run dev </br>
 > if first time, close the server by using ctrl+C and do "npm run dev" again(Since css will not update first time. Bug!!) </br>
