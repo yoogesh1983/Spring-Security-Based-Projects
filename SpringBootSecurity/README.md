@@ -1,21 +1,28 @@
-# What is the Application about ? </br>
-&nbsp;=> This is a Spring-Boot application that uses Spring-Security</br>
+# What is the Application about? </br>
+- This is a Spring-Boot application that uses Spring-Security</br>
+- This application can be run from the commandLine or from the eclipse using embedded server at Port <b>8888</b> and can also be run at external webServer like tomcat at port <b>8080</b> </br>
 
-# How to run the application ? </br>
-&nbsp;=> This application can be run from the commandLine or from the eclipse using embedded server at Port <b>8888</b> and can also be run at external webServer like tomcat at port <b>8080</b> </br>
-&nbsp;=> Right click on a project => Maven => update-project</br>
-&nbsp;=> Right click on a project => run as => Run on server => run </br>
-&nbsp;=> You can now browse the application at <strong>http://localhost:8080/SpringSecurity-AnnotationApproach/</strong> </br>
-&nbsp;=> In case of 404, make sure to change the JarfileName in a web-project setting which sometime may not update</br>
-&nbsp;=> You may get 500 error saying the css code not found. If that happens, the project structure might be like below:</br></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              ![./docs/Project_View.PNG](./docs/Project_View.PNG) <br/>
-              
-&nbsp;=> Normally when you clone a fresh copy from Git, the structure might be like above where the resources folder is not in a build path. So that in this condition, do the following: </br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Open project in eclipse => Right click into a resources folder => build path => use as a Source Folder</strong> </br>
-&nbsp;=> The file structure will be like below now and it should solve the problem:</br></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              ![./docs/Project_View_After_Change.PNG](./docs/Project_View_After_Change.PNG)
-              
-&nbsp;=> You may need to clear browser cache if you get 405 Error</br>
-&nbsp;=> Similarly, You must refresh the project once the maven <b>clean install</b> is done
+# How to run the Application? </br>
+> npm install </br>
+> npm run dev </br>
+> if first time, close the server by using ctrl+C and do "npm run dev" again(Since css will not update first time. Bug!!) </br>
+
+The application can now be browsed at http://localhost:3000/ </br>
+
+if not run successfully, You may need to do the following installation</br>
+
+> npm install phantomjs-prebuilt@2.1.16 --ignore-scripts </br>
+> npm install npm-run-all --save-dev </br>
+> npm install -g nodemon </br>
+
+# How to clone a project (Using VisualStudio Code) </br>
+> Ctrl+Shift+p </br>
+> git clone </br>
+> Enter a URL </br>
+> select a folder you want to save the the project into your local</br>
+> Close the project from Visual code and again open the particular project inside the folder i.e. REACTContact_SSR </br>
+
+Run a following command to commit git from visualcode (Otherwise it will not show the username password modal popup) </br>
+> git config --global user.email "yoogesh1983@gmail.com" </br>
+> git config --global user.name "Yoogesh"</br>
+
