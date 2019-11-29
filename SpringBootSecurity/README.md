@@ -17,6 +17,12 @@ The application can now be browsed at http://localhost:8888/SpringBootSecurity/d
 
 The application can now be browsed at http://localhost:8888/SpringBootSecurity/dispatcher </br>
 
+<b>When deploying to the external tomcat:</b> </br>
+> copy the <b>SpringBootSecurity.war</b> from a target folder and put inside the <b>webapp</b> folder of tomcat server</br>
+> Start the server by double clicking on a startup.bat inside a bin folder of tomcat</br>
+
+The application can now be browsed at http://localhost:8080/SpringBootSecurity/dispatcher </br>
+
 # How to clone a project (Using VisualStudio Code) </br>
 > Ctrl+Shift+p </br>
 > git clone </br>
