@@ -7,17 +7,15 @@
 Do the following once the compile is done and war is creted inside a target folder:</br>
 
 <b>When running from a command line:</b> </br>
-> java -jar  </br>
-> npm run dev </br>
-> if first time, close the server by using ctrl+C and do "npm run dev" again(Since css will not update first time. Bug!!) </br>
+> java -jar SpringBootSecurity.war </br>
 
-The application can now be browsed at http://localhost:3000/ </br>
+The application can now be browsed at http://localhost:8888/SpringBootSecurity/dispatcher </br>
 
-if not run successfully, You may need to do the following installation</br>
+<b>When running from eclipse with embedded tomcat:</b> </br>
+> Right click to the DispatcherServletInitializer.java</br>
+> Run As -> Java Application</br>
 
-> npm install phantomjs-prebuilt@2.1.16 --ignore-scripts </br>
-> npm install npm-run-all --save-dev </br>
-> npm install -g nodemon </br>
+The application can now be browsed at http://localhost:8888/SpringBootSecurity/dispatcher </br>
 
 # How to clone a project (Using VisualStudio Code) </br>
 > Ctrl+Shift+p </br>
