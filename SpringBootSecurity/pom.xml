@@ -39,18 +39,17 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		<!--  This tomcat is fine if you want total Rest application. however it won't work if you have JSP. for this you need to use the below one.
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>  --> 
 		
-		<!-- Since the above spring boot provided tomcat is working in the latest updates, this tomcat is redundant now
 		<dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>		
-		 -->
 		 
 		<dependency>
             <groupId>javax.servlet</groupId>
@@ -131,6 +130,12 @@
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.3.0</version>
+		</dependency>
+		
+		<!-- for StringUtils -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>	
 		
 	</dependencies>
