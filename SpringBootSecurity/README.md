@@ -1,25 +1,21 @@
-# Getting Started
+# What is the Application about ? </br>
+&nbsp;=> This is a Spring-Security application replacing legacy web.xml by Java configuration (Annotation) approach </br>
 
-### Reference Documentation
-For further reference, please consider the following sections:
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/maven-plugin/)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#using-boot-devtools)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#boot-features-jpa-and-spring-data)
-* [Spring Security](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#boot-features-security)
-* [OAuth2 Resource Server](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#boot-features-security-oauth2-server)
-* [OAuth2 Client](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#boot-features-security-oauth2-client)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
+# How to run the application ? </br>
+&nbsp;=> This application needs to be run at tomcat and may get 403 when run into wild-fly server </br>
+&nbsp;=> Right click on a project => Maven => update-project</br>
+&nbsp;=> Right click on a project => run as => Run on server => run </br>
+&nbsp;=> You can now browse the application at <strong>http://localhost:8080/SpringSecurity-AnnotationApproach/</strong> </br>
+&nbsp;=> In case of 404, make sure to change the JarfileName in a web-project setting which sometime may not update</br>
+&nbsp;=> You may get 500 error saying the css code not found. If that happens, the project structure might be like below:</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              ![./docs/Project_View.PNG](./docs/Project_View.PNG) <br/>
+              
+&nbsp;=> Normally when you clone a fresh copy from Git, the structure might be like above where the resources folder is not in a build path. So that in this condition, do the following: </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Open project in eclipse => Right click into a resources folder => build path => use as a Source Folder</strong> </br>
+&nbsp;=> The file structure will be like below now and it should solve the problem:</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              ![./docs/Project_View_After_Change.PNG](./docs/Project_View_After_Change.PNG)
+              
+&nbsp;=> You may need to clear browser cache if you get 405 Error</br>
+&nbsp;=> Similarly, You must refresh the project once the maven <b>clean install</b> is done
