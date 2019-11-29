@@ -1,5 +1,5 @@
 # What is the Application about ? </br>
-&nbsp;=> This is a Spring-Security application replacing legacy web.xml by Java configuration (Annotation) approach </br>
+&nbsp;=> This is a Spring-Boot application that uses Spring-Security.</br>
 
 # How to run the application ? </br>
 &nbsp;=> This application needs to be run at tomcat and may get 403 when run into wild-fly server </br>
