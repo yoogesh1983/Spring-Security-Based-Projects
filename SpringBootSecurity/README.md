@@ -2,7 +2,8 @@
 - This is a Spring-Boot application that uses Spring-Security</br>
 - This application can be run from the <b>commandLine</b> or from the eclipse using embedded server at Port <b>8888</b> and can also be run at external webServer like <b>tomcat</b> at port <b>8080</b> </br>
 
-# How to run the Application once the compile is done and war is creted inside a target folder? </br>
+# How to run the Application? </br>
+- Do the following once the compile is done and war is creted inside a target folder:</br>
 When running from a command line: </br>
 > npm install </br>
 > npm run dev </br>
