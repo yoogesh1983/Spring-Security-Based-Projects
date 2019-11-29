@@ -1,6 +1,6 @@
 # What is the Application about? </br>
 - This is a Spring-Boot application that uses Spring-Security</br>
-- This application can be run from the commandLine or from the eclipse using embedded server at Port <b>8888</b> and can also be run at external webServer like tomcat at port <b>8080</b> </br>
+- This application can be run from the <b>commandLine</b> or from the eclipse using embedded server at Port <b>8888</b> and can also be run at external webServer like <b>tomcat</b> at port <b>8080</b> </br>
 
 # How to run the Application? </br>
 > npm install </br>
