@@ -26,6 +26,29 @@ xmlns="http://www.springframework.org/schema/mvc"
   <beans:property name="basename" value="messages/messages" /> 
   </beans:bean>
   
+<beans:bean  id="swagger2Config"
+class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration">
+  </beans:bean>
+  
+  <beans:bean id="documentationType" class="springfox.documentation.spi.DocumentationType">
+  	<beans:constructor-arg name="name" value="swagger" />
+  	<beans:constructor-arg name="version" value="2.0" />
+</beans:bean>
+
+<beans:bean  id="docket" class="springfox.documentation.spring.web.plugins.Docket">
+<beans:constructor-arg ref="documentationType"/>
+</beans:bean>
+  
+
+  
+  <context:component-scan base-package="com.codetutr.controller">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller" />
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+</context:component-scan>
+
+  <mvc:default-servlet-handler />
   
   <!-- ==================================================================================================================================== -->
   
