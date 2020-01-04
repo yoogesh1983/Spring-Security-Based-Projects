@@ -75,6 +75,7 @@
 <!-- ==================================================================================================================================== -->  
     
     		               <!-- Access Control list -->
+    		               <!-- https://github.com/springfox/springfox/issues/2093 -->
     		               
 <security:http use-expressions="true" access-decision-manager-ref="accessDecisionManager">
         <security:intercept-url pattern="/" access="permitAll" /> 
@@ -82,6 +83,9 @@
         <security:intercept-url pattern="/swagger-ui.html" access="permitAll" />
         <security:intercept-url pattern="/v2/api-docs" access="permitAll" />
         <security:intercept-url pattern="/api/**" access="permitAll" />
+        
+        <security:intercept-url pattern="/swagger-resources/**" access="permitAll" />
+        <security:intercept-url pattern="/webjars/**" access="permitAll" />
         
 		<security:intercept-url pattern="/do-sign-in" access="permitAll" />  <!-- That's not our controller!! That's spring's controller!! -->
 		<security:intercept-url pattern="/sign-in" access="permitAll" />

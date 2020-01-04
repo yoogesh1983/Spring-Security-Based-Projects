@@ -10,23 +10,11 @@ xmlns="http://www.springframework.org/schema/mvc"
 
 
     <mvc:annotation-driven />   
-    <!-- Enable scanning of spring @Configuration classes -->
-    <context:annotation-config/>
-                                             
     <mvc:resources location="/static/" mapping="/static/**"   />    
     
-    <mvc:resources order="1" location="/resources/" mapping="/resources/**" />
-	<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
-	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
-	
-		    <!-- Enables swgger ui-->
-    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
-    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
-	
 	<context:component-scan base-package="com.codetutr.controller" />  
 	<context:component-scan base-package="com.codetutr.validation" />     
 
-	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    <beans:property name="order" value="0"/>
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -38,16 +26,6 @@ xmlns="http://www.springframework.org/schema/mvc"
 	  <beans:property name="basename" value="messages/messages" /> 
 	</beans:bean>
   
-	<beans:bean  id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration">
-	</beans:bean>
-	<beans:bean id="documentationType" class="springfox.documentation.spi.DocumentationType">
-	  	<beans:constructor-arg name="name" value="swagger" />
-	  	<beans:constructor-arg name="version" value="2.0" />
-	</beans:bean>
-	<mvc:default-servlet-handler />
-
-
-
   <context:component-scan base-package="com.codetutr.controller">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />

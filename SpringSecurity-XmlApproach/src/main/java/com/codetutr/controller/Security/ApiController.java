@@ -21,8 +21,10 @@ public class ApiController {
 	@PostMapping(value="/user", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value="Save the user", notes="This url is used to save the user", response=User.class )
 	public Profile saveUser(HttpServletResponse response, @RequestBody Profile profile) {
-		return new Profile();
+	Profile newProfile =  new Profile();
+	newProfile.setFirstName("Yoogesh");
+	newProfile.setLastName("Sharma");
+	return newProfile;
 	}
 	
-
 }
