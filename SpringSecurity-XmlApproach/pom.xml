@@ -12,6 +12,7 @@
 		<org.springframework-version>4.3.5.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<swagger-version>[2.9.2,)</swagger-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -117,16 +118,13 @@
 			<scope>test</scope>
 		</dependency>  
 		
-		
 		 <!--  for StringUtils -->
-  <dependency>
-	<groupId>org.apache.commons</groupId>
-	<artifactId>commons-lang3</artifactId>
-	<version>3.0</version>
-  </dependency>
+		 <dependency>
+		    <groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		 </dependency>
   
-		
-		
 		<!-- Spring Security dependency -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -170,18 +168,18 @@
 		</dependency>
 		
 		
-<!--Dependency for swagger 2 -->
-<dependency>
-<groupId>io.springfox</groupId>
-<artifactId>springfox-swagger2</artifactId>
-<version>2.9.2</version>
-</dependency>
-<!--Dependency for swagger ui -->
-<dependency>
-<groupId>io.springfox</groupId>
-<artifactId>springfox-swagger-ui</artifactId>
-<version>2.9.2</version>
-</dependency>		
+		<!--Dependency for swagger 2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger-version}</version>
+		</dependency>	
+	
 		<!-- Needed for JSON View (JsonMessageConverter) -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
