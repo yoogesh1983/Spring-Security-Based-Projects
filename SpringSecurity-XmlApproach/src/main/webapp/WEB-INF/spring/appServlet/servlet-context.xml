@@ -9,12 +9,12 @@ xmlns="http://www.springframework.org/schema/mvc"
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <mvc:annotation-driven />                                            
+    <mvc:annotation-driven />   
     <mvc:resources location="/static/" mapping="/static/**"   />    
+    
 	<context:component-scan base-package="com.codetutr.controller" />  
 	<context:component-scan base-package="com.codetutr.validation" />     
 
-	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    <beans:property name="order" value="0"/>
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -22,10 +22,16 @@ xmlns="http://www.springframework.org/schema/mvc"
 	</beans:bean>
 	
 	
-<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-  <beans:property name="basename" value="messages/messages" /> 
-  </beans:bean>
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	  <beans:property name="basename" value="messages/messages" /> 
+	</beans:bean>
   
+  <context:component-scan base-package="com.codetutr.controller">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller" />
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+</context:component-scan>
   
   <!-- ==================================================================================================================================== -->
   
@@ -53,4 +59,7 @@ xmlns="http://www.springframework.org/schema/mvc"
 <!-- ==================================================================================================================================== -->
 	
 	
+
+
+
 </beans:beans>

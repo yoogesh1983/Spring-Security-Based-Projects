@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @ComponentScan(basePackages = "com.codetutr")
-@Import(value={InternationalizationConfig.class, StaticResourceConfig.class, ThemeConfig.class})
+@Import(value={InternationalizationConfig.class, StaticResourceConfig.class, ThemeConfig.class, SwaggerConfig.class})
 public class AppConfig_Mvc implements WebMvcConfigurer
 {
 	@Bean
