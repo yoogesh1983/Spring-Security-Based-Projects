@@ -83,6 +83,8 @@
         
         <!-- Permit all for swagger related stuffs -->
         <security:intercept-url pattern="/swagger-ui.html" access="permitAll" />
+        <security:intercept-url pattern="/swagger-ui/**" access="permitAll" />
+        <security:intercept-url pattern="/v3/api-docs/**" access="permitAll" />
         <security:intercept-url pattern="/v2/api-docs" access="permitAll" />
         <security:intercept-url pattern="/api/**" access="permitAll" />
         <security:intercept-url pattern="/swagger-resources/**" access="permitAll" />
