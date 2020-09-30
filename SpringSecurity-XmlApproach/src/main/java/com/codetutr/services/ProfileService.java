@@ -28,9 +28,9 @@ public class ProfileService
 //		TableProfile.put(2L, new Profile(2L, "kristy@gmail.com","Countrr1", "Kristy", "Sharma", "ROLE_ADMIN"));
 //		TableProfile.put(3L, new Profile(3L, "sushila@gmail.com","Countrr1", "Sushila", "Sapkota", "ROLE_DBA"));
 		
-		TableProfile.put(1L, new Profile(1L, "syoogesh@gmail.com",passwordEncoder.encode("Countrr1"), "Yoogesh", "Sharma", "ROLE_USER"));
-		TableProfile.put(2L, new Profile(2L, "kristy@gmail.com",passwordEncoder.encode("Countrr1"), "Kristy", "Sharma", "ROLE_ADMIN"));
-		TableProfile.put(3L, new Profile(3L, "sushila@gmail.com",passwordEncoder.encode("Countrr1"), "Sushila", "Sapkota", "ROLE_DBA"));
+		TableProfile.put(1L, new Profile(1L, "user@gmail.com",passwordEncoder.encode("1234"), "Yoogesh", "Sharma", "ROLE_USER"));
+		TableProfile.put(2L, new Profile(2L, "admin@gmail.com",passwordEncoder.encode("1234"), "Kristy", "Sharma", "ROLE_ADMIN"));
+		TableProfile.put(3L, new Profile(3L, "dba@gmail.com",passwordEncoder.encode("1234"), "Sushila", "Sapkota", "ROLE_DBA"));
     }
 	
 	
