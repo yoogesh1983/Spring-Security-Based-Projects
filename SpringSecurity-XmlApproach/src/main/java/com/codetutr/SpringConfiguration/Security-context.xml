@@ -100,7 +100,7 @@
 		<security:intercept-url pattern="/my-account-user" access="hasRole('ROLE_USER')" /> 
 		<security:intercept-url pattern="/my-account-admin" access="hasRole('ROLE_ADMIN')" /> 
 		<security:intercept-url pattern="/my-account-dba" access="hasRole('ROLE_ADMIN') and hasRole('ROLE_DBA')" /> 
-		<security:intercept-url pattern="/**" access="denyAll" /> 
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" /> 
  
 		
 	    <security:form-login login-page="/sign-in" login-processing-url="/do-sign-in" authentication-success-handler-ref="customSuccessHandler" authentication-failure-url="/sign-in?error=true" username-parameter="username" password-parameter="password"/>

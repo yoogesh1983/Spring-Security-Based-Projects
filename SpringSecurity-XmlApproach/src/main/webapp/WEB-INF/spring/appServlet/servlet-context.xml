@@ -16,7 +16,7 @@ xmlns="http://www.springframework.org/schema/mvc"
 	<context:component-scan base-package="com.codetutr.validation" />     
 	
 	<context:property-placeholder
-        location="classpath:yms.properties"
+        location="classpath:swagger.properties"
         ignore-unresolvable="true" />
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

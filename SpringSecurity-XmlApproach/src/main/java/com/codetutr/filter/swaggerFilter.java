@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-//@Component
 public class swaggerFilter implements Filter{
 	
 	private static final String APPLICATION_JSON = "application/json";
@@ -56,7 +55,7 @@ public class swaggerFilter implements Filter{
 		}
 		
 	}
-
+	
 	@Override
 	public void destroy() {
 		
