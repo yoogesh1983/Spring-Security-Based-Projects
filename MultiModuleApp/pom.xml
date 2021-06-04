@@ -215,7 +215,7 @@
 
 
 		<!-- Restful Api -->
-		<httpclient.version>4.3.4</httpclient.version>
+		<httpclient.version>4.5.13</httpclient.version>
 		<jsonIgnore.version>1.9.13</jsonIgnore.version>
 
 
